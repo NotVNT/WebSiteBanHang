@@ -1,0 +1,157 @@
+﻿@model WebSiteBanHang.Models.Product
+@inject WebSiteBanHang.Repositories.ICategoryRepository CategoryRepository
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-lg rounded-3 overflow-hidden">
+                <div class="card-header bg-gradient-primary text-white p-4 border-0">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-box-seam fs-2 me-3"></i>
+                        <h2 class="mb-0">Chi tiết sản phẩm</h2>
+                    </div>
+                </div>
+                
+                <div class="card-body p-0">
+                    <div class="row g-0">
+                        <!-- Product Image Section -->
+                        <div class="col-md-5 p-4 d-flex align-items-center justify-content-center bg-light">
+                            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                            {
+                                <div class="product-image-container">
+                                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded product-image shadow" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="text-center p-5">
+                                    <i class="bi bi-image-fill text-secondary" style="font-size: 8rem;"></i>
+                                    <p class="text-muted mt-3">No image available</p>
+                                </div>
+                            }
+                        </div>
+                        
+                        <!-- Product Details Section -->
+                        <div class="col-md-7 p-4">
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h3 class="product-title fw-bold text-primary mb-0">@Model.Name</h3>
+                                    <span class="badge bg-success rounded-pill fs-5 px-3 py-2">@Model.Price.ToString("C0")</span>
+                                </div>
+                                
+                                @{
+                                    var categoryTask = CategoryRepository.GetByIdAsync(Model.CategoryId);
+                                    var category = categoryTask.Result;
+                                }
+                                <div class="mb-3">
+                                    <span class="badge bg-info text-dark">
+                                        <i class="bi bi-tag-fill me-1"></i>
+                                        @(category != null ? category.Name : "Unknown Category")
+                                    </span>
+                                    <span class="badge bg-secondary ms-2">
+                                        <i class="bi bi-hash me-1"></i>
+                                        ID: @Model.Id
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h5 class="fw-bold text-dark mb-2">
+                                    <i class="bi bi-file-text-fill me-2 text-primary"></i>Mô tả sản phẩm
+                                </h5>
+                                <div class="bg-light p-3 rounded description-box">
+                                    <p class="mb-0">@Model.Description</p>
+                                </div>
+                            </div>
+                            
+                            <div class="product-specs mb-4">
+                                <h5 class="fw-bold text-dark mb-3">
+                                    <i class="bi bi-info-circle-fill me-2 text-primary"></i>Thông tin chi tiết
+                                </h5>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="list-group list-group-flush bg-transparent">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 bg-transparent">
+                                                <span class="text-muted">Mã sản phẩm:</span>
+                                                <span class="fw-medium">SP-@Model.Id</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 bg-transparent">
+                                                <span class="text-muted">Tên sản phẩm:</span>
+                                                <span class="fw-medium">@Model.Name</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 bg-transparent">
+                                                <span class="text-muted">Danh mục:</span>
+                                                <span class="fw-medium">@(category != null ? category.Name : "Unknown Category")</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 bg-transparent">
+                                                <span class="text-muted">Giá bán:</span>
+                                                <span class="fw-bold text-success">@Model.Price.ToString("C0")</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-white p-4 border-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-muted">
+                            <small><i class="bi bi-clock me-1"></i>Cập nhật gần đây</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> Quay lại danh sách
+                            </a>
+                            <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">
+                                <i class="bi bi-pencil me-1"></i> Chỉnh sửa
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                                <i class="bi bi-trash me-1"></i> Xóa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    }
+    
+    .product-image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 300px;
+    }
+    
+    .product-image {
+        max-height: 350px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    
+    .product-image:hover {
+        transform: scale(1.05);
+    }
+    
+    .description-box {
+        max-height: 150px;
+        overflow-y: auto;
+        font-size: 0.95rem;
+    }
+    
+    .product-title {
+        font-size: 1.8rem;
+    }
+</style>

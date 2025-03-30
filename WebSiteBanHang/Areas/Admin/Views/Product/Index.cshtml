@@ -1,0 +1,182 @@
+﻿@model WebSiteBanHang.Models.ViewModels.PaginatedList<WebSiteBanHang.Models.Product>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">
+            <i class="bi bi-box"></i> Danh Sách Sản Phẩm 
+        </h2>
+        <a asp-action="Add" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Add New Product
+        </a>
+    </div>
+
+    <!-- Category filter -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="row g-2 align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <label class="form-label me-2 mb-0 fw-bold">
+                            <i class="bi bi-funnel me-1 text-primary"></i> Lọc theo danh mục:
+                        </label>
+                        <select name="categoryId" class="form-select" asp-items="ViewBag.Categories" onchange="this.form.submit()">
+                            <option value="">-- Tất cả danh mục --</option>
+                        </select>
+                        <input type="hidden" name="page" value="1" /> <!-- Reset to page 1 when filtering -->
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    @if (ViewBag.SelectedCategoryId != null)
+                    {
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle"></i> Xóa bộ lọc
+                        </a>
+                    }
+                    <span class="ms-2 text-muted">
+                        @Model.TotalItems sản phẩm, đang hiển thị trang @Model.PageIndex/@(Model.TotalPages > 0 ? Model.TotalPages : 1)
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            @if (Model.Items.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Description</th>
+                                <th scope="col" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@product.Name</strong>
+                                    </td>
+                                    <td class="text-success">
+                                        <strong>@product.Price.ToString("C")</strong>
+                                    </td>
+                                    <td>
+                                        <small>@(product.Description?.Length > 50 ? product.Description.Substring(0, 47) + "..." : product.Description)</small>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a asp-action="Display" asp-route-id="@product.Id"
+                                               class="btn btn-outline-info btn-sm" title="View">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a asp-action="Update" asp-route-id="@product.Id"
+                                               class="btn btn-outline-warning btn-sm" title="Edit">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@product.Id"
+                                               class="btn btn-outline-danger btn-sm" title="Delete">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mt-4">
+                            <!-- First Page -->
+                            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="1" asp-route-categoryId="@ViewBag.SelectedCategoryId" aria-label="First">
+                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                </a>
+                            </li>
+                            <!-- Previous Page -->
+                            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)" asp-route-categoryId="@ViewBag.SelectedCategoryId" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            
+                            @{
+                                var startPage = Math.Max(1, Model.PageIndex - 2);
+                                var endPage = Math.Min(Model.TotalPages, Model.PageIndex + 2);
+                                
+                                // Show dots if not starting from first page
+                                if (startPage > 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                                
+                                // Page numbers
+                                for (var i = startPage; i <= endPage; i++)
+                                {
+                                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-categoryId="@ViewBag.SelectedCategoryId">@i</a>
+                                    </li>
+                                }
+                                
+                                // Show dots if not ending on last page
+                                if (endPage < Model.TotalPages)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                            }
+                            
+                            <!-- Next Page -->
+                            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)" asp-route-categoryId="@ViewBag.SelectedCategoryId" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <!-- Last Page -->
+                            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@Model.TotalPages" asp-route-categoryId="@ViewBag.SelectedCategoryId" aria-label="Last">
+                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="text-center mt-2 text-muted small">
+                        Showing @(((Model.PageIndex - 1) * Model.PageSize) + 1) to @(Math.Min(Model.TotalItems, Model.PageIndex * Model.PageSize)) of @Model.TotalItems items
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-search text-muted fs-1"></i>
+                    <h5 class="mt-3">Không tìm thấy sản phẩm nào</h5>
+                    @if (ViewBag.SelectedCategoryId != null)
+                    {
+                        <p class="text-muted">Không có sản phẩm nào trong danh mục này.</p>
+                        <a href="@Url.Action("Index")" class="btn btn-outline-primary mt-2">
+                            <i class="bi bi-arrow-left me-2"></i>Xem tất cả sản phẩm
+                        </a>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Cửa hàng chưa có sản phẩm nào.</p>
+                        <a asp-action="Add" class="btn btn-primary mt-2">
+                            <i class="bi bi-plus-circle me-2"></i>Thêm sản phẩm mới
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

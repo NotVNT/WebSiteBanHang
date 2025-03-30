@@ -1,0 +1,69 @@
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-between align-items-center @ManageNavPages.IndexNavClass(ViewContext)">
+        <a asp-area="Identity" asp-page="/Account/Manage/Index" class="text-decoration-none">
+            <i class="bi bi-person me-2 text-primary"></i>Thông tin tài khoản
+        </a>
+        @if (ManageNavPages.IsActivePage(ViewContext, "/Account/Manage/Index"))
+        {
+            <span class="badge bg-primary rounded-pill"><i class="bi bi-arrow-right"></i></span>
+        }
+    </li>
+    
+    <!-- Add Favorites List Navigation Item -->
+    <li class="list-group-item d-flex justify-content-between align-items-center @ManageNavPages.GetNavClass(ViewContext, "Favorites")">
+        <a href="@Url.Action("Index", "Favorites", new { area = "Customer" })" class="text-decoration-none">
+            <i class="bi bi-heart me-2 text-primary"></i>Danh sách yêu thích
+        </a>
+        @if (ManageNavPages.IsActivePage(ViewContext, "Favorites"))
+        {
+            <span class="badge bg-primary rounded-pill"><i class="bi bi-arrow-right"></i></span>
+        }
+    </li>
+    
+    <!-- Add Ratings Navigation Item -->
+    <li class="list-group-item d-flex justify-content-between align-items-center @ManageNavPages.GetNavClass(ViewContext, "Ratings")">
+        <a href="@Url.Action("Index", "Ratings", new { area = "Customer" })" class="text-decoration-none">
+            <i class="bi bi-star me-2 text-primary"></i>Đánh giá của tôi
+        </a>
+        @if (ManageNavPages.IsActivePage(ViewContext, "Ratings"))
+        {
+            <span class="badge bg-primary rounded-pill"><i class="bi bi-arrow-right"></i></span>
+        }
+    </li>
+    
+    <li class="list-group-item d-flex justify-content-between align-items-center @ManageNavPages.ChangePasswordNavClass(ViewContext)">
+        <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" class="text-decoration-none">
+            <i class="bi bi-key me-2 text-primary"></i>Đổi mật khẩu
+        </a>
+        @if (ManageNavPages.IsActivePage(ViewContext, "/Account/Manage/ChangePassword"))
+        {
+            <span class="badge bg-primary rounded-pill"><i class="bi bi-arrow-right"></i></span>
+        }
+    </li>
+    @if (hasExternalLogins)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center @ManageNavPages.ExternalLoginsNavClass(ViewContext)">
+            <a asp-area="Identity" asp-page="/Account/Manage/ExternalLogins" class="text-decoration-none">
+                <i class="bi bi-box-arrow-in-right me-2 text-primary"></i>Đăng nhập bên ngoài
+            </a>
+            @if (ManageNavPages.IsActivePage(ViewContext, "/Account/Manage/ExternalLogins"))
+            {
+                <span class="badge bg-primary rounded-pill"><i class="bi bi-arrow-right"></i></span>
+            }
+        </li>
+    }
+    <li class="list-group-item d-flex justify-content-between align-items-center @ManageNavPages.PersonalDataNavClass(ViewContext)">
+        <a asp-area="Identity" asp-page="/Account/Manage/PersonalData" class="text-decoration-none">
+            <i class="bi bi-person-bounding-box me-2 text-primary"></i>Dữ liệu cá nhân
+        </a>
+        @if (ManageNavPages.IsActivePage(ViewContext, "/Account/Manage/PersonalData"))
+        {
+            <span class="badge bg-primary rounded-pill"><i class="bi bi-arrow-right"></i></span>
+        }
+    </li>
+</ul>

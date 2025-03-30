@@ -1,0 +1,183 @@
+@model WebSiteBanHang.Models.ViewModels.MockCheckoutViewModel
+@{
+    ViewData["Title"] = "Thông tin đặt hàng";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="card-title mb-0">
+                        <i class="bi bi-person-lines-fill me-2"></i>Thông tin đặt hàng
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="PlaceOrder" method="post" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="FullName" class="form-label"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input asp-for="FullName" class="form-control" placeholder="Nhập họ tên..." />
+                                </div>
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="PhoneNumber" class="form-label"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                    <input asp-for="PhoneNumber" class="form-control" placeholder="Nhập số điện thoại..." />
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input asp-for="Email" class="form-control" placeholder="Nhập email..." />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ShippingAddress" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                                <textarea asp-for="ShippingAddress" class="form-control" rows="3" placeholder="Nhập địa chỉ giao hàng..."></textarea>
+                            </div>
+                            <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Notes" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-pencil"></i></span>
+                                <textarea asp-for="Notes" class="form-control" rows="2" placeholder="Ghi chú về đơn hàng (nếu có)..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="PaymentMethod" class="form-label"></label>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-check card p-3">
+                                        <input class="form-check-input" type="radio" asp-for="PaymentMethod" id="cod" value="COD" checked />
+                                        <label class="form-check-label" for="cod">
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-light rounded-circle p-2 me-3">
+                                                    <i class="bi bi-cash text-success fs-4"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Thanh toán khi nhận hàng</h6>
+                                                    <small class="text-muted">Trả tiền mặt khi nhận được hàng</small>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check card p-3">
+                                        <input class="form-check-input" type="radio" asp-for="PaymentMethod" id="bank" value="BankTransfer" />
+                                        <label class="form-check-label" for="bank">
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-light rounded-circle p-2 me-3">
+                                                    <i class="bi bi-credit-card text-primary fs-4"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0">Chuyển khoản ngân hàng</h6>
+                                                    <small class="text-muted">Chuyển khoản trước khi giao hàng</small>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="TotalAmount" />
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Quay lại giỏ hàng
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg px-5">
+                                <i class="bi bi-check-circle me-2"></i>Hoàn tất đơn hàng
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4 sticky-lg-top" style="top: 2rem;">
+                <div class="card-header bg-info text-white py-3">
+                    <h4 class="card-title mb-0">
+                        <i class="bi bi-cart4 me-2"></i>Tóm tắt đơn hàng
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        @if(Model.CartItems != null && Model.CartItems.Any())
+                        {
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <div class="list-group-item p-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <img src="@item.ProductImage" alt="@item.ProductName" class="img-thumbnail" style="width: 60px;">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-0">@item.ProductName</h6>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-muted">@item.UnitPrice.ToString("N0") đ x @item.Quantity</span>
+                                                <span class="fw-bold">@item.Subtotal.ToString("N0") đ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="list-group-item p-3 text-center">
+                                <p class="text-muted mb-0">Không có sản phẩm nào được chọn</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="card-footer bg-light p-3">
+                    <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+                        <span>Tổng cộng:</span>
+                        <span class="text-primary">@Model.TotalAmount.ToString("N0") đ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Form validation
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+}

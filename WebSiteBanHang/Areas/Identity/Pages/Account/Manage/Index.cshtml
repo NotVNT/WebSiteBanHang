@@ -1,0 +1,127 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Thông tin tài khoản";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<div class="container py-5">
+    <div class="row">
+        <!-- Left sidebar with user menu -->
+        <div class="col-lg-4">
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" 
+                         style="width: 100px; height: 100px; font-size: 3rem;">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <h5 class="card-title mb-1">@Model.Input.FullName</h5>
+                    <p class="text-muted mb-3">@Model.Input.Email</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                            <i class="bi bi-person-badge me-1"></i>Hồ sơ
+                        </a>
+                        <a asp-page="./ChangePassword" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                            <i class="bi bi-key me-1"></i>Mật khẩu
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4 mb-lg-0 border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <partial name="_ManageNav" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main content area -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3 border-0">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-person-lines-fill text-primary me-2"></i>@ViewData["Title"]
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Status message -->
+                    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-success me-2 fs-4"></i>
+                                <span>@Model.StatusMessage</span>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form id="profile-form" method="post" class="needs-validation">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        
+                        <div class="row g-3">
+                            <!-- Full Name -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.FullName" class="form-control" autocomplete="name" aria-required="true" placeholder="Nguyễn Văn A" />
+                                    <label asp-for="Input.FullName" class="form-label"></label>
+                                    <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <!-- Birth Date -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.BirthDate" class="form-control" type="date" aria-required="true" />
+                                    <label asp-for="Input.BirthDate" class="form-label"></label>
+                                    <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.Email" class="form-control" placeholder="example@gmail.com" readonly />
+                                    <label asp-for="Input.Email" class="form-label"></label>
+                                    <div class="form-text text-muted">Email không thể thay đổi sau khi đăng ký.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Phone Number -->
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="tel" placeholder="0123456789" />
+                                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-end mt-3">
+                            <button id="update-profile-button" type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-save me-2"></i>Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Additional information about account -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body p-4">
+                    <h6 class="card-subtitle mb-3 text-primary fw-bold">
+                        <i class="bi bi-info-circle me-2"></i>Thông tin bổ sung
+                    </h6>
+                    <p class="card-text text-muted mb-0">
+                        Thông tin cá nhân của bạn được sử dụng để cải thiện trải nghiệm mua sắm và để quản lý tài khoản của bạn.
+                        Bạn có thể cập nhật thông tin này bất cứ lúc nào.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

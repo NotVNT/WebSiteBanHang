@@ -1,0 +1,56 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="text-center">
+    <h1>Đăng ký </h1>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="mb-3">
+                <label asp-for="Input.FullName" class="form-label">Nhập họ và tên</label>
+                <input asp-for="Input.FullName" class="form-control" autocomplete="username" aria-required="true" />
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.PhoneNumber" class="form-label">Nhập số điện thoại (không bắt buộc)</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Email" class="form-label">Nhập gmail (bắt buộc)</label>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.BirthDate" class="form-label">Ngày sinh</label>
+                <input asp-for="Input.BirthDate" class="form-control" aria-required="true" />
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Password" class="form-label">Nhập mật khẩu</label>
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <small class="form-text text-muted">(*) Mật khẩu tối thiểu 6 ký tự; chỉ chứa chữ thường và số. (VD: abc123)</small>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.ConfirmPassword" class="form-label">Nhập lại mật khẩu</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-danger mt-3">Đăng ký</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>Bạn đã có tài khoản? <a href="/Identity/Account/Login">Đăng nhập ngay</a></p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

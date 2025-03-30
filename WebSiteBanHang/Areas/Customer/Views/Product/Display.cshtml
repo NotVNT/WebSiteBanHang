@@ -1,0 +1,518 @@
+﻿@model WebSiteBanHang.Models.Product
+@inject WebSiteBanHang.Repositories.ICategoryRepository CategoryRepository
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@inject SignInManager<ApplicationUser> SignInManager
+
+<div class="container mt-5 mb-5">
+    
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="Customer" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Chi tiết sản phẩm</li>
+        </ol>
+    </nav>
+    
+    <div class="row">
+        <!-- Hình ảnh sản phẩm -->
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="product-image-container position-relative">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid product-image" />
+                    }
+                    else
+                    {
+                        <img src="/images/no-image.png" alt="No image available" class="img-fluid product-image" />
+                    }
+                    <div class="position-absolute top-0 start-0 p-3">
+                        @if (Context.Request.Query.ContainsKey("isNew"))
+                        {
+                            <span class="badge rounded-pill bg-danger shadow-sm">Mới</span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill bg-danger shadow-sm">Hot</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Thông tin sản phẩm -->
+        <div class="col-lg-6">
+            <h1 class="fw-bold mb-3 product-title">@Model.Name</h1>
+            
+            <div class="d-flex align-items-center mb-4">
+                <span class="price-tag display-6 text-primary fw-bold me-3">@Model.Price.ToString("C0")</span>
+                <div class="product-rating">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i>
+                    <span class="ms-1 text-muted">(4.5/5)</span>
+                </div>
+            </div>
+            
+            <div class="mb-4 product-category">
+                <span class="text-uppercase fw-medium text-muted">Danh mục:</span>
+                <span class="badge bg-light text-dark border me-2">
+                    @{
+                        var categoryTask = CategoryRepository.GetByIdAsync(Model.CategoryId);
+                        var category = categoryTask.Result;
+                        @(category != null ? category.Name : "Unknown Category")
+                    }
+                </span>
+            </div>
+            
+            <div class="mb-4 product-description">
+                <h5 class="fw-bold mb-3">Mô tả sản phẩm</h5>
+                <p class="text-muted">@Model.Description</p>
+            </div>
+
+            <hr class="my-4">
+            
+            <div class="d-grid gap-2 d-md-flex">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" class="d-flex gap-2 flex-grow-1">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                        <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
+                            <i class="bi bi-cart-plus me-2"></i> Thêm vào giỏ hàng
+                        </button>
+                    </form>
+                    
+                    @if (ViewBag.IsFavorite)
+                    {
+                        <form asp-area="Customer" asp-controller="Favorites" asp-action="RemoveFromFavorites" method="post">
+                            <input type="hidden" name="id" value="@ViewBag.FavoriteId" />
+                            <input type="hidden" name="returnToProduct" value="1" />
+                            <button type="submit" class="btn btn-outline-danger btn-lg">
+                                <i class="bi bi-heart-fill"></i>
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-area="Customer" asp-controller="Favorites" asp-action="AddToFavorites" method="post">
+                            <input type="hidden" name="productId" value="@Model.Id" />
+                            <button type="submit" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        </form>
+                    }
+                }
+                else
+                {
+                    <a class="btn btn-primary btn-lg flex-grow-1" asp-area="Identity" asp-page="/Account/Login" 
+                       asp-route-returnUrl="@Url.Action("Display", "Product", new { area = "Customer", id = Model.Id })">
+                        <i class="bi bi-cart-plus me-2"></i> Thêm vào giỏ hàng
+                    </a>
+                    <a class="btn btn-outline-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" 
+                       asp-route-returnUrl="@Url.Action("Display", "Product", new { area = "Customer", id = Model.Id })">
+                        <i class="bi bi-heart"></i>
+                    </a>
+                }
+            </div>
+            
+            <!-- Remove the rating button and modal from here -->
+            
+            <div class="shipping-info row text-center mt-4 py-3 border-top border-bottom">
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <i class="bi bi-truck fs-3 mb-2 text-primary"></i>
+                    <h5 class="fw-semibold">Giao hàng miễn phí</h5>
+                    <p class="text-muted mb-0">Cho đơn hàng trên 20 triệu</p>
+                </div>
+                
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <i class="bi bi-shield-check fs-3 mb-2 text-primary"></i>
+                    <h5 class="fw-semibold">Bảo hành</h5>
+                    <p class="text-muted mb-0">12 tháng chính hãng</p>
+                </div>
+                
+                <div class="col-md-4">
+                    <i class="bi bi-arrow-return-left fs-3 mb-2 text-primary"></i>
+                    <h5 class="fw-semibold">Đổi trả</h5>
+                    <p class="text-muted mb-0">Trong vòng 30 ngày</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Thông tin chi tiết sản phẩm -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white py-3">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-medium" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">
+                                Chi tiết sản phẩm
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            @{
+                                // Get the rating count for this product
+                                var ratingCount = await Context.RequestServices.GetService<WebSiteBanHang.Models.ApplicationDbContext>().Ratings
+                                    .Where(r => r.ProductId == Model.Id)
+                                    .CountAsync();
+                            }
+                            <button class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                                Đánh giá (@ratingCount)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab">
+                                Vận chuyển & Đổi trả
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body p-4">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                            <h5 class="fw-bold mb-3">Thông số kỹ thuật</h5>
+                            <p>@Model.Description</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span class="fw-medium">Tên sản phẩm:</span>
+                                            <span>@Model.Name</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span class="fw-medium">Danh mục:</span>
+                                            <span>@(category != null ? category.Name : "Unknown Category")</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span class="fw-medium">Mã sản phẩm:</span>
+                                            <span>SP-@Model.Id</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                            <span class="fw-medium">Tình trạng:</span>
+                                            <span class="badge bg-success">Còn hàng</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reviews" role="tabpanel">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <div class="card border-0 shadow-sm mb-4">
+                                    <div class="card-body">
+                                        <h5 class="mb-3">Đánh giá của bạn</h5>
+                                        
+                                        @if (ViewBag.UserRating != null)
+                                        {
+                                            <div class="alert alert-info">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="me-2">Đánh giá hiện tại của bạn:</div>
+                                                    <div class="rating-stars">
+                                                        @for (int i = 1; i <= 5; i++)
+                                                        {
+                                                            if (i <= ViewBag.UserRating.RatingValue)
+                                                            {
+                                                                <i class="bi bi-star-fill text-warning"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="bi bi-star text-warning"></i>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                @if (!string.IsNullOrEmpty(ViewBag.UserRating.Comment))
+                                                {
+                                                    <p class="mb-0">Bình luận: @ViewBag.UserRating.Comment</p>
+                                                }
+                                            </div>
+                                        }
+                                        
+                                        <form id="ratingForm" asp-area="Customer" asp-controller="Ratings" asp-action="Add" method="post">
+                                            <input type="hidden" name="productId" value="@Model.Id" />
+                                            <input type="hidden" id="ratingValue" name="ratingValue" value="@(ViewBag.UserRating?.RatingValue ?? 5)" />
+                                            
+                                            <div class="mb-3">
+                                                <label class="form-label">Chọn đánh giá</label>
+                                                <div class="rating">
+                                                    <i class="bi bi-star-fill star" data-rating="1"></i>
+                                                    <i class="bi bi-star-fill star" data-rating="2"></i>
+                                                    <i class="bi bi-star-fill star" data-rating="3"></i>
+                                                    <i class="bi bi-star-fill star" data-rating="4"></i>
+                                                    <i class="bi bi-star-fill star" data-rating="5"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="comment" class="form-label">Bình luận (không bắt buộc)</label>
+                                                <textarea class="form-control" id="comment" name="comment" rows="3" 
+                                                          placeholder="Nhập nhận xét của bạn về sản phẩm...">@(ViewBag.UserRating?.Comment ?? "")</textarea>
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="bi bi-send me-2"></i>Gửi đánh giá
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                                <hr class="my-4">
+                            }
+                            else
+                            {
+                                <div class="alert alert-info mb-4">
+                                    <p class="mb-0">Vui lòng <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Display", "Product", new { id = Model.Id })" class="alert-link">đăng nhập</a> để đánh giá sản phẩm này.</p>
+                                </div>
+                            }
+                            
+                            <h5 class="mb-4">Đánh giá từ khách hàng</h5>
+                            
+                            <div id="review-list">
+                                @{
+                                    var ratings = await Context.RequestServices.GetService<WebSiteBanHang.Models.ApplicationDbContext>().Ratings
+                                        .Where(r => r.ProductId == Model.Id)
+                                        .Include(r => r.User)
+                                        .OrderByDescending(r => r.DateCreated)
+                                        .ToListAsync();
+                                        
+                                    if (!ratings.Any())
+                                    {
+                                        <div class="text-center py-4">
+                                            <div class="mb-3">
+                                                <i class="bi bi-star fs-3 text-muted"></i>
+                                            </div>
+                                            <h5>Chưa có đánh giá nào cho sản phẩm này</h5>
+                                            <p class="text-muted">Hãy là người đầu tiên đánh giá sản phẩm này</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        foreach (var rating in ratings)
+                                        {
+                                            <div class="card mb-3 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="rating-user-avatar me-2">
+                                                                <i class="bi bi-person-circle fs-4"></i>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="mb-0">@rating.User.FullName</h6>
+                                                                <div class="text-muted small">
+                                                                    @rating.DateCreated.ToString("dd/MM/yyyy HH:mm")
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rating-stars">
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                if (i <= rating.RatingValue)
+                                                                {
+                                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i class="bi bi-star text-warning"></i>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    @if (!string.IsNullOrEmpty(rating.Comment))
+                                                    {
+                                                        <p class="mb-0">@rating.Comment</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-muted fst-italic mb-0">Không có bình luận</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="shipping" role="tabpanel">
+                            <h5 class="fw-bold mb-3">Chính sách vận chuyển</h5>
+                            <p>- Giao hàng miễn phí trong nội thành cho đơn hàng từ 500.000đ</p>
+                            <p>- Thời gian giao hàng: 2-5 ngày làm việc tùy vào khu vực</p>
+                            <p>- Đơn vị vận chuyển: Giao Hàng Nhanh, GHTK, Viettel Post</p>
+                            
+                            <h5 class="fw-bold mb-3 mt-4">Chính sách đổi trả</h5>
+                            <p>- Đổi trả miễn phí trong vòng 30 ngày nếu sản phẩm lỗi từ nhà sản xuất</p>
+                            <p>- Hoàn tiền 100% nếu sản phẩm không đúng mô tả</p>
+                            <p>- Liên hệ hotline 1900.1234 để được hướng dẫn đổi trả</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        max-height: 400px;
+        transition: transform 0.3s ease;
+    }
+    
+    .product-image-container {
+        background-color: #f8f9fa;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .product-image-container:hover .product-image {
+        transform: scale(1.05);
+    }
+    
+    .product-title {
+        font-size: calc(1.2rem + 1vw);
+    }
+    
+    .rounded-4 {
+        border-radius: 0.75rem!important;
+    }
+    
+    .btn-lg {
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .price-tag {
+        font-size: calc(1.2rem + 1vw);
+    }
+    
+    .nav-tabs .nav-link {
+        color: #495057;
+        border: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+        padding: 1rem 1.5rem;
+    }
+    
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        background-color: transparent;
+        border-bottom: 2px solid #0d6efd;
+    }
+    
+    @@media (max-width: 767.98px) {
+        .shipping-info .col-md-4:not(:last-child) {
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+    }
+    
+    .rating {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        font-size: 2rem;
+        color: #ddd;
+        cursor: pointer;
+    }
+    
+    .rating .star {
+        margin-right: 5px;
+        transition: color 0.2s;
+    }
+    
+    .rating .star.active,
+    .rating .star.hover {
+        color: #ffc107;
+    }
+    
+    .rating-stars {
+        font-size: 1.1rem;
+    }
+    
+    .rating-user-avatar {
+        color: #6c757d;
+    }
+    
+    #review-list .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    #review-list .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.rating .star');
+            const ratingInput = document.getElementById('ratingValue');
+            
+            updateStarDisplay(parseInt(ratingInput.value) || 5);
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    ratingInput.value = rating;
+                    updateStarDisplay(rating);
+                });
+                
+                star.addEventListener('mouseenter', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    hoverStarDisplay(rating);
+                });
+            });
+            
+            const ratingContainer = document.querySelector('.rating');
+            if (ratingContainer) {
+                ratingContainer.addEventListener('mouseleave', function() {
+                    updateStarDisplay(parseInt(ratingInput.value) || 5);
+                });
+            }
+            
+            function updateStarDisplay(rating) {
+                stars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+            
+            function hoverStarDisplay(rating) {
+                stars.forEach(star => {
+                    const starRating = parseInt(star.getAttribute('data-rating'));
+                    if (starRating <= rating) {
+                        star.classList.add('hover');
+                    } else {
+                        star.classList.remove('hover');
+                    }
+                });
+            }
+            
+            const ratingForm = document.getElementById('ratingForm');
+            if (ratingForm) {
+                ratingForm.addEventListener('submit', function(e) {
+                    // Additional validation can be added here if needed
+                });
+            }
+        });
+    </script>
+}

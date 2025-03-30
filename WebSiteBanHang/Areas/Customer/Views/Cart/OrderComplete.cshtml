@@ -1,0 +1,381 @@
+@model WebSiteBanHang.Models.Order
+@{
+    ViewData["Title"] = "Đặt hàng thành công";
+    var totalAmount = ViewBag.TotalAmount ?? 0;
+    var orderId = ViewBag.OrderId ?? 0;
+    var orderCode = $"Ord{orderId:D6}"; // Format thành Ord000019
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-lg rounded-lg overflow-hidden mb-4">
+                <div class="card-body p-0">
+                    <!-- Banner success section -->
+                    <div class="success-banner p-5 text-center">
+                        <div class="success-icon-container mb-4">
+                            <div class="success-icon">
+                                <i class="bi bi-check2-circle"></i>
+                            </div>
+                        </div>
+                        <h1 class="display-5 fw-bold text-white mb-3">Đặt Hàng Thành Công!</h1>
+                        <div class="order-id-badge mx-auto mb-3">
+                            Mã đơn hàng: <span class="fw-bold">@orderCode</span>
+                        </div>
+                        <p class="lead text-white mb-1">
+                            Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi.
+                        </p>
+                        <p class="lead text-white">
+                            Tổng giá trị đơn hàng: <span class="fw-bold">@totalAmount.ToString("N0") đ</span>
+                        </p>
+                    </div>
+                    
+                    <!-- Order timeline -->
+                    <div class="p-4 p-md-5 bg-white">
+                        <div class="order-timeline mb-5">
+                            <div class="timeline-track"></div>
+                            <div class="timeline-steps">
+                                <div class="timeline-step active">
+                                    <div class="timeline-step-icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="timeline-step-content">
+                                        <h6 class="mb-1">Đặt hàng</h6>
+                                        <p class="small text-muted mb-0">Đã hoàn tất</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="timeline-step-icon">
+                                        <i class="bi bi-clock"></i>
+                                    </div>
+                                    <div class="timeline-step-content">
+                                        <h6 class="mb-1">Xác nhận</h6>
+                                        <p class="small text-muted mb-0">Đang chờ</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="timeline-step-icon">
+                                        <i class="bi bi-box"></i>
+                                    </div>
+                                    <div class="timeline-step-content">
+                                        <h6 class="mb-1">Đóng gói</h6>
+                                        <p class="small text-muted mb-0">Chưa bắt đầu</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="timeline-step-icon">
+                                        <i class="bi bi-truck"></i>
+                                    </div>
+                                    <div class="timeline-step-content">
+                                        <h6 class="mb-1">Vận chuyển</h6>
+                                        <p class="small text-muted mb-0">Chưa bắt đầu</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        @if (Model != null)
+                        {
+                            <div class="order-details mb-4">
+                                <h5 class="fw-bold mb-4">Chi tiết đơn hàng</h5>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="bg-light rounded p-3 h-100">
+                                            <h6 class="fw-bold mb-3">
+                                                <i class="bi bi-info-circle me-2"></i>Thông tin đơn hàng
+                                            </h6>
+                                            <p class="mb-2">
+                                                <span class="text-muted">Mã đơn hàng:</span> 
+                                                <span class="fw-bold text-primary">@orderCode</span>
+                                            </p>
+                                            <p class="mb-2">
+                                                <span class="text-muted">Ngày đặt:</span> 
+                                                <span>@Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</span>
+                                            </p>
+                                            <p class="mb-2">
+                                                <span class="text-muted">Phương thức thanh toán:</span>
+                                                <span>@(Model.PaymentMethod == "COD" ? "Thanh toán khi nhận hàng" : "Chuyển khoản ngân hàng")</span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <span class="text-muted">Trạng thái:</span>
+                                                <span class="badge bg-warning text-dark">Chờ xác nhận</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="bg-light rounded p-3 h-100">
+                                            <h6 class="fw-bold mb-3">
+                                                <i class="bi bi-truck me-2"></i>Thông tin giao hàng
+                                            </h6>
+                                            <p class="mb-2">
+                                                <span class="text-muted">Người nhận:</span> 
+                                                <span>@Model.ShippingName</span>
+                                            </p>
+                                            <p class="mb-2">
+                                                <span class="text-muted">Số điện thoại:</span> 
+                                                <span>@(Model.PhoneNumber ?? "Không có")</span>
+                                            </p>
+                                            <p class="mb-2">
+                                                <span class="text-muted">Email:</span> 
+                                                <span>@(Model.Email ?? "Không có")</span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <span class="text-muted">Địa chỉ:</span> 
+                                                <span>@Model.ShippingAddress</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="order-notes mb-4">
+                                @if(!string.IsNullOrEmpty(Model.Notes))
+                                {
+                                    <div class="bg-light rounded p-3">
+                                        <h6 class="fw-bold mb-2">
+                                            <i class="bi bi-chat-left-text me-2"></i>Ghi chú đơn hàng
+                                        </h6>
+                                        <p class="mb-0">@Model.Notes</p>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        
+                        <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                          <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                          <div>
+                            Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất để xác nhận đơn hàng. Vui lòng giữ điện thoại liên lạc.
+                          </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                                @if (Model != null)
+                                {
+                                    <a asp-area="Customer" asp-controller="Order" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-file-earmark-text me-2"></i>Xem chi tiết đơn hàng
+                                    </a>
+                                }
+                                <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary btn-lg">
+                                    <i class="bi bi-house me-2"></i>Về trang chủ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order tips -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-lightbulb me-2 text-warning"></i>Thông tin hữu ích
+                    </h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3 text-primary">
+                                    <i class="bi bi-truck fs-4"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Vận chuyển</h6>
+                                    <p class="small text-muted mb-0">Thời gian giao hàng ước tính là 2-3 ngày làm việc</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3 text-primary">
+                                    <i class="bi bi-credit-card fs-4"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Thanh toán</h6>
+                                    <p class="small text-muted mb-0">Đảm bảo bạn có đủ tiền mặt khi nhận hàng</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3 text-primary">
+                                    <i class="bi bi-question-circle fs-4"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Hỗ trợ</h6>
+                                    <p class="small text-muted mb-0">Liên hệ hotline 0987 654 321 nếu bạn cần trợ giúp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Banner styling */
+    .success-banner {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .success-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ffffff10" d="M0 0h100v100H0z"/></svg>');
+        opacity: 0.1;
+    }
+    
+    /* Order ID badge */
+    .order-id-badge {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 8px 16px;
+        border-radius: 30px;
+        display: inline-block;
+        color: white;
+        font-size: 1.1rem;
+    }
+    
+    /* Success icon styling */
+    .success-icon-container {
+        height: 120px;
+        width: 120px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .success-icon {
+        background-color: white;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s infinite;
+    }
+    
+    .success-icon i {
+        color: #28a745;
+        font-size: 60px;
+        line-height: 1;
+    }
+    
+    /* Timeline styling */
+    .order-timeline {
+        position: relative;
+        margin: 0 auto 3rem;
+        padding: 1rem 0;
+    }
+    
+    .timeline-track {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #e9ecef;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+    
+    .timeline-steps {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        z-index: 2;
+    }
+    
+    .timeline-step {
+        text-align: center;
+        width: 120px;
+    }
+    
+    .timeline-step-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        font-size: 1.5rem;
+        color: #adb5bd;
+    }
+    
+    .timeline-step.active .timeline-step-icon {
+        background-color: #28a745;
+        color: white;
+    }
+    
+    /* Animations */
+    @@keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+    }
+    
+    /* Responsive adjustments */
+    @@media (max-width: 767px) {
+        .timeline-steps {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 30px;
+        }
+        
+        .timeline-track {
+            top: 0;
+            left: 30px;
+            width: 2px;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .timeline-step-icon {
+            margin: 0 15px 0 0;
+        }
+        
+        .timeline-step-content {
+            text-align: left;
+        }
+    }
+    
+    @@media (max-width: 576px) {
+        .success-icon-container {
+            height: 90px;
+            width: 90px;
+        }
+        
+        .success-icon {
+            height: 80px;
+            width: 80px;
+        }
+        
+        .success-icon i {
+            font-size: 45px;
+        }
+    }
+</style>

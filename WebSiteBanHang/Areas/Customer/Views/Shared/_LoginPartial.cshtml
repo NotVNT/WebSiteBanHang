@@ -1,0 +1,125 @@
+@using Microsoft.AspNetCore.Identity
+@using WebSiteBanHang.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject WebSiteBanHang.Models.ApplicationDbContext DbContext
+@using System.Security.Claims
+@using WebSiteBanHang.Models
+
+<style>
+    .navbar-nav .nav-item {
+        margin-right: 15px;
+    }
+    
+    .auth-buttons {
+        display: flex;
+        align-items: center;
+    }
+    
+    .auth-buttons .nav-item {
+        margin-right: 10px;
+    }
+    
+    /* Ngăn nav-link bị xuống dòng */
+    .navbar-nav .nav-link {
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+    
+    /* Điều chỉnh vị trí badge */
+    .badge.position-absolute {
+        top: -5px !important;
+        right: -5px !important;
+    }
+    
+    /* Đảm bảo biểu tượng và văn bản nằm trên cùng một dòng */
+    .nav-link i {
+        margin-right: 5px;
+    }
+</style>
+
+@{
+    // Chuyển hướng về trang Customer/Home/Index sau khi đăng xuất
+    var returnUrl = Url.Action("Index", "Home", new { area = "Customer" });
+    
+    // Get cart item count for logged in user
+    int cartItemCount = 0;
+    
+    // Đếm số đơn hàng đang chờ xác nhận
+    int pendingOrderCount = 0;
+    
+    if (SignInManager.IsSignedIn(User))
+    {
+        var userId = UserManager.GetUserId(User);
+        cartItemCount = DbContext.CartItems.Where(c => c.UserId == userId).Sum(c => c.Quantity);
+        
+        // Đếm số đơn hàng đang chờ xác nhận
+        pendingOrderCount = DbContext.Orders
+            .Where(o => o.UserId == userId && o.Status == OrderStatus.Pending)
+            .Count();
+    }
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav d-flex flex-row align-items-center">
+        @if (!User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-white position-relative" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                    <i class="bi bi-cart3"></i>
+                    <span>Giỏ hàng</span>
+                    @if (cartItemCount > 0)
+                    {
+                        <span class="badge rounded-pill bg-danger position-absolute">@cartItemCount</span>
+                    }
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white position-relative" asp-area="Customer" asp-controller="Order" asp-action="Index">
+                    <i class="bi bi-receipt"></i> Đơn hàng của tôi
+                    @if (pendingOrderCount > 0)
+                    {
+                        <span class="badge rounded-pill bg-warning text-dark position-absolute">@pendingOrderCount</span>
+                    }
+                </a>
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                <i class="bi bi-person-circle"></i> @UserManager.GetUserAsync(User).Result.FullName
+            </a>
+        </li>
+        <li class="nav-item">
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@returnUrl" method="post" id="logoutForm" class="form-inline m-0">
+                <button type="submit" class="nav-link btn btn-link text-white border-0">
+                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                </button>
+            </form>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav auth-buttons d-flex flex-row align-items-center">
+        <li class="nav-item">
+            <a class="nav-link text-white position-relative" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                <i class="bi bi-cart3"></i>
+                <span>Giỏ hàng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">
+                <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">
+                <i class="bi bi-person-plus"></i> Đăng ký
+            </a>
+        </li>
+    </ul>
+} 

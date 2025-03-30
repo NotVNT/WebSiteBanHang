@@ -1,0 +1,42 @@
+@model IEnumerable<WebSiteBanHang.Models.Category>
+
+<li class="nav-item dropdown hover-dropdown">
+    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-grid me-1"></i>SẢN PHẨM
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end wide-dropdown animate slideIn" aria-labelledby="navbarDropdownProducts">
+        <li>
+            <a class="dropdown-item" asp-area="Customer" asp-controller="Product" asp-action="Index">
+                <i class="bi bi-boxes me-2 text-primary"></i>Tất cả sản phẩm
+            </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li><h6 class="dropdown-header">Danh mục sản phẩm</h6></li>
+        
+        <div class="row px-2">
+            @{
+                var categories = Model.ToList();
+                int itemsPerRow = 3; // Number of categories per row
+                
+                for (int i = 0; i < categories.Count; i++)
+                {
+                    var category = categories[i];
+                    
+                    <div class="col-md-4 p-0">
+                        <li>
+                            <a class="dropdown-item" asp-area="Customer" asp-controller="Product" asp-action="Index" asp-route-categoryId="@category.Id">
+                                <i class="bi bi-tag me-2 text-secondary"></i>@category.Name
+                            </a>
+                        </li>
+                    </div>
+                    
+                    // Add clearfix after each row
+                    if ((i + 1) % itemsPerRow == 0 && i < categories.Count - 1)
+                    {
+                        <div class="w-100"></div>
+                    }
+                }
+            }
+        </div>
+    </ul>
+</li>

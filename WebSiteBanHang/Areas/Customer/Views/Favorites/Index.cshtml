@@ -1,0 +1,269 @@
+@model IEnumerable<WebSiteBanHang.Models.Favorite>
+@{
+    ViewData["Title"] = "Danh sách yêu thích";
+    ViewData["ActivePage"] = "Favorites";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="position-relative mb-4 mx-auto" style="width: 100px; height: 100px;">
+                        <div class="bg-danger bg-gradient text-white rounded-circle d-flex align-items-center justify-content-center"
+                             style="width: 100px; height: 100px; font-size: 3rem;">
+                            <i class="bi bi-heart"></i>
+                        </div>
+                    </div>
+                    <h5 class="my-3">Danh sách yêu thích</h5>
+                    <p class="text-muted mb-4">Quản lý các sản phẩm bạn yêu thích</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4 mb-lg-0 border-0 shadow-sm">
+                <div class="card-body p-0">
+                    <partial name="~/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3 border-0">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-heart-fill text-danger me-2"></i>Sản phẩm yêu thích
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>@TempData["ErrorMessage"]
+                        </div>
+                    }
+                    
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle-fill me-2"></i>@TempData["SuccessMessage"]
+                        </div>
+                    }
+                    
+                    @if (!Model.Any())
+                    {
+                        <div class="text-center py-5">
+                            <div class="display-1 text-muted mb-4">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <h5>Danh sách yêu thích trống</h5>
+                            <p class="text-muted mb-4">Bạn chưa thêm sản phẩm nào vào danh sách yêu thích</p>
+                            <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                                <i class="bi bi-cart me-2"></i>Tiếp tục mua sắm
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            @foreach (var favorite in Model)
+                            {
+                                <div class="col">
+                                    <div class="card h-100 border shadow-sm">
+                                        <div class="position-absolute top-0 end-0 p-2">
+                                            <form class="remove-favorite-form">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@favorite.Id" />
+                                                <button type="button" class="btn btn-sm btn-outline-danger rounded-circle remove-favorite-btn"
+                                                        data-favorite-id="@favorite.Id">
+                                                    <i class="bi bi-x-lg"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="row g-0">
+                                            <div class="col-4">
+                                                <img src="@(string.IsNullOrEmpty(favorite.Product?.ImageUrl) ? "/images/no-image.png" : favorite.Product.ImageUrl)" 
+                                                     class="img-fluid rounded-start" style="height: 100%; object-fit: cover;" 
+                                                     alt="@favorite.Product?.Name">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@favorite.Product?.Name</h5>
+                                                    <p class="card-text text-primary fw-bold">@(favorite.Product?.Price.ToString("C0") ?? "N/A")</p>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">
+                                                            Đã thêm: @favorite.DateAdded.ToString("dd/MM/yyyy")
+                                                        </small>
+                                                    </p>
+                                                    <div class="mt-2">
+                                                        <a asp-area="Customer" asp-controller="Product" asp-action="Display" asp-route-id="@favorite.ProductId" class="btn btn-sm btn-outline-primary">
+                                                            <i class="bi bi-eye me-1"></i>Xem
+                                                        </a>
+                                                        <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline">
+                                                            <input type="hidden" name="id" value="@favorite.ProductId" />
+                                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                                            <button type="submit" class="btn btn-sm btn-success">
+                                                                <i class="bi bi-cart-plus me-1"></i>Thêm vào giỏ
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners to all remove buttons
+            document.querySelectorAll('.remove-favorite-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Prevent any default action
+                    e.preventDefault();
+                    
+                    const favoriteId = this.getAttribute('data-favorite-id');
+                    if (!favoriteId) return;
+                    
+                    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách yêu thích?')) {
+                        removeFavorite(this);
+                    }
+                });
+            });
+            
+            function removeFavorite(buttonElement) {
+                // Find the form
+                const form = buttonElement.closest('.remove-favorite-form');
+                if (!form) return;
+                
+                // Get the form data
+                const formData = new FormData(form);
+                
+                // Find the product container to remove if successful
+                const productContainer = buttonElement.closest('.col');
+                
+                // Show loading indicator on the button
+                const originalButtonHtml = buttonElement.innerHTML;
+                buttonElement.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+                buttonElement.disabled = true;
+                
+                // Submit the form via AJAX
+                fetch('@Url.Action("RemoveFromFavorites", "Favorites", new { area = "Customer" })', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: formData,
+                    credentials: 'same-origin'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Show success notification
+                        showNotification(data.message, 'success');
+                        
+                        // Remove the product from the display
+                        if (productContainer) {
+                            productContainer.remove();
+                            
+                            // Check if there are no more favorites
+                            const remainingItems = document.querySelectorAll('.col');
+                            if (remainingItems.length === 0) {
+                                // Show the empty state
+                                const cardBody = document.querySelector('.card-body');
+                                if (cardBody) {
+                                    cardBody.innerHTML = `
+                                        <div class="text-center py-5">
+                                            <div class="display-1 text-muted mb-4">
+                                                <i class="bi bi-heart"></i>
+                                            </div>
+                                            <h5>Danh sách yêu thích trống</h5>
+                                            <p class="text-muted mb-4">Bạn chưa thêm sản phẩm nào vào danh sách yêu thích</p>
+                                            <a href="@Url.Action("Index", "Home", new { area = "Customer" })" class="btn btn-primary">
+                                                <i class="bi bi-cart me-2"></i>Tiếp tục mua sắm
+                                            </a>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        }
+                    } else {
+                        // Show error notification
+                        showNotification(data.message || 'Đã xảy ra lỗi', 'danger');
+                        
+                        // Restore the button
+                        buttonElement.innerHTML = originalButtonHtml;
+                        buttonElement.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('Đã xảy ra lỗi khi xóa sản phẩm', 'danger');
+                    
+                    // Restore the button
+                    buttonElement.innerHTML = originalButtonHtml;
+                    buttonElement.disabled = false;
+                });
+            }
+            
+            function showNotification(message, type) {
+                // Remove any existing notifications
+                const existingNotifications = document.querySelectorAll('.notification-toast');
+                existingNotifications.forEach(note => note.remove());
+                
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `alert alert-${type} notification-toast`;
+                notification.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="${type === 'success' ? 'bi bi-check-circle-fill' : 'bi bi-exclamation-triangle-fill'} me-2"></i>
+                        <span>${message}</span>
+                        <button type="button" class="btn-close ms-auto" onclick="this.parentElement.parentElement.remove()"></button>
+                    </div>
+                `;
+                
+                // Style the notification
+                notification.style.position = 'fixed';
+                notification.style.top = '20px';
+                notification.style.right = '20px';
+                notification.style.zIndex = '9999';
+                notification.style.minWidth = '300px';
+                notification.style.boxShadow = '0 0.5rem 1rem rgba(0, 0, 0, 0.15)';
+                notification.style.animation = 'fadeIn 0.5s';
+                
+                // Append to body
+                document.body.appendChild(notification);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'fadeOut 0.5s';
+                    setTimeout(() => notification.remove(), 500);
+                }, 5000);
+            }
+        });
+    </script>
+    
+    <style>
+        @@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @@keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+    </style>
+}

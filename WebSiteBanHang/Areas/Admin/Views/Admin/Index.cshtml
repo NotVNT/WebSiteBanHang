@@ -1,0 +1,317 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <!-- Dashboard Header -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card border-0 shadow-lg rounded-4 bg-primary bg-gradient text-white">
+                <div class="card-body p-5">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="display-5 me-3">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <div>
+                            <h1 class="mb-0 display-6">Admin Dashboard</h1>
+                            <p class="lead mb-0">Welcome to the system administration panel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Stats Summary -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                            <i class="bi bi-cart3 text-primary fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Total Orders</h6>
+                            <h3 class="mb-0">284</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                            <i class="bi bi-people text-success fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Customers</h6>
+                            <h3 class="mb-0">156</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                            <i class="bi bi-box-seam text-warning fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Products</h6>
+                            <h3 class="mb-0">47</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                            <i class="bi bi-cash-coin text-danger fs-3"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1">Revenue</h6>
+                            <h3 class="mb-0">48.5M</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Main Management Options -->
+            <div class="card border-0 shadow-lg rounded-4 mb-4">
+                <div class="card-header bg-white p-4 border-0">
+                    <h4 class="mb-0 fw-bold">
+                        <i class="bi bi-grid-1x2-fill text-primary me-2"></i>Management Options
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <a href="@Url.Action("Index", "Product", new { area = "Admin" })" class="list-group-item list-group-item-action p-4 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-box fs-4 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Sản Phẩm</h5>
+                                    <p class="mb-0 text-muted">Thêm, sửa, xóa và quản lý thông tin sản phẩm</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+
+                        <a href="@Url.Action("Index", "Categories", new { area = "Admin" })" class="list-group-item list-group-item-action p-4 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-tags fs-4 text-success"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Danh Mục</h5>
+                                    <p class="mb-0 text-muted">Tổ chức và phân loại sản phẩm theo danh mục</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action p-4 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-people fs-4 text-info"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Khách Hàng</h5>
+                                    <p class="mb-0 text-muted">Xem thông tin và quản lý tài khoản khách hàng</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+
+                        <!-- New User Management Option -->
+                        <a href="#" class="list-group-item list-group-item-action p-4 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-person-badge fs-4 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Người Dùng</h5>
+                                    <p class="mb-0 text-muted">Quản lý tài khoản và phân quyền người dùng hệ thống</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action p-4 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-box-seam fs-4 text-warning"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Kho Hàng</h5>
+                                    <p class="mb-0 text-muted">Theo dõi tồn kho và quản lý nhập xuất hàng</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+
+                        <a href="@Url.Action("Index", "Order", new { area = "Admin" })" class="list-group-item list-group-item-action p-4 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-receipt-cutoff fs-4 text-danger"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Đơn Hàng</h5>
+                                    <p class="mb-0 text-muted">Xem và quản lý đơn đặt hàng của khách hàng</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action p-4 border-0">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                                    <i class="bi bi-percent fs-4 text-danger"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Quản Lý Khuyến Mãi & Mã Giảm Giá</h5>
+                                    <p class="mb-0 text-muted">Tạo và quản lý chương trình khuyến mãi</p>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto fs-4 text-muted"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Additional Management Options -->
+            <div class="card border-0 shadow-lg rounded-4 mb-4">
+                <div class="card-header bg-white p-4 border-0">
+                    <h4 class="mb-0 fw-bold">
+                        <i class="bi bi-tools text-primary me-2"></i>Advanced Tools
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action p-3 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-secondary bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-file-richtext fs-5 text-secondary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Quản Lý Nội Dung</h6>
+                                    <small class="text-muted">Cập nhật nội dung website</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action p-3 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-secondary bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-chat-square-text fs-5 text-secondary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Đánh Giá & Bình Luận</h6>
+                                    <small class="text-muted">Quản lý feedback từ khách hàng</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action p-3 border-0 border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-secondary bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-graph-up fs-5 text-secondary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Báo Cáo & Thống Kê</h6>
+                                    <small class="text-muted">Phân tích dữ liệu bán hàng</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="list-group-item list-group-item-action p-3 border-0">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-secondary bg-opacity-10 p-2 me-3">
+                                    <i class="bi bi-gear fs-5 text-secondary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Cấu Hình Chung</h6>
+                                    <small class="text-muted">Thiết lập cấu hình hệ thống</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-white p-4 border-0">
+                    <h4 class="mb-0 fw-bold">
+                        <i class="bi bi-lightning-charge text-primary me-2"></i>Quick Actions
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-light d-block py-3 border">
+                                <i class="bi bi-plus-circle text-success fs-4 d-block mb-2"></i>
+                                <span>New Product</span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-light d-block py-3 border">
+                                <i class="bi bi-person-plus text-primary fs-4 d-block mb-2"></i>
+                                <span>New User</span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-light d-block py-3 border">
+                                <i class="bi bi-receipt text-warning fs-4 d-block mb-2"></i>
+                                <span>New Order</span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-light d-block py-3 border">
+                                <i class="bi bi-cloud-download text-info fs-4 d-block mb-2"></i>
+                                <span>Backup</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rounded-4 {
+        border-radius: 0.75rem !important;
+    }
+
+    .card {
+        transition: transform 0.2s;
+    }
+
+    .list-group-item-action:hover {
+        transform: translateY(-3px);
+        z-index: 1;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    
+    .card-header {
+        border-top-left-radius: 0.75rem !important;
+        border-top-right-radius: 0.75rem !important;
+    }
+</style>

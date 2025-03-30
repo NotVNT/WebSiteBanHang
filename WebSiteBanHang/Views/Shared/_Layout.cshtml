@@ -1,0 +1,287 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Bán Hàng Nội Thất</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebSiteBanHang.styles.css" asp-append-version="true" />
+    <style>
+        .logout-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1050;
+            width: 50%;
+            text-align: center;
+        }
+        
+        /* Top Bar Styles */
+        .top-bar {
+            background-color: #0a4275;
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+        
+        .top-bar a {
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .top-bar a:hover {
+            opacity: 0.8;
+        }
+        
+        .top-bar .social-icons i {
+            margin-left: 10px;
+            font-size: 1rem;
+        }
+        
+        .top-bar .contact-info i {
+            margin-right: 5px;
+        }
+        
+        /* Responsive Adjustments */
+        @@media (max-width: 767.98px) {
+            .top-bar {
+                text-align: center;
+            }
+            
+            .top-bar .social-icons,
+            .top-bar .additional-links {
+                margin-top: 5px;
+            }
+        }
+        
+        /* Dropdown hover effect */
+        @@media (min-width: 768px) {
+            .hover-dropdown:hover > .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+            
+            .hover-dropdown .dropdown-toggle:active,
+            .hover-dropdown .dropdown-toggle:focus {
+                outline: 0;
+            }
+        }
+        
+        .dropdown-menu {
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+            border: none;
+            border-radius: 0.5rem;
+            animation: slideDown 0.3s ease;
+        }
+        
+        /* Wide dropdown styling for category menu */
+        .wide-dropdown {
+            width: 600px;
+            max-width: 90vw;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .wide-dropdown .dropdown-item {
+            padding: 0.5rem 1rem;
+            white-space: normal;
+            border-radius: 0.25rem;
+        }
+        
+        .wide-dropdown .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        @@keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @@media (max-width: 767.98px) {
+            .wide-dropdown {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .wide-dropdown .row > div {
+                width: 100%;
+            }
+        }
+        
+        /* Sticky header styles */
+        header.sticky-top {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        /* Add shadow when scrolled */
+        header.shadow-on-scroll {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Adjust body padding to prevent content jump */
+        body {
+            padding-top: 0;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="contact-info d-flex flex-wrap gap-3">
+                        <a href="tel:0987654321"><i class="bi bi-telephone"></i> 0987 654 321</a>
+                        <a href="mailto:info@gocnhodecor.com"><i class="bi bi-envelope"></i> info@gocnhodecor.com</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-md-end justify-content-center">
+                        <div class="additional-links me-3">
+                            <a href="#" class="me-3"><i class="bi bi-truck me-1"></i> Chính sách vận chuyển</a>
+                            <a href="#"><i class="bi bi-shield-check me-1"></i> Bảo hành</a>
+                        </div>
+                        <div class="social-icons">
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-tiktok"></i></a>
+                            <a href="#"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-white" asp-area="Customer" asp-controller="Home" asp-action="Index"> <i class="bi bi-shop"></i> GocNhoDecor</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door me-1"></i>HOME
+                            </a>
+                        </li>
+                        @await Component.InvokeAsync("CategoryMenu")
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="Admin" asp-controller="Admin" asp-action="Index"><i class="bi bi-shield-check"></i>Admin</a>
+                            </li>
+                        }
+                    </ul>
+                    
+                    <!-- Search Bar -->
+                    <form class="d-flex mx-auto" asp-area="Customer" asp-controller="Product" asp-action="Search" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-search text-muted"></i>
+                            </span>
+                            <input type="text" name="searchTerm" id="searchInput" class="form-control border-start-0 border-end-0" 
+                                   placeholder="Tìm kiếm sản phẩm..." aria-label="Search products">
+                            <span class="input-group-text bg-white border-start-0 clear-search-icon" onclick="clearSearch('searchInput')">
+                                <i class="bi bi-x text-muted"></i>
+                            </span>
+                        </div>
+                    </form>
+                    
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        @if (TempData["LogoutMessage"] != null)
+        {
+            <div class="alert alert-info logout-message">
+                @TempData["LogoutMessage"]
+            </div>
+        }
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer border-top py-3 mt-4 bg-white">
+        <div class="container text-center">
+            <span class="text-muted">&copy; 2025 - WebSiteBanHang - </span>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header.sticky-top');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        header.classList.add('shadow-on-scroll');
+                    } else {
+                        header.classList.remove('shadow-on-scroll');
+                    }
+                });
+            }
+        });
+
+        // Script to clear search input
+        function clearSearch(inputId) {
+            document.getElementById(inputId).value = '';
+            document.getElementById(inputId).focus();
+        }
+        
+        // Script to submit search form on Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        this.form.submit();
+                    }
+                });
+            }
+            
+            // Add style for clear search icon
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .clear-search-icon {
+                    cursor: pointer;
+                }
+                .clear-search-icon:hover {
+                    color: #0d6efd;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

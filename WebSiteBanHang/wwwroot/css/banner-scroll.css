@@ -1,0 +1,97 @@
+.banner-scroll-container {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+    margin-bottom: 30px;
+    margin-top: -16px;
+}
+
+.banner-scroll-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.banner-scroll-item {
+    flex: 0 0 100%;
+    padding: 0;
+}
+
+.banner-scroll-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.banner-scroll-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.banner-scroll-nav button {
+    background-color: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    padding: 10px;
+}
+
+.banner-scroll-nav button:hover {
+    background-color: transparent;
+    transform: scale(1.2);
+}
+
+.banner-scroll-nav button i {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.banner-scroll-nav button:hover i {
+    color: #ffffff;
+}
+
+.banner-scroll-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.banner-scroll-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.banner-scroll-dot.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .banner-scroll-item img {
+        height: 200px;
+    }
+}

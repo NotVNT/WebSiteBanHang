@@ -1,0 +1,43 @@
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Fix for header navigation items */
+    .navbar-nav .nav-item {
+        margin-right: 8px;
+    }
+    
+    /* Prevent items from wrapping to next line */
+    .navbar-collapse {
+        flex-wrap: nowrap !important;
+    }
+    
+    /* Fix badge positioning */
+    .position-relative .badge {
+        transform: translate(-50%, -25%);
+        margin-left: -3px;
+    }
+    
+    /* Set min-width for action items to prevent shifts */
+    .navbar .navbar-nav:last-child {
+        min-width: 180px;
+    }
+    
+    /* Ensure navbar links have proper padding */
+    .navbar .nav-link {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    /* Add whitespace nowrap to prevent text breaking */
+    .navbar-nav .nav-link, 
+    .navbar-brand {
+        white-space: nowrap;
+    }
+</style>
+
+@RenderBody()
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

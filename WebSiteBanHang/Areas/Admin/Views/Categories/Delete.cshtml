@@ -1,0 +1,138 @@
+﻿@model WebSiteBanHang.Models.Category
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-header bg-gradient bg-danger text-white p-4 border-0">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-trash3 fs-3 me-3"></i>
+                        <h2 class="mb-0">Xóa danh mục</h2>
+                    </div>
+                </div>
+                
+                <div class="card-body p-4">
+                    @if (ViewBag.HasProducts)
+                    {
+                        <div class="alert alert-danger border-0 rounded-3 p-4 mb-4 shadow-sm">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <i class="bi bi-exclamation-triangle-fill fs-1 text-danger"></i>
+                                </div>
+                                <div>
+                                    <h4 class="alert-heading">Không thể xóa danh mục này!</h4>
+                                    <p class="mb-0">Danh mục này đang chứa @ViewBag.ProductCount sản phẩm. Bạn cần chuyển hoặc xóa các sản phẩm này trước khi xóa danh mục.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-4 border-danger border-opacity-50">
+                            <div class="card-body">
+                                <h5 class="card-title text-danger"><i class="bi bi-info-circle me-2"></i>Thông tin danh mục</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <th style="width: 150px">Mã danh mục:</th>
+                                            <td>@Model.Id</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tên danh mục:</th>
+                                            <td><span class="fw-medium">@Model.Name</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số sản phẩm:</th>
+                                            <td><span class="badge bg-danger rounded-pill">@ViewBag.ProductCount</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box me-2"></i>Quản lý sản phẩm
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center mb-4 py-3">
+                            <div class="display-1 text-danger mb-3">
+                                <i class="bi bi-exclamation-diamond"></i>
+                            </div>
+                            <h3 class="mb-4">Bạn có chắc chắn muốn xóa danh mục này?</h3>
+                            <p class="text-muted">Thao tác này không thể hoàn tác. Danh mục sẽ bị xóa vĩnh viễn khỏi hệ thống.</p>
+                        </div>
+                        
+                        <div class="card mb-4 bg-light border-0">
+                            <div class="card-body p-4">
+                                <h5 class="card-title text-danger mb-3"><i class="bi bi-info-circle me-2"></i>Thông tin danh mục</h5>
+                                <div class="row align-items-center">
+                                    <div class="col-md-2 text-center">
+                                        <div class="bg-light p-3 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                            <i class="bi bi-folder2-open text-danger fs-1"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <table class="table table-borderless">
+                                            <tr>
+                                                <th style="width: 150px">Mã danh mục:</th>
+                                                <td>@Model.Id</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tên danh mục:</th>
+                                                <td><span class="fw-bold fs-5">@Model.Name</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form asp-action="DeleteConfirmed" method="post" id="deleteForm">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                                </a>
+                                <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                    <i class="bi bi-trash3 me-2"></i>Xóa danh mục
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Confirmation Modal -->
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0">
+                                    <div class="modal-header bg-danger text-white border-0">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel"><i class="bi bi-exclamation-triangle me-2"></i>Xác nhận xóa</h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-4">
+                                        <p>Bạn có chắc chắn muốn xóa danh mục <strong>@Model.Name</strong>?</p>
+                                        <p class="text-danger mb-0"><small>Lưu ý: Thao tác này không thể hoàn tác.</small></p>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                            <i class="bi bi-x-circle me-2"></i>Hủy
+                                        </button>
+                                        <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm').submit();">
+                                            <i class="bi bi-trash3 me-2"></i>Xóa
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

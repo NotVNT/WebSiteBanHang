@@ -1,0 +1,201 @@
+﻿@model WebSiteBanHang.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-gradient bg-primary text-white py-3">
+                    <h2 class="mb-0 text-center">
+                        <i class="bi bi-pencil-square me-2"></i>Cập nhật sản phẩm
+                    </h2>
+                </div>
+                
+                <div class="card-body p-4">
+                    <form asp-action="Update" method="post" enctype="multipart/form-data" class="needs-validation" id="productForm" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger alert alert-danger p-2 mb-4" role="alert"></div>
+                        <input type="hidden" asp-for="Id" />
+                        
+                        <!-- Tên sản phẩm -->
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label fw-bold">
+                                <i class="bi bi-tag-fill me-1 text-primary"></i> @Html.DisplayNameFor(model => model.Name)
+                            </label>
+                            <input asp-for="Name" class="form-control form-control-lg shadow-sm" placeholder="Nhập tên sản phẩm..." />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <div class="form-text">Tên sản phẩm nên ngắn gọn và mô tả chính xác sản phẩm</div>
+                        </div>
+                        
+                        <!-- Giá sản phẩm -->
+                        <div class="mb-4">
+                            <label asp-for="Price" class="form-label fw-bold">
+                                <i class="bi bi-currency-exchange me-1 text-primary"></i> @Html.DisplayNameFor(model => model.Price)
+                            </label>
+                            <div class="input-group input-group-lg shadow-sm">
+                                <input id="priceInput" class="form-control" placeholder="Nhập giá sản phẩm " value="@Model.Price.ToString("#,##0")"/>
+                                <input type="hidden" asp-for="Price" id="formattedPrice" />
+                                <span class="input-group-text bg-success text-white fw-bold">VNĐ</span>
+                            </div>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                            <div class="form-text">Giá sản phẩm phải từ 1.000đ đến 100.000.000đ </div>
+                        </div>
+                        
+                        <!-- Mô tả sản phẩm -->
+                        <div class="mb-4">
+                            <label asp-for="Description" class="form-label fw-bold">
+                                <i class="bi bi-file-text-fill me-1 text-primary"></i> @Html.DisplayNameFor(model => model.Description)
+                            </label>
+                            <textarea asp-for="Description" class="form-control shadow-sm" rows="4" placeholder="Nhập mô tả chi tiết sản phẩm..."></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        
+                        <!-- Danh mục sản phẩm -->
+                        <div class="mb-4">
+                            <label asp-for="CategoryId" class="form-label fw-bold">
+                                <i class="bi bi-bookmark-fill me-1 text-primary"></i> @Html.DisplayNameFor(model => model.CategoryId)
+                            </label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select form-select-lg shadow-sm">
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        
+                        <!-- Hình ảnh sản phẩm -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-image-fill me-1 text-primary"></i> Hình ảnh sản phẩm
+                            </label>
+                            <div class="card bg-light border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <img id="imagePreview" src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/no-image.png" : Model.ImageUrl)" 
+                                             alt="Xem trước" class="img-fluid rounded shadow-sm" style="max-height: 250px;">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="file" id="imageInput" name="imageFile" class="form-control" accept="image/*" onchange="previewImage(event)">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="resetImage()">
+                                            <i class="bi bi-arrow-counterclockwise"></i> Đặt lại
+                                        </button>
+                                    </div>
+                                    <div class="form-text text-center mt-2">Hỗ trợ các định dạng: JPG, PNG, GIF (tối đa 5MB)</div>
+                                    <div id="imageValidationMessage" class="text-danger mt-2" style="display: @(string.IsNullOrEmpty(Model.ImageUrl) ? "block" : "none");">
+                                        Bạn chưa chọn ảnh cho sản phẩm
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Nút thao tác -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                <i class="bi bi-save"></i> Cập nhật
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Format price input with thousand separators
+        const priceInput = document.getElementById('priceInput');
+        const formattedPrice = document.getElementById('formattedPrice');
+        
+        // Initialize the formatted price value
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set the initial hidden price value for form submission
+            formattedPrice.value = '@Model.Price';
+        });
+        
+        // Format display when user inputs values
+        priceInput.addEventListener('input', function(e) {
+            // Remove all non-digit characters
+            let value = this.value.replace(/[^\d]/g, '');
+            
+            // Format with commas for display
+            if (value) {
+                this.value = new Intl.NumberFormat('vi-VN').format(value);
+            }
+            
+            // Store raw value for form submission
+            formattedPrice.value = value;
+        });
+        
+        // Handle form submission validation
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            const imageInput = document.getElementById('imageInput');
+            const imageValidationMessage = document.getElementById('imageValidationMessage');
+            const currentImage = '@Model.ImageUrl';
+            
+            // Validate image is selected or already exists
+            if (imageInput.files.length === 0 && !currentImage) {
+                // Prevent form submission
+                event.preventDefault();
+                // Show validation message
+                imageValidationMessage.style.display = 'block';
+                // Scroll to the image input for better visibility
+                imageInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Focus on the image input
+                imageInput.focus();
+                return false;
+            } else {
+                imageValidationMessage.style.display = 'none';
+            }
+            
+            return true;
+        });
+        
+        // Image preview functions 
+        function previewImage(event) {
+            const reader = new FileReader();
+            const imagePreview = document.getElementById('imagePreview');
+            const imageValidationMessage = document.getElementById('imageValidationMessage');
+            
+            reader.onload = function() {
+                imagePreview.src = reader.result;
+            }
+            
+            if (event.target.files && event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+                // Hide validation message when image is selected
+                imageValidationMessage.style.display = 'none';
+            }
+        }
+        
+        function resetImage() {
+            const imageInput = document.getElementById('imageInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const imageValidationMessage = document.getElementById('imageValidationMessage');
+            const originalImage = "@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/no-image.png" : Model.ImageUrl)";
+            
+            imageInput.value = '';
+            imagePreview.src = originalImage;
+            
+            // Show validation message when image is reset only if no original image
+            if (originalImage === "/images/no-image.png") {
+                imageValidationMessage.style.display = 'block';
+            } else {
+                imageValidationMessage.style.display = 'none';
+            }
+        }
+        
+        // Real-time validation feedback
+        document.querySelectorAll('.form-control, .form-select').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() !== '') {
+                    this.classList.add('is-valid');
+                    this.classList.remove('is-invalid');
+                } else if (this.hasAttribute('required')) {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                }
+            });
+        });
+    </script>
+}
+
