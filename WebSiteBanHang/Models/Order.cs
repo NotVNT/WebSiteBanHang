@@ -80,5 +80,7 @@ namespace WebSiteBanHang.Models
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
+
+        public string CancellationReason { get; set; }
     }
 } 

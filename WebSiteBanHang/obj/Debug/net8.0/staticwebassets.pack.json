@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\banner-scroll-image\\decor4.jpg"
     },
     {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\banner-scroll-image\\decor5.jpg",
+      "PackagePath": "staticwebassets\\banner-scroll-image\\decor5.jpg"
+    },
+    {
       "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\css\\banner-scroll.css",
       "PackagePath": "staticwebassets\\css\\banner-scroll.css"
     },
@@ -59,6 +63,10 @@
     {
       "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\17-1-768x511.jpg",
       "PackagePath": "staticwebassets\\images\\17-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\2280603707_TranNgocVinh.jpg",
+      "PackagePath": "staticwebassets\\images\\2280603707_TranNgocVinh.jpg"
     },
     {
       "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\3-99496-1-768x511.jpg",
@@ -1055,6 +1063,10 @@
     {
       "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\banner-scroll.js",
       "PackagePath": "staticwebassets\\js\\banner-scroll.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\cart-ajax.js",
+      "PackagePath": "staticwebassets\\js\\cart-ajax.js"
     },
     {
       "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\site.js",

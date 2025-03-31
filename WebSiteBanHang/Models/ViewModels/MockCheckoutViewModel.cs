@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace WebSiteBanHang.Models.ViewModels
 {
@@ -8,14 +10,16 @@ namespace WebSiteBanHang.Models.ViewModels
         [Display(Name = "Họ và tên")]
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
-        [Display(Name = "Số điện thoại")]
-        public string PhoneNumber { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng nhập email")]
-        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ email")]
+        [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@gmail\.com$", ErrorMessage = "Vui lòng nhập đúng định dạng Gmail")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+        [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại phải có 10 hoặc 11 chữ số")]
+        [Display(Name = "Số điện thoại")]
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ giao hàng")]
         [Display(Name = "Địa chỉ giao hàng")]

@@ -3,8 +3,5 @@
 <a class="nav-link text-white position-relative" asp-area="Customer" asp-controller="Cart" asp-action="Index">
     <i class="bi bi-cart3"></i> 
     <span>Giỏ hàng</span>
-    @if (Model > 0)
-    {
-        <span class="badge rounded-pill bg-danger position-absolute" style="top: 0; right: -10px;">@Model</span>
-    }
+    <span class="badge rounded-pill bg-danger cart-badge @(Model > 0 ? "has-items" : "")">@(Model > 0 ? Model.ToString() : "0")</span>
 </a> 

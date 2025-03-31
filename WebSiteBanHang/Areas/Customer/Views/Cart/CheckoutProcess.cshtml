@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body p-4">
                     <form asp-action="PlaceOrder" method="post" class="needs-validation" novalidate>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger alert alert-danger p-2"></div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -29,7 +29,7 @@
                                 <label asp-for="PhoneNumber" class="form-label"></label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                                    <input asp-for="PhoneNumber" class="form-control" placeholder="Nhập số điện thoại..." />
+                                    <input asp-for="PhoneNumber" class="form-control" placeholder="Nhập 10 hoặc 11 chữ số" />
                                 </div>
                                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
@@ -39,7 +39,7 @@
                             <label asp-for="Email" class="form-label"></label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                                <input asp-for="Email" class="form-control" placeholder="Nhập email..." />
+                                <input asp-for="Email" class="form-control" placeholder="Nhập địa chỉ Gmail" />
                             </div>
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
@@ -179,5 +179,39 @@
                 }, false)
             })
         })()
+
+        // Hiển thị form validation trực tiếp khi người dùng nhập liệu
+        $(document).ready(function() {
+            // Kiểm tra số điện thoại khi nhập
+            $("#PhoneNumber").on("input", function() {
+                var value = $(this).val();
+                // Loại bỏ ký tự không phải số
+                value = value.replace(/[^0-9]/g, '');
+                $(this).val(value);
+                
+                // Validate số điện thoại
+                if (value.length > 0 && (value.length < 10 || value.length > 11)) {
+                    $(this).addClass("is-invalid");
+                } else {
+                    $(this).removeClass("is-invalid");
+                    if (value.length >= 10) {
+                        $(this).addClass("is-valid");
+                    }
+                }
+            });
+
+            // Kiểm tra email khi nhập
+            $("#Email").on("blur", function() {
+                var value = $(this).val();
+                var isGmail = /^[a-zA-Z0-9._%+-]+@@gmail\.com$/.test(value);
+                
+                if (value && !isGmail) {
+                    $(this).addClass("is-invalid");
+                } else if (value) {
+                    $(this).removeClass("is-invalid");
+                    $(this).addClass("is-valid");
+                }
+            });
+        });
     </script>
 }

@@ -5,9 +5,8 @@
     var (statusClass, statusText) = Model.Status switch
     {
         OrderStatus.Pending => ("bg-warning text-dark", "Chờ xác nhận"),
-        OrderStatus.Processing => ("bg-info text-dark", "Đang xử lý"),
-        OrderStatus.Shipped => ("bg-primary", "Đang giao hàng"),
-        OrderStatus.Delivered => ("bg-success", "Đã giao hàng"),
+        OrderStatus.Processing => ("bg-info text-dark", "Đã xác nhận"),
+        OrderStatus.Completed => ("bg-success", "Đã giao hàng"),
         OrderStatus.Cancelled => ("bg-danger", "Đã hủy"),
         _ => ("bg-secondary", "Không xác định")
     };
@@ -31,7 +30,21 @@
                         <h5 class="card-title mb-0">
                             <i class="bi bi-box-seam text-primary me-2"></i>Chi tiết sản phẩm
                         </h5>
-                        <span class="badge @statusClass">@statusText</span>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                <div class="badge 
+                                    @(Model.Status == OrderStatus.Pending ? "bg-warning text-dark" : 
+                                      Model.Status == OrderStatus.Processing ? "bg-info text-dark" :
+                                      Model.Status == OrderStatus.Completed ? "bg-success" :
+                                      Model.Status == OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")
+                                    p-2 fs-6">
+                                    @(Model.Status == OrderStatus.Pending ? "Chờ xác nhận" :
+                                      Model.Status == OrderStatus.Processing ? "Đã xác nhận" :
+                                      Model.Status == OrderStatus.Completed ? "Đã hoàn thành" :
+                                      Model.Status == OrderStatus.Cancelled ? "Đã hủy" : Model.Status.ToString())
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -101,8 +114,31 @@
                     </p>
                     <p class="mb-1 d-flex justify-content-between">
                         <span class="text-muted">Trạng thái:</span>
-                        <span class="badge @statusClass">@statusText</span>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                <div class="badge 
+                                    @(Model.Status == OrderStatus.Pending ? "bg-warning text-dark" : 
+                                      Model.Status == OrderStatus.Processing ? "bg-info text-dark" :
+                                      Model.Status == OrderStatus.Completed ? "bg-success" :
+                                      Model.Status == OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")
+                                    p-2 fs-6">
+                                    @(Model.Status == OrderStatus.Pending ? "Chờ xác nhận" :
+                                      Model.Status == OrderStatus.Processing ? "Đã xác nhận" :
+                                      Model.Status == OrderStatus.Completed ? "Đã hoàn thành" :
+                                      Model.Status == OrderStatus.Cancelled ? "Đã hủy" : Model.Status.ToString())
+                                </div>
+                            </div>
+                        </div>
                     </p>
+                    @if (Model.Status == OrderStatus.Cancelled && !string.IsNullOrEmpty(Model.CancellationReason))
+                    {
+                        <div class="alert alert-danger mt-2">
+                            <p class="mb-0">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                <strong>Lý do hủy đơn hàng:</strong> @Model.CancellationReason
+                            </p>
+                        </div>
+                    }
                 </div>
             </div>
 

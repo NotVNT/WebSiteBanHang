@@ -1,0 +1,926 @@
+@model WebSiteBanHang.Models.ViewModels.PaginatedList<WebSiteBanHang.Models.Order>
+@using WebSiteBanHang.Models.ViewModels
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    var filter = ViewBag.Filter as OrderFilterViewModel ?? new OrderFilterViewModel();
+    
+    // Đếm số lượng đơn hàng theo trạng thái
+    var pendingOrders = ViewBag.PendingOrders ?? 0;
+    var processingOrders = ViewBag.ProcessingOrders ?? 0;
+    var completedOrders = ViewBag.CompletedOrders ?? 0;
+    var cancelledOrders = ViewBag.CancelledOrders ?? 0;
+    var totalOrders = Model.TotalItems;
+}
+
+<div class="container py-4">
+    <!-- Dashboard Section -->
+    <div class="card border-0 shadow-lg rounded-3 mb-4">
+        <div class="card-header bg-white p-3 border-0">
+            <h4 class="mb-0">
+                <i class="bi bi-speedometer2 text-primary me-2"></i>Tổng quan đơn hàng
+            </h4>
+        </div>
+        <div class="card-body pb-4">
+            <div class="row g-3">
+                <!-- Tổng đơn hàng -->
+                <div class="col-12 col-md-6 col-lg">
+                    <div class="card border-0 rounded-3 shadow-sm bg-light h-100">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-receipt text-primary fs-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Tổng đơn hàng</h6>
+                                <h3 class="mb-0">@totalOrders</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 py-2">
+                            <a href="@Url.Action("Index")" class="text-decoration-none small d-flex align-items-center justify-content-end">
+                                <span>Xem tất cả</span>
+                                <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chờ xác nhận -->
+                <div class="col-12 col-md-6 col-lg">
+                    <div class="card border-0 rounded-3 shadow-sm h-100">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-hourglass-split text-warning fs-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Chờ xác nhận</h6>
+                                <h3 class="mb-0">@pendingOrders</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 py-2">
+                            <a href="@Url.Action("Index", new { Status = WebSiteBanHang.Models.OrderStatus.Pending })" class="text-decoration-none small d-flex align-items-center justify-content-end">
+                                <span>Xem chi tiết</span>
+                                <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đã xác nhận -->
+                <div class="col-12 col-md-6 col-lg">
+                    <div class="card border-0 rounded-3 shadow-sm h-100">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-clipboard-check text-info fs-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Đã xác nhận</h6>
+                                <h3 class="mb-0">@processingOrders</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 py-2">
+                            <a href="@Url.Action("Index", new { Status = WebSiteBanHang.Models.OrderStatus.Processing })" class="text-decoration-none small d-flex align-items-center justify-content-end">
+                                <span>Xem chi tiết</span>
+                                <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đã hoàn thành -->
+                <div class="col-12 col-md-6 col-lg">
+                    <div class="card border-0 rounded-3 shadow-sm h-100">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-box-seam text-success fs-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Đã hoàn thành</h6>
+                                <h3 class="mb-0">@completedOrders</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 py-2">
+                            <a href="@Url.Action("Index", new { Status = WebSiteBanHang.Models.OrderStatus.Completed })" class="text-decoration-none small d-flex align-items-center justify-content-end">
+                                <span>Xem chi tiết</span>
+                                <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đã hủy -->
+                <div class="col-12 col-md-6 col-lg">
+                    <div class="card border-0 rounded-3 shadow-sm h-100">
+                        <div class="card-body p-3 d-flex align-items-center">
+                            <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                                <i class="bi bi-x-circle text-danger fs-3"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-muted mb-1">Đã hủy</h6>
+                                <h3 class="mb-0">@cancelledOrders</h3>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-0 py-2">
+                            <a href="@Url.Action("Index", new { Status = WebSiteBanHang.Models.OrderStatus.Cancelled })" class="text-decoration-none small d-flex align-items-center justify-content-end">
+                                <span>Xem chi tiết</span>
+                                <i class="bi bi-chevron-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card border-0 shadow-lg rounded-3">
+        <div class="card-header bg-primary text-white p-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">
+                    <i class="bi bi-receipt me-2"></i> Quản lý đơn hàng
+                </h3>
+                <div>
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="collapse" data-bs-target="#filterPanel">
+                        <i class="bi bi-funnel me-1"></i> Lọc đơn hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filter Panel -->
+        <div class="collapse @(filter.Status.HasValue || filter.StartDate.HasValue || filter.EndDate.HasValue || !string.IsNullOrEmpty(filter.CustomerSearch) || filter.OrderId.HasValue || filter.MinAmount.HasValue || filter.MaxAmount.HasValue ? "show" : "")" id="filterPanel">
+            <div class="card-body bg-light border-bottom">
+                <form asp-action="Index" method="get" id="filterForm">
+                    <input type="hidden" name="page" value="1" />
+                    
+                    <div class="row g-3">
+                        <!-- First row of filters -->
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Trạng thái đơn hàng</label>
+                            <select name="Status" class="form-select" id="statusFilter">
+                                @foreach (var option in filter.StatusOptions)
+                                {
+                                    <option value="@option.Value" selected="@(filter.Status.HasValue && ((int)filter.Status.Value).ToString() == option.Value)">
+                                        @option.Text
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Khoảng thời gian</label>
+                            <select name="DateRange" class="form-select" id="dateRangeFilter">
+                                @foreach (var option in filter.DateRangeOptions)
+                                {
+                                    <option value="@option.Value" selected="@(filter.DateRange == option.Value)">
+                                        @option.Text
+                                    </option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-4" id="customDateSection">
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label">Từ ngày</label>
+                                    <input type="date" name="StartDate" class="form-control" 
+                                           value="@(filter.StartDate?.ToString("yyyy-MM-dd"))" />
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label">Đến ngày</label>
+                                    <input type="date" name="EndDate" class="form-control" 
+                                           value="@(filter.EndDate?.ToString("yyyy-MM-dd"))" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- New row for additional filters -->
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-person me-1"></i>Tìm khách hàng
+                            </label>
+                            <input type="text" name="CustomerSearch" class="form-control" 
+                                   placeholder="Tên, email hoặc số điện thoại" 
+                                   value="@filter.CustomerSearch" />
+                            <div class="form-text">Tìm theo tên, email hoặc số điện thoại</div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-upc-scan me-1"></i>Mã đơn hàng
+                            </label>
+                            <input type="number" name="OrderId" class="form-control" 
+                                   placeholder="Nhập mã đơn hàng" 
+                                   value="@filter.OrderId" />
+                        </div>
+                    </div>
+                    
+                    <!-- New row for price range filters -->
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">
+                                <i class="bi bi-cash-coin me-1"></i>Khoảng giá
+                            </label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text">Từ</span>
+                                        <input type="text" id="minAmountDisplay" class="form-control price-input" placeholder="VNĐ" value="@(filter.MinAmount?.ToString("N0") ?? "")" />
+                                        <input type="hidden" name="MinAmount" id="minAmountValue" value="@filter.MinAmount" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text">Đến</span>
+                                        <input type="text" id="maxAmountDisplay" class="form-control price-input" placeholder="VNĐ" value="@(filter.MaxAmount?.ToString("N0") ?? "")" />
+                                        <input type="hidden" name="MaxAmount" id="maxAmountValue" value="@filter.MaxAmount" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn-outline-secondary me-2" onclick="resetAllFilters()">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Hoàn tác
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-filter me-1"></i>Lọc đơn hàng
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Status update messages will appear here -->
+        <div id="status-update-message" class="alert alert-success alert-dismissible fade d-none mx-3 mt-3" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <span id="message-text"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        <!-- Active Filters Summary -->
+        @if (filter.Status.HasValue || filter.StartDate.HasValue || filter.EndDate.HasValue || !string.IsNullOrEmpty(filter.CustomerSearch) || filter.OrderId.HasValue || filter.MinAmount.HasValue || filter.MaxAmount.HasValue)
+        {
+            <div class="card-body border-bottom pt-0 pb-3">
+                <div class="d-flex align-items-center">
+                    <span class="text-muted me-2">Bộ lọc đang áp dụng:</span>
+                    <div class="d-flex flex-wrap gap-2">
+                        @if (filter.Status.HasValue)
+                        {
+                            <span class="badge bg-info text-dark">
+                                Trạng thái: 
+                                @(filter.Status == OrderStatus.Pending ? "Chờ xác nhận" :
+                                  filter.Status == OrderStatus.Processing ? "Đã xác nhận" :
+                                  filter.Status == OrderStatus.Completed ? "Đã hoàn thành" :
+                                  filter.Status == OrderStatus.Cancelled ? "Đã hủy" : filter.Status.ToString())
+                                <button type="button" class="btn-close btn-close-white btn-sm ms-1" 
+                                        onclick="clearFilter('Status')" aria-label="Close"></button>
+                            </span>
+                        }
+                        
+                        @if (!string.IsNullOrEmpty(filter.DateRange) || filter.StartDate.HasValue || filter.EndDate.HasValue)
+                        {
+                            <span class="badge bg-info text-dark">
+                                Thời gian: 
+                                @if (!string.IsNullOrEmpty(filter.DateRange))
+                                {
+                                    @(filter.DateRange == "today" ? "Hôm nay" :
+                                      filter.DateRange == "yesterday" ? "Hôm qua" :
+                                      filter.DateRange == "last7days" ? "7 ngày qua" :
+                                      filter.DateRange == "last30days" ? "30 ngày qua" :
+                                      filter.DateRange == "thismonth" ? "Tháng này" :
+                                      filter.DateRange == "lastmonth" ? "Tháng trước" : "")
+                                }
+                                else
+                                {
+                                    @(filter.StartDate?.ToString("dd/MM/yyyy"))
+                                    @(filter.StartDate.HasValue && filter.EndDate.HasValue ? " - " : "")
+                                    @(filter.EndDate?.ToString("dd/MM/yyyy"))
+                                }
+                                <button type="button" class="btn-close btn-close-white btn-sm ms-1" 
+                                        onclick="clearDateFilters()" aria-label="Close"></button>
+                            </span>
+                        }
+                        
+                        @if (!string.IsNullOrEmpty(filter.CustomerSearch))
+                        {
+                            <span class="badge bg-info text-dark">
+                                Khách hàng: @filter.CustomerSearch
+                                <button type="button" class="btn-close btn-close-white btn-sm ms-1" 
+                                        onclick="clearFilter('CustomerSearch')" aria-label="Close"></button>
+                            </span>
+                        }
+                        
+                        @if (filter.OrderId.HasValue)
+                        {
+                            <span class="badge bg-info text-dark">
+                                Mã đơn: #@filter.OrderId
+                                <button type="button" class="btn-close btn-close-white btn-sm ms-1" 
+                                        onclick="clearFilter('OrderId')" aria-label="Close"></button>
+                            </span>
+                        }
+                        
+                        @if (filter.MinAmount.HasValue || filter.MaxAmount.HasValue)
+                        {
+                            <span class="badge bg-info text-dark">
+                                Giá: @(filter.MinAmount?.ToString("N0") ?? "0")đ - @(filter.MaxAmount?.ToString("N0") ?? "∞")đ
+                                <button type="button" class="btn-close btn-close-white btn-sm ms-1" 
+                                        onclick="clearPriceFilter()" aria-label="Close"></button>
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        
+        <div class="card-body p-0">
+            <!-- Add Sort Options -->
+            <div class="bg-light p-3 border-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="mb-md-0">
+                            <i class="bi bi-list-columns me-2"></i>Danh sách đơn hàng 
+                            <span class="badge bg-secondary ms-2">@Model.TotalItems đơn hàng</span>
+                        </h5>
+                    </div>
+                    <div class="col-md-6">
+                        <form method="get" class="d-flex align-items-center justify-content-md-end gap-2" id="sortForm">
+                            <!-- Preserve existing filters by adding hidden inputs for all filter values -->
+                            <input type="hidden" name="Status" value="@filter.Status" />
+                            <input type="hidden" name="StartDate" value="@(filter.StartDate?.ToString("yyyy-MM-dd"))" />
+                            <input type="hidden" name="EndDate" value="@(filter.EndDate?.ToString("yyyy-MM-dd"))" />
+                            <input type="hidden" name="DateRange" value="@filter.DateRange" />
+                            <input type="hidden" name="CustomerSearch" value="@filter.CustomerSearch" />
+                            <input type="hidden" name="OrderId" value="@filter.OrderId" />
+                            <input type="hidden" name="MinAmount" value="@filter.MinAmount" />
+                            <input type="hidden" name="MaxAmount" value="@filter.MaxAmount" />
+                            <input type="hidden" name="page" value="1" />
+                            
+                            <div class="d-flex align-items-center">
+                                <label class="me-2 mb-0 d-none d-md-block">
+                                    <i class="bi bi-sort-down me-1 text-primary"></i>Sắp xếp:
+                                </label>
+                                <div class="input-group input-group-sm">
+                                    <select name="SortBy" class="form-select" onchange="this.form.submit()">
+                                        @foreach (var item in filter.SortOptions)
+                                        {
+                                            <option value="@item.Value" selected="@(filter.SortBy == item.Value)">
+                                                @item.Text
+                                            </option>
+                                        }
+                                    </select>
+                                    <select name="SortDirection" class="form-select" onchange="this.form.submit()">
+                                        @foreach (var item in filter.SortDirectionOptions)
+                                        {
+                                            <option value="@item.Value" selected="@(filter.SortDirection == item.Value)">
+                                                @(item.Value == "desc" ? "↓ " : "↑ ")@item.Text
+                                            </option>
+                                        }
+                                    </select>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="resetSort()" title="Hoàn tác sắp xếp">
+                                        <i class="bi bi-arrow-counterclockwise"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            @if (Model.Items.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Khách hàng</th>
+                                <th>Ngày đặt</th>
+                                <th class="text-end">Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th class="text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Items)
+                            {
+                                <tr id="order-row-@order.Id">
+                                    <td>
+                                        <strong>#@order.Id</strong>
+                                        <div class="small text-muted">@order.TrackingNumber</div>
+                                    </td>
+                                    <td>
+                                        <div class="fw-medium">@order.FullName</div>
+                                        <div class="small text-muted">@order.PhoneNumber</div>
+                                    </td>
+                                    <td>
+                                        @order.OrderDate.ToString("dd/MM/yyyy")
+                                        <div class="small text-muted">@order.OrderDate.ToString("HH:mm")</div>
+                                    </td>
+                                    <td class="text-end fw-bold">@order.TotalAmount.ToString("N0") đ</td>
+                                    <td>
+                                        <div class="status-badge-container">
+                                            <span id="status-badge-@order.Id" class="status-badge badge 
+                                                @(order.Status == OrderStatus.Pending ? "bg-warning text-dark" : 
+                                                order.Status == OrderStatus.Processing ? "bg-info text-dark" : 
+                                                order.Status == OrderStatus.Completed ? "bg-success" : 
+                                                order.Status == OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")">
+                                                @(order.Status == OrderStatus.Pending ? "Chờ xác nhận" : 
+                                                order.Status == OrderStatus.Processing ? "Đã xác nhận" : 
+                                                order.Status == OrderStatus.Completed ? "Đã hoàn thành" : 
+                                                order.Status == OrderStatus.Cancelled ? "Đã hủy" : order.Status.ToString())
+                                            </span>
+                                            
+                                            <div class="dropdown d-inline-block ms-1">
+                                                @if (order.Status == OrderStatus.Completed || order.Status == OrderStatus.Cancelled)
+                                                {
+                                                    <!-- Show locked status icon for completed or cancelled orders -->
+                                                    <button class="btn btn-sm btn-outline-secondary" type="button" disabled title="@(order.Status == OrderStatus.Completed ? "Đơn hàng đã hoàn thành" : "Đơn hàng đã hủy")">
+                                                        <i class="bi bi-lock"></i>
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <!-- Show dropdown for orders that can be updated -->
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu status-dropdown">
+                                                        <li>
+                                                            <button class="dropdown-item status-update-btn @(order.Status == OrderStatus.Processing ? "active" : "")" 
+                                                                    data-order-id="@order.Id" data-status="@OrderStatus.Processing">
+                                                                <i class="bi bi-check2-circle me-2 text-info"></i>Đã xác nhận
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button class="dropdown-item status-update-btn @(order.Status == OrderStatus.Completed ? "active" : "")" 
+                                                                    data-order-id="@order.Id" data-status="@OrderStatus.Completed">
+                                                                <i class="bi bi-box-seam me-2 text-success"></i>Đã hoàn thành
+                                                            </button>
+                                                        </li>
+                                                        <li><hr class="dropdown-divider"></li>
+                                                        <li>
+                                                            <button class="dropdown-item cancel-order-btn" data-order-id="@order.Id">
+                                                                <i class="bi bi-x-circle me-2 text-danger"></i>Hủy đơn hàng
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                @if (Model.TotalPages > 1)
+                {
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center mt-4">
+                            <!-- First Page -->
+                            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="1"
+                                   asp-route-Status="@filter.Status"
+                                   asp-route-StartDate="@filter.StartDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-EndDate="@filter.EndDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-DateRange="@filter.DateRange"
+                                   aria-label="First">
+                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                </a>
+                            </li>
+                            <!-- Previous Page -->
+                            <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex - 1)"
+                                   asp-route-Status="@filter.Status"
+                                   asp-route-StartDate="@filter.StartDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-EndDate="@filter.EndDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-DateRange="@filter.DateRange"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            
+                            @{
+                                var startPage = Math.Max(1, Model.PageIndex - 2);
+                                var endPage = Math.Min(Model.TotalPages, Model.PageIndex + 2);
+                                
+                                // Show dots if not starting from first page
+                                if (startPage > 1)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                                
+                                // Page numbers
+                                for (var i = startPage; i <= endPage; i++)
+                                {
+                                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                        <a class="page-link" asp-action="Index" asp-route-page="@i"
+                                           asp-route-Status="@filter.Status"
+                                           asp-route-StartDate="@filter.StartDate?.ToString("yyyy-MM-dd")"
+                                           asp-route-EndDate="@filter.EndDate?.ToString("yyyy-MM-dd")"
+                                           asp-route-DateRange="@filter.DateRange"
+                                           aria-label="Page @i">
+                                            @i
+                                        </a>
+                                    </li>
+                                }
+                                
+                                // Show dots if not ending on last page
+                                if (endPage < Model.TotalPages)
+                                {
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                }
+                            }
+                            
+                            <!-- Next Page -->
+                            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@(Model.PageIndex + 1)"
+                                   asp-route-Status="@filter.Status"
+                                   asp-route-StartDate="@filter.StartDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-EndDate="@filter.EndDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-DateRange="@filter.DateRange"
+                                   aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <!-- Last Page -->
+                            <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                                <a class="page-link" asp-action="Index" asp-route-page="@Model.TotalPages"
+                                   asp-route-Status="@filter.Status"
+                                   asp-route-StartDate="@filter.StartDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-EndDate="@filter.EndDate?.ToString("yyyy-MM-dd")"
+                                   asp-route-DateRange="@filter.DateRange"
+                                   aria-label="Last">
+                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="text-center mt-2 text-muted small">
+                        Showing @(((Model.PageIndex - 1) * Model.PageSize) + 1) to @(Math.Min(Model.TotalItems, Model.PageIndex * Model.PageSize)) of @Model.TotalItems items
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-receipt-cutoff text-muted fs-1"></i>
+                    <h5 class="mt-3">Không có đơn hàng nào</h5>
+                    @if (filter.Status.HasValue || filter.StartDate.HasValue || filter.EndDate.HasValue || !string.IsNullOrEmpty(filter.CustomerSearch) || filter.OrderId.HasValue || filter.MinAmount.HasValue || filter.MaxAmount.HasValue)
+                    {
+                        <p class="text-muted mb-4">Không có đơn hàng nào phù hợp với bộ lọc bạn đã chọn.</p>
+                        <a asp-action="Index" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-repeat me-2"></i>Xem tất cả đơn hàng
+                        </a>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Hiện chưa có đơn hàng nào trong hệ thống.</p>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Add this modal at the end of the file, before the closing div -->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="cancelOrderModalLabel">
+                    <i class="bi bi-x-circle me-2"></i>Hủy đơn hàng
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="cancelOrderForm" asp-action="CancelOrder" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="cancelOrderId" value="" />
+                    <div class="mb-3">
+                        <label for="cancellationReason" class="form-label">Lý do hủy đơn hàng:</label>
+                        <select name="cancellationReason" id="cancellationReason" class="form-select mb-2" required>
+                            <option value="">-- Chọn lý do --</option>
+                            <option value="Hết hàng">Hết hàng</option>
+                            <option value="Thời tiết xấu">Thời tiết xấu</option>
+                            <option value="Sản phẩm bị lỗi">Sản phẩm bị lỗi</option>
+                            <option value="Không thể liên hệ với khách hàng">Không thể liên hệ với khách hàng</option>
+                            <option value="other">Lý do khác</option>
+                        </select>
+                        <div id="otherReasonContainer" class="d-none mt-2">
+                            <textarea name="otherReason" id="otherReason" class="form-control" 
+                                      placeholder="Nhập lý do hủy đơn hàng..." rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x me-1"></i>Đóng
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-x-circle me-1"></i>Xác nhận hủy đơn hàng
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Clear individual filters
+        function clearFilter(filterName) {
+            const input = document.querySelector(`[name="${filterName}"]`);
+            if (input) {
+                if (input.tagName === 'SELECT') {
+                    input.value = '';
+                } else {
+                    input.value = '';
+                }
+            }
+            document.getElementById('filterForm').submit();
+        }
+        
+        // Clear date filters
+        function clearDateFilters() {
+            document.querySelector('[name="StartDate"]').value = '';
+            document.querySelector('[name="EndDate"]').value = '';
+            document.querySelector('[name="DateRange"]').value = '';
+            document.getElementById('filterForm').submit();
+        }
+        
+        // Clear price filter - DI CHUYỂN RA NGOÀI ĐỂ CÓ PHẠM VI TOÀN CỤC
+        function clearPriceFilter() {
+            document.getElementById('minAmountDisplay').value = '';
+            document.getElementById('maxAmountDisplay').value = '';
+            document.getElementById('minAmountValue').value = '';
+            document.getElementById('maxAmountValue').value = '';
+            document.getElementById('filterForm').submit();
+        }
+        
+        // Thêm function để hoàn tác tất cả bộ lọc
+        function resetAllFilters() {
+            // Giữ lại tham số sắp xếp nhưng loại bỏ các tham số lọc
+            window.location.href = '@Url.Action("Index", new { SortBy = filter.SortBy, SortDirection = filter.SortDirection })';
+        }
+        
+        // Thêm function để hoàn tác sắp xếp
+        function resetSort() {
+            // Giữ lại các tham số lọc nhưng loại bỏ tham số sắp xếp
+            var url = new URL(window.location.href);
+            url.searchParams.delete('SortBy');
+            url.searchParams.delete('SortDirection');
+            // Giữ lại trang hiện tại nếu có
+            if (url.searchParams.has('page')) {
+                url.searchParams.set('page', '1');
+            }
+            window.location.href = url.toString();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle status update button clicks
+            document.querySelectorAll('.status-update-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order-id');
+                    const newStatus = this.getAttribute('data-status');
+                    
+                    // Update button state
+                    this.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Đang cập nhật...';
+                    this.disabled = true;
+                    
+                    // Send AJAX request to update status
+                    fetch('/Admin/Order/UpdateStatus?id=' + orderId + '&status=' + newStatus, {
+                        method: 'GET',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Instead of showing a custom message, reload the page
+                            // This will show the TempData message in the layout
+                            window.location.reload();
+                        } else {
+                            // Show error message
+                            const messageAlert = document.getElementById('status-update-message');
+                            const messageText = document.getElementById('message-text');
+                            messageText.textContent = data.message || 'Có lỗi xảy ra khi cập nhật trạng thái đơn hàng';
+                            messageAlert.classList.remove('d-none', 'alert-success');
+                            messageAlert.classList.add('show', 'alert-danger');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while updating the order status.');
+                    })
+                    .finally(() => {
+                        // Reset button text and enable it
+                        this.innerHTML = this.getAttribute('data-status') == '@OrderStatus.Processing' ?
+                            '<i class="bi bi-check2-circle me-2 text-info"></i>Đã xác nhận' :
+                            this.getAttribute('data-status') == '@OrderStatus.Completed' ?
+                            '<i class="bi bi-box-seam me-2 text-success"></i>Đã hoàn thành' :
+                            '<i class="bi bi-x-circle me-2 text-danger"></i>Hủy đơn hàng';
+                        this.disabled = false;
+                    });
+                });
+            });
+
+            // Handle cancel order button clicks
+            document.querySelectorAll('.cancel-order-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const orderId = this.getAttribute('data-order-id');
+                    document.getElementById('cancelOrderId').value = orderId;
+                    const modal = new bootstrap.Modal(document.getElementById('cancelOrderModal'));
+                    modal.show();
+                });
+            });
+
+            // Handle "other" reason selection
+            const reasonSelect = document.getElementById('cancellationReason');
+            const otherReasonContainer = document.getElementById('otherReasonContainer');
+            const otherReasonInput = document.getElementById('otherReason');
+            
+            reasonSelect.addEventListener('change', function() {
+                if (this.value === 'other') {
+                    otherReasonContainer.classList.remove('d-none');
+                    otherReasonInput.setAttribute('required', 'required');
+                } else {
+                    otherReasonContainer.classList.add('d-none');
+                    otherReasonInput.removeAttribute('required');
+                }
+            });
+            
+            // Validate form submission
+            document.getElementById('cancelOrderForm').addEventListener('submit', function(e) {
+                const reasonSelect = document.getElementById('cancellationReason');
+                const otherReasonInput = document.getElementById('otherReason');
+                
+                if (reasonSelect.value === '') {
+                    e.preventDefault();
+                    alert('Vui lòng chọn lý do hủy đơn hàng');
+                    return;
+                }
+                
+                if (reasonSelect.value === 'other' && otherReasonInput.value.trim() === '') {
+                    e.preventDefault();
+                    alert('Vui lòng nhập lý do hủy đơn hàng khác');
+                    return;
+                }
+            });
+
+            // Handle date range filter visibility
+            const dateRangeFilter = document.getElementById('dateRangeFilter');
+            const customDateSection = document.getElementById('customDateSection');
+            
+            function toggleCustomDateFields() {
+                if (dateRangeFilter.value === '') {
+                    customDateSection.style.display = 'block';
+                } else {
+                    customDateSection.style.display = 'none';
+                }
+            }
+            
+            // Initial toggle based on selected value
+            toggleCustomDateFields();
+            
+            // Toggle on change
+            dateRangeFilter.addEventListener('change', toggleCustomDateFields);
+            
+            // Auto-submit on status change
+            const statusFilter = document.getElementById('statusFilter');
+            statusFilter.addEventListener('change', function() {
+                document.getElementById('filterForm').submit();
+            });
+            
+            // Auto-submit on date range preset change
+            dateRangeFilter.addEventListener('change', function() {
+                document.getElementById('filterForm').submit();
+            });
+
+            // Add event listener for customer search input to submit on Enter
+            const customerSearch = document.querySelector('[name="CustomerSearch"]');
+            if (customerSearch) {
+                customerSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.getElementById('filterForm').submit();
+                    }
+                });
+            }
+            
+            // Add event listener for order ID input to submit on Enter
+            const orderIdInput = document.querySelector('[name="OrderId"]');
+            if (orderIdInput) {
+                orderIdInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.getElementById('filterForm').submit();
+                    }
+                });
+            }
+
+            // Format price inputs with thousand separators
+            const minAmountDisplay = document.getElementById('minAmountDisplay');
+            const maxAmountDisplay = document.getElementById('maxAmountDisplay');
+            const minAmountValue = document.getElementById('minAmountValue');
+            const maxAmountValue = document.getElementById('maxAmountValue');
+            
+            // Format display values on initial load
+            if (minAmountDisplay && minAmountValue) {
+                minAmountDisplay.addEventListener('input', function() {
+                    // Remove all non-digit characters
+                    let value = this.value.replace(/[^\d]/g, '');
+                    
+                    // Format with commas for display
+                    if (value) {
+                        this.value = new Intl.NumberFormat('vi-VN').format(value);
+                    }
+                    
+                    // Store raw value for form submission
+                    minAmountValue.value = value;
+                });
+            }
+            
+            if (maxAmountDisplay && maxAmountValue) {
+                maxAmountDisplay.addEventListener('input', function() {
+                    // Remove all non-digit characters
+                    let value = this.value.replace(/[^\d]/g, '');
+                    
+                    // Format with commas for display
+                    if (value) {
+                        this.value = new Intl.NumberFormat('vi-VN').format(value);
+                    }
+                    
+                    // Store raw value for form submission
+                    maxAmountValue.value = value;
+                });
+            }
+            
+            // Handle form submission to ensure the hidden fields have the current values
+            const filterForm = document.getElementById('filterForm');
+            if (filterForm) {
+                filterForm.addEventListener('submit', function() {
+                    // Make sure the hidden fields have the current values
+                    if (minAmountDisplay) {
+                        minAmountValue.value = minAmountDisplay.value.replace(/[^\d]/g, '');
+                    }
+                    if (maxAmountDisplay) {
+                        maxAmountValue.value = maxAmountDisplay.value.replace(/[^\d]/g, '');
+                    }
+                });
+            }
+
+            // Formatting for sort options
+            const sortForm = document.getElementById('sortForm');
+            if (sortForm) {
+                // Auto-submit on change
+                sortForm.querySelectorAll('select').forEach(select => {
+                    select.addEventListener('change', function() {
+                        sortForm.submit();
+                    });
+                });
+            }
+        });
+    </script>
+}
+
+<style>
+    .status-badge {
+        font-size: 0.85rem;
+        padding: 0.35em 0.65em;
+    }
+    
+    .status-update-btn.active {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    
+    .dropdown-menu.status-dropdown {
+        min-width: 180px;
+    }
+    
+    /* Add styles for filter badges */
+    .badge .btn-close {
+        padding: 0.15rem;
+        margin-top: -0.1rem;
+        cursor: pointer;
+    }
+    
+    /* Filter panel transition */
+    #filterPanel {
+        transition: all 0.3s ease-in-out;
+    }
+</style> 

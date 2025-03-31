@@ -34,7 +34,7 @@
                         </div>
                         <div>
                             <h6 class="text-muted mb-1">Total Orders</h6>
-                            <h3 class="mb-0">284</h3>
+                            <h3 class="mb-0">@ViewBag.TotalOrders</h3>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div>
                             <h6 class="text-muted mb-1">Customers</h6>
-                            <h3 class="mb-0">156</h3>
+                            <h3 class="mb-0">@ViewBag.TotalCustomers</h3>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <h6 class="text-muted mb-1">Products</h6>
-                            <h3 class="mb-0">47</h3>
+                            <h3 class="mb-0">@ViewBag.TotalProducts</h3>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         </div>
                         <div>
                             <h6 class="text-muted mb-1">Revenue</h6>
-                            <h3 class="mb-0">48.5M</h3>
+                            <h3 class="mb-0">@(ViewBag.TotalRevenue != null ? String.Format("{0:0.0}M", ViewBag.TotalRevenue / 1000000) : "0")</h3>
                         </div>
                     </div>
                 </div>
