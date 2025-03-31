@@ -76,7 +76,19 @@ namespace WebSiteBanHang.Repositories
             var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
-                order.OrderStatus = status;
+                // Validate that the status is one of the allowed values
+                if (!Enum.IsDefined(typeof(OrderStatus), status))
+                {
+                    throw new ArgumentException("Invalid order status", nameof(status));
+                }
+                
+                // Update payment status automatically when order is completed
+                if (status == OrderStatus.Completed && order.PaymentMethod == "COD")
+                {
+                    order.PaymentStatus = true;
+                }
+                
+                order.Status = status;
                 await _context.SaveChangesAsync();
             }
         }
@@ -84,7 +96,7 @@ namespace WebSiteBanHang.Repositories
         public async Task<List<Order>> GetOrdersByStatusAsync(OrderStatus status)
         {
             return await _context.Orders
-                .Where(o => o.OrderStatus == status)
+                .Where(o => o.Status == status)
                 .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
         }
@@ -99,6 +111,25 @@ namespace WebSiteBanHang.Repositories
             return await _context.Orders
                 .Where(o => o.Status != OrderStatus.Cancelled)
                 .SumAsync(o => o.TotalAmount);
+        }
+
+        public async Task CancelOrderAsync(int id, string cancellationReason)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order != null)
+            {
+                order.Status = OrderStatus.Cancelled;
+                order.CancellationReason = cancellationReason;
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<int> GetUniqueCustomerCountAsync()
+        {
+            return await _context.Orders
+                .Select(o => o.UserId)
+                .Distinct()
+                .CountAsync();
         }
     }
 }

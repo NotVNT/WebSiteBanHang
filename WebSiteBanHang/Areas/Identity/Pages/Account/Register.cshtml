@@ -1,56 +1,170 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Đăng ký";
 }
 
-<div class="text-center">
-    <h1>Đăng ký </h1>
-</div>
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="mb-3">
-                <label asp-for="Input.FullName" class="form-label">Nhập họ và tên</label>
-                <input asp-for="Input.FullName" class="form-control" autocomplete="username" aria-required="true" />
-                <span asp-validation-for="Input.FullName" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Input.PhoneNumber" class="form-label">Nhập số điện thoại (không bắt buộc)</label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Input.Email" class="form-label">Nhập gmail (bắt buộc)</label>
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Input.BirthDate" class="form-label">Ngày sinh</label>
-                <input asp-for="Input.BirthDate" class="form-control" aria-required="true" />
-                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Input.Password" class="form-label">Nhập mật khẩu</label>
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <small class="form-text text-muted">(*) Mật khẩu tối thiểu 6 ký tự; chỉ chứa chữ thường và số. (VD: abc123)</small>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Input.ConfirmPassword" class="form-label">Nhập lại mật khẩu</label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" 
+                             style="width: 80px; height: 80px; font-size: 2.5rem;">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+                        <h2 class="fw-normal mb-0">@ViewData["Title"]</h2>
+                        <p class="text-muted small">Tạo tài khoản mới tại GocNhoDecor</p>
+                    </div>
+
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger text-center mb-3" role="alert"></div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.FullName" class="form-control" autocomplete="name" aria-required="true" placeholder="Nguyễn Văn A" />
+                            <label asp-for="Input.FullName" class="form-label">Họ và tên</label>
+                            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="0912345678" />
+                            <label asp-for="Input.PhoneNumber" class="form-label">Số điện thoại (không bắt buộc)</label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="name@gmail.com" />
+                            <label asp-for="Input.Email" class="form-label">Email (bắt buộc)</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.BirthDate" class="form-control" aria-required="true" />
+                            <label asp-for="Input.BirthDate" class="form-label">Ngày sinh</label>
+                            <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.ConfirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="alert alert-info mb-4 small">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Mật khẩu tối thiểu 6 ký tự; chỉ chứa chữ thường và số. (VD: abc123)
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button id="registerSubmit" type="submit" class="btn btn-danger btn-lg fw-bold">
+                                <i class="bi bi-person-plus-fill me-2"></i>Đăng ký tài khoản
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <p class="mb-0">
+                                Bạn đã có tài khoản? 
+                                <a asp-page="./Login" class="text-decoration-none">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i>Đăng nhập ngay
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
             
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-danger mt-3">Đăng ký</button>
-        </form>
-        <div class="text-center mt-3">
-            <p>Bạn đã có tài khoản? <a href="/Identity/Account/Login">Đăng nhập ngay</a></p>
+            <!-- Added footer -->
+            <div class="text-center mt-4">
+                <p class="text-muted small">
+                    © 2025 GocNhoDecor - Nội thất cho mọi ngóc ngách cuộc sống
+                </p>
+            </div>
         </div>
     </div>
 </div>
 
+<style>
+    /* Custom styling for a cleaner look */
+    .form-floating>.form-control:focus~label,
+    .form-floating>.form-control:not(:placeholder-shown)~label {
+        color: #6c757d;
+        opacity: .85;
+    }
+    
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-danger:hover {
+        background-color: #bb2d3b;
+        border-color: #b02a37;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+</style>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        $(document).ready(function() {
+            // Cấu hình jQuery Validation để hiển thị tất cả lỗi cùng lúc
+            $.validator.setDefaults({
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.siblings("span.text-danger"));
+                },
+                highlight: function(element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function(element) {
+                    $(element).removeClass("is-invalid");
+                }
+            });
+            
+            // Tùy chỉnh thông báo lỗi
+            $.extend($.validator.messages, {
+                required: function(param, input) {
+                    switch(input.name) {
+                        case "Input.Password":
+                            return "Hãy nhập mật khẩu";
+                        case "Input.BirthDate":
+                            return "Hãy nhập ngày sinh";
+                        case "Input.FullName":
+                            return "Hãy nhập họ và tên";
+                        case "Input.Email":
+                            return "Hãy nhập email";
+                        default:
+                            return "Trường này là bắt buộc";
+                    }
+                },
+                equalTo: "Mật khẩu xác nhận phải trùng với mật khẩu phía trên"
+            });
+            
+            // Cấu hình validator để kiểm tra tất cả các trường
+            $("#registerForm").validate({
+                showErrors: function(errorMap, errorList) {
+                    // Sử dụng phương thức mặc định để hiển thị lỗi
+                    this.defaultShowErrors();
+                    
+                    // Đảm bảo tất cả các thông báo lỗi đều hiển thị
+                    $("span.text-danger").each(function() {
+                        if ($(this).html() === "") {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 }

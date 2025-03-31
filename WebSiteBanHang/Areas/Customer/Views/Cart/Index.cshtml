@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Giỏ hàng";
-    decimal totalPrice = 0;
+    ViewData["ActivePage"] = "Cart";
 }
 
 <div class="container mt-4">
@@ -112,9 +112,14 @@
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">
-                        <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
-                    </a>
+                    <div>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-left"></i> Tiếp tục mua sắm
+                        </a>
+                        <button type="button" class="btn btn-outline-danger ms-2" data-bs-toggle="modal" data-bs-target="#clearCartModal">
+                            <i class="bi bi-trash"></i> Xóa tất cả
+                        </button>
+                    </div>
                     <div>
                         <form id="checkout-form" asp-area="Customer" asp-controller="Cart" asp-action="Checkout" method="post">
                             <input type="hidden" name="selectedItems" id="selected-items" value="" />
@@ -125,6 +130,32 @@
                     </div>
                 </div>
             }
+        </div>
+    </div>
+</div>
+
+<!-- Clear Cart Confirmation Modal -->
+<div class="modal fade" id="clearCartModal" tabindex="-1" aria-labelledby="clearCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="clearCartModalLabel">Xóa tất cả sản phẩm từ giỏ hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="mb-4">
+                    <div class="text-danger" style="font-size: 3rem;">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                    </div>
+                </div>
+                <p class="mb-0">Bạn có muốn xóa tất cả sản phẩm khỏi giỏ hàng không?</p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <form asp-area="Customer" asp-controller="Cart" asp-action="ClearCart" method="post" id="clear-cart-form">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger px-4 ms-2">Xác nhận</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -223,6 +254,13 @@
                 checkoutButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
                 checkoutButton.disabled = true;
                 return true;
+            });
+            
+            // Clear cart submit button
+            document.getElementById('clear-cart-form')?.addEventListener('submit', function() {
+                const submitButton = this.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Đang xử lý...';
             });
             
             // Khởi tạo tổng tiền ban đầu

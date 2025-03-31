@@ -72,13 +72,11 @@
                             
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post">
-                                    <input type="hidden" name="id" value="@product.Id" />
-                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                                    <button type="submit" class="btn btn-success btn-sm">
-                                        <i class="bi bi-cart-plus"></i> Thêm vào giỏ
-                                    </button>
-                                </form>
+                                <button type="button" class="btn btn-success btn-sm add-to-cart-btn"
+                                        data-product-id="@product.Id" 
+                                        data-return-url="@Context.Request.Path@Context.Request.QueryString">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
                             }
                             else
                             {
@@ -117,13 +115,11 @@
                             
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post">
-                                    <input type="hidden" name="id" value="@product.Id" />
-                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                                    <button type="submit" class="btn btn-success btn-sm">
-                                        <i class="bi bi-cart-plus"></i> Thêm vào giỏ
-                                    </button>
-                                </form>
+                                <button type="button" class="btn btn-success btn-sm add-to-cart-btn"
+                                        data-product-id="@product.Id" 
+                                        data-return-url="@Context.Request.Path@Context.Request.QueryString">
+                                    <i class="bi bi-cart-plus"></i> Thêm vào giỏ
+                                </button>
                             }
                             else
                             {

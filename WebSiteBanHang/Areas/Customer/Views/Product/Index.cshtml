@@ -71,6 +71,43 @@
                 <div>
                     <span class="text-muted">Hiển thị @Model.Items.Count() trong tổng số @Model.TotalItems sản phẩm</span>
                 </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-sort me-1"></i>
+                        @{
+                            var sortText = ViewBag.CurrentSortBy switch
+                            {
+                                "price_asc" => "Giá: Thấp đến cao",
+                                "price_desc" => "Giá: Cao đến thấp",
+                                _ => "Sắp xếp theo"
+                            };
+                        }
+                        @sortText
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="sortDropdown">
+                        <li>
+                            <a class="dropdown-item @(ViewBag.CurrentSortBy == null ? "active" : "")" 
+                               href="@Url.Action(string.IsNullOrEmpty(ViewBag.SearchTerm as string) ? "Index" : "Search", 
+                               new { categoryId = ViewBag.SelectedCategoryId, searchTerm = ViewBag.SearchTerm, sortBy = "" })">
+                                <i class="bi bi-arrow-down-up me-2"></i>Mặc định
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item @(ViewBag.CurrentSortBy == "price_asc" ? "active" : "")" 
+                               href="@Url.Action(string.IsNullOrEmpty(ViewBag.SearchTerm as string) ? "Index" : "Search", 
+                               new { categoryId = ViewBag.SelectedCategoryId, searchTerm = ViewBag.SearchTerm, sortBy = "price_asc" })">
+                                <i class="bi bi-sort-numeric-down me-2"></i>Giá: Thấp đến cao
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item @(ViewBag.CurrentSortBy == "price_desc" ? "active" : "")" 
+                               href="@Url.Action(string.IsNullOrEmpty(ViewBag.SearchTerm as string) ? "Index" : "Search", 
+                               new { categoryId = ViewBag.SelectedCategoryId, searchTerm = ViewBag.SearchTerm, sortBy = "price_desc" })">
+                                <i class="bi bi-sort-numeric-up me-2"></i>Giá: Cao đến thấp
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             
             @if (!Model.Items.Any())
@@ -125,6 +162,7 @@
                                    asp-route-page="1" 
                                    asp-route-categoryId="@ViewBag.SelectedCategoryId"
                                    asp-route-searchTerm="@ViewBag.SearchTerm"
+                                   asp-route-sortBy="@ViewBag.CurrentSortBy"
                                    aria-label="First">
                                     <span aria-hidden="true">&laquo;&laquo;</span>
                                 </a>
@@ -137,6 +175,7 @@
                                    asp-route-page="@(Model.PageIndex - 1)" 
                                    asp-route-categoryId="@ViewBag.SelectedCategoryId"
                                    asp-route-searchTerm="@ViewBag.SearchTerm"
+                                   asp-route-sortBy="@ViewBag.CurrentSortBy"
                                    aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
@@ -162,7 +201,8 @@
                                            asp-action="@(string.IsNullOrEmpty(ViewBag.SearchTerm as string) ? "Index" : "Search")" 
                                            asp-route-page="@i" 
                                            asp-route-categoryId="@ViewBag.SelectedCategoryId"
-                                           asp-route-searchTerm="@ViewBag.SearchTerm">@i</a>
+                                           asp-route-searchTerm="@ViewBag.SearchTerm"
+                                           asp-route-sortBy="@ViewBag.CurrentSortBy">@i</a>
                                     </li>
                                 }
                                 
@@ -182,6 +222,7 @@
                                    asp-route-page="@(Model.PageIndex + 1)" 
                                    asp-route-categoryId="@ViewBag.SelectedCategoryId"
                                    asp-route-searchTerm="@ViewBag.SearchTerm"
+                                   asp-route-sortBy="@ViewBag.CurrentSortBy"
                                    aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
@@ -194,6 +235,7 @@
                                    asp-route-page="@Model.TotalPages" 
                                    asp-route-categoryId="@ViewBag.SelectedCategoryId"
                                    asp-route-searchTerm="@ViewBag.SearchTerm"
+                                   asp-route-sortBy="@ViewBag.CurrentSortBy"
                                    aria-label="Last">
                                     <span aria-hidden="true">&raquo;&raquo;</span>
                                 </a>

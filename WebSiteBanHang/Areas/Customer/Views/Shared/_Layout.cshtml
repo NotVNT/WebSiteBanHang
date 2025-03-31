@@ -43,7 +43,11 @@
 
 @RenderBody()
 
-@await RenderSectionAsync("Scripts", required: false)
+@section Scripts {
+    <!-- Other scripts -->
+    <script src="~/js/cart-ajax.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+}
 
 <script>
     // Auto-dismiss toasts after 5 seconds

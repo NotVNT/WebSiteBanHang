@@ -61,12 +61,12 @@ namespace WebSiteBanHang.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Hãy nhập ngày sinh")]
             [DataType(DataType.Date)]
             [Display(Name = "Birth Date")]
             public DateTime BirthDate { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Hãy nhập mật khẩu")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [RegularExpression(@"^[a-z0-9]+$", ErrorMessage = "The password must contain only lowercase letters and numbers.")]

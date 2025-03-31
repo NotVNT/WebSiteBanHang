@@ -97,15 +97,11 @@ namespace WebSiteBanHang.Areas.Identity.Pages.Account
                         return RedirectToPage("./Lockout");
                     }
                 }
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Tài khoản hoặc mật khẩu của bạn sai, vui lòng kiểm tra lại");
                 return Page();
             }
 
             return Page();
         }
     }
-
-
-
-
 }

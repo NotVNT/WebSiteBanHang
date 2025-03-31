@@ -138,3 +138,64 @@ header + main {
 .card.position-relative:hover {
     transform: translateY(-5px);
 }
+
+/* Status badge responsive styling */
+@media (max-width: 768px) {
+    .status-badge-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .status-badge-container .dropdown {
+        margin-top: 0.5rem;
+        margin-left: 0 !important;
+    }
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 0.75rem;
+    padding: 0.25em 0.6em;
+    min-width: 1.5em;
+    text-align: center;
+}
+
+/* Animation for cart badge when items added */
+@keyframes cart-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.cart-badge.has-items {
+    animation: cart-pulse 0.5s;
+}
+
+/* Cart badge animation */
+.badge-animation {
+    animation: badge-pulse 1s ease;
+}
+
+@keyframes badge-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Toast styling */
+.toast {
+    opacity: 1 !important;
+}
+
+#toast-container {
+    z-index: 1100;
+}

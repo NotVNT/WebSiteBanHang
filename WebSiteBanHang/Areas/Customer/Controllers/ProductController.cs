@@ -45,7 +45,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> Index(int? categoryId, int page = 1)
+        public async Task<IActionResult> Index(int? categoryId, string sortBy = null, int page = 1)
         {
             const int pageSize = 9; // Show 9 products per page
             
@@ -62,16 +62,31 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 ViewBag.CategoryName = category?.Name ?? "Unknown Category";
             }
 
+            // Apply sorting
+            switch (sortBy)
+            {
+                case "price_asc":
+                    products = products.OrderBy(p => p.Price).ToList();
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.Price).ToList();
+                    break;
+                default:
+                    // Default sorting can remain unchanged or you can set a default
+                    break;
+            }
+            
             // Get all categories for sidebar
             var categories = await _categoryRepository.GetAllAsync();
             ViewBag.Categories = categories;
             ViewBag.SelectedCategoryId = categoryId;
+            ViewBag.CurrentSortBy = sortBy; // Save current sort for UI state
             
             var paginatedProducts = WebSiteBanHang.Models.ViewModels.PaginatedList<Product>.Create(products, page, pageSize);
             return View(paginatedProducts);
         }
 
-        public async Task<IActionResult> Search(string searchTerm, int page = 1)
+        public async Task<IActionResult> Search(string searchTerm, string sortBy = null, int page = 1)
         {
             const int pageSize = 9;
             
@@ -96,6 +111,20 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 .Where(p => p.Name != null && p.Name.ToLower().Contains(searchTermLower))
                 .ToList();
 
+            // Apply sorting
+            switch (sortBy)
+            {
+                case "price_asc":
+                    filteredProducts = filteredProducts.OrderBy(p => p.Price).ToList();
+                    break;
+                case "price_desc":
+                    filteredProducts = filteredProducts.OrderByDescending(p => p.Price).ToList();
+                    break;
+                default:
+                    // Default sorting remains unchanged
+                    break;
+            }
+            
             // Log detailed information about search results
             System.Diagnostics.Debug.WriteLine($"Found {filteredProducts.Count} products containing '{searchTermLower}':");
             foreach (var product in filteredProducts)
@@ -107,6 +136,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             var categories = await _categoryRepository.GetAllAsync();
             ViewBag.Categories = categories;
             ViewBag.SearchResults = filteredProducts.Count;
+            ViewBag.CurrentSortBy = sortBy; // Save current sort for UI state
             
             var paginatedProducts = WebSiteBanHang.Models.ViewModels.PaginatedList<Product>.Create(
                 filteredProducts, page, pageSize);
