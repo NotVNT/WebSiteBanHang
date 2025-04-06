@@ -17,6 +17,9 @@ namespace WebSiteBanHang.Models
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Content> Contents { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -48,6 +51,19 @@ namespace WebSiteBanHang.Models
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
+                
+            // Configure Content entity
+            modelBuilder.Entity<Content>()
+                .ToTable("Contents");
+                
+            // Configure Promotion entity
+            modelBuilder.Entity<Promotion>()
+                .Property(p => p.DiscountAmount)
+                .HasColumnType("decimal(18,2)");
+                
+            modelBuilder.Entity<Promotion>()
+                .Property(p => p.MinimumOrderAmount)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

@@ -1,0 +1,163 @@
+@model WebSiteBanHang.Models.Promotion
+
+@{
+    ViewData["Title"] = "Thêm mã khuyến mãi mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/Admin/Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Promotion" asp-action="Index">Quản lý khuyến mãi</a></li>
+        <li class="breadcrumb-item active">Thêm mới</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-percent me-1"></i>
+            Thông tin mã khuyến mãi
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="Code" class="control-label">Mã khuyến mãi</label>
+                            <input asp-for="Code" class="form-control" required />
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                            <small class="form-text text-muted">Mã khuyến mãi dùng khi thanh toán (VD: SUMMER2023)</small>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DiscountAmount" class="control-label">Giá trị giảm</label>
+                                    <input asp-for="DiscountAmount" class="form-control" type="number" step="0.01" min="0" required />
+                                    <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Loại giảm giá</label>
+                                    <div class="form-check mt-2">
+                                        <input asp-for="IsPercentage" class="form-check-input" type="checkbox" />
+                                        <label class="form-check-label" for="IsPercentage">
+                                            Giảm theo phần trăm (%)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="MinimumOrderAmount" class="control-label">Giá trị đơn hàng tối thiểu</label>
+                            <input asp-for="MinimumOrderAmount" id="minimumOrderAmount" class="form-control" type="text" />
+                            <input type="hidden" id="minimumOrderAmountValue" name="MinimumOrderAmount" />
+                            <span asp-validation-for="MinimumOrderAmount" class="text-danger"></span>
+                            <small class="form-text text-muted">Để trống nếu không áp dụng điều kiện này</small>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="MaxUseTimes" class="control-label">Số lần sử dụng tối đa</label>
+                            <input asp-for="MaxUseTimes" class="form-control" type="number" min="1" />
+                            <span asp-validation-for="MaxUseTimes" class="text-danger"></span>
+                            <small class="form-text text-muted">Để trống nếu không giới hạn số lần sử dụng</small>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="StartDate" class="control-label">Ngày bắt đầu</label>
+                                    <input asp-for="StartDate" class="form-control" type="date" required />
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="EndDate" class="control-label">Ngày kết thúc</label>
+                                    <input asp-for="EndDate" class="form-control" type="date" />
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    <small class="form-text text-muted">Để trống nếu không có ngày hết hạn</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" type="checkbox" checked />
+                                <label class="form-check-label" for="IsActive">
+                                    Kích hoạt ngay
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>
+                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function () {
+            // Set default start date to today if not set
+            if (!$('#StartDate').val()) {
+                $('#StartDate').val(new Date().toISOString().split('T')[0]);
+            }
+            
+            // Validation for percentage values
+            $('#IsPercentage').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#DiscountAmount').attr('max', '100');
+                } else {
+                    $('#DiscountAmount').removeAttr('max');
+                }
+            });
+            
+            // Format currency for minimum order amount
+            $('#minimumOrderAmount').on('input', function() {
+                // Remove all non-digit characters
+                let value = $(this).val().replace(/\D/g, '');
+                
+                // Store the raw value in the hidden field
+                $('#minimumOrderAmountValue').val(value);
+                
+                // Format with thousand separators
+                if (value) {
+                    $(this).val(formatNumber(value));
+                }
+            });
+            
+            // Handle form submission
+            $('form').on('submit', function() {
+                let rawValue = $('#minimumOrderAmount').val().replace(/\./g, '');
+                $('#minimumOrderAmountValue').val(rawValue);
+                return true;
+            });
+            
+            // Function to format number with thousand separators
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+        });
+    </script>
+} 

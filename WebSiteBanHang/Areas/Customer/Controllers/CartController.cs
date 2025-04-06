@@ -120,6 +120,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var cartItem = await _context.CartItems
+                .Include(c => c.Product)
                 .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
             
             if (cartItem == null)
@@ -129,14 +130,21 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             
             if (quantity <= 0)
             {
+                // Lưu tên sản phẩm trước khi xóa
+                var productName = cartItem.Product?.Name ?? "Sản phẩm";
+                
                 _context.CartItems.Remove(cartItem);
+                await _context.SaveChangesAsync();
+                
+                TempData["ErrorMessage"] = $"{productName} đã được xóa khỏi giỏ hàng";
             }
             else
             {
                 cartItem.Quantity = quantity;
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Số lượng sản phẩm đã được cập nhật";
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -153,6 +161,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var cartItem = await _context.CartItems
+                .Include(c => c.Product)
                 .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
             
             if (cartItem == null)
@@ -160,8 +169,13 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 return NotFound();
             }
             
+            // Lưu tên sản phẩm trước khi xóa
+            var productName = cartItem.Product?.Name ?? "Sản phẩm";
+            
             _context.CartItems.Remove(cartItem);
             await _context.SaveChangesAsync();
+            
+            TempData["ErrorMessage"] = $"{productName} đã được xóa khỏi giỏ hàng";
             
             return RedirectToAction(nameof(Index));
         }
@@ -428,6 +442,42 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             }
             
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> RemoveFromCartAjax(int id)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                return Json(new { success = false, message = "Admin không thể sử dụng chức năng giỏ hàng." });
+            }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var cartItem = await _context.CartItems
+                .Include(c => c.Product)
+                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+            
+            if (cartItem == null)
+            {
+                return Json(new { success = false, message = "Không tìm thấy sản phẩm trong giỏ hàng" });
+            }
+            
+            var productName = cartItem.Product?.Name ?? "Sản phẩm";
+            
+            _context.CartItems.Remove(cartItem);
+            await _context.SaveChangesAsync();
+            
+            // Get updated cart count
+            int cartCount = await _context.CartItems
+                .Where(c => c.UserId == userId)
+                .SumAsync(c => c.Quantity);
+            
+            return Json(new { 
+                success = true, 
+                message = $"{productName} đã được xóa khỏi giỏ hàng", 
+                cartCount = cartCount 
+            });
         }
     }
 }

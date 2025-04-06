@@ -1,0 +1,165 @@
+@model WebSiteBanHang.Models.ViewModels.ContentViewModel
+
+@{
+    ViewData["Title"] = "Thêm mới nội dung";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">Thêm mới nội dung</h2>
+    
+    <div class="card border-0 shadow-lg rounded-4 mb-4">
+        <div class="card-header bg-white p-4 border-0 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">
+                <i class="bi bi-file-earmark-plus text-primary me-2"></i>Chi tiết nội dung
+            </h5>
+            <a asp-action="Index" class="btn btn-outline-secondary d-flex align-items-center">
+                <i class="bi bi-arrow-left me-2"></i> Trở về danh sách
+            </a>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="card border-0 shadow-sm rounded-3 mb-3">
+                            <div class="card-header bg-light py-3">
+                                <h6 class="mb-0"><i class="bi bi-pencil me-2"></i>Thông tin cơ bản</h6>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="mb-4">
+                                    <label asp-for="Content.Title" class="form-label fw-medium">Tiêu đề</label>
+                                    <input asp-for="Content.Title" class="form-control form-control-lg" required />
+                                    <span asp-validation-for="Content.Title" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label asp-for="Content.Slug" class="form-label fw-medium">Đường dẫn (slug)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text text-muted">/</span>
+                                        <input asp-for="Content.Slug" class="form-control" required />
+                                    </div>
+                                    <div class="form-text text-muted">
+                                        <i class="bi bi-info-circle me-1"></i>Sử dụng chữ thường, dấu gạch ngang, không dấu (VD: gioi-thieu)
+                                    </div>
+                                    <span asp-validation-for="Content.Slug" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="Content.Body" class="form-label fw-medium">Nội dung</label>
+                                    <textarea asp-for="Content.Body" id="editor" class="form-control" rows="12" required></textarea>
+                                    <span asp-validation-for="Content.Body" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm rounded-3 mb-3">
+                            <div class="card-header bg-light py-3">
+                                <h6 class="mb-0"><i class="bi bi-gear me-2"></i>Cài đặt</h6>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <label asp-for="Content.ContentType" class="form-label fw-medium">Loại nội dung</label>
+                                    <select asp-for="Content.ContentType" class="form-select" asp-items="Model.ContentTypes"></select>
+                                    <span asp-validation-for="Content.ContentType" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="Content.Published" class="form-label d-flex justify-content-between fw-medium">
+                                        <span>Trạng thái</span>
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox" asp-for="Content.Published" class="form-check-input" id="publishedSwitch" checked>
+                                            <label class="form-check-label" for="publishedSwitch">Xuất bản</label>
+                                        </div>
+                                    </label>
+                                    <span asp-validation-for="Content.Published" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="Content.DisplayOrder" class="form-label fw-medium">Thứ tự hiển thị</label>
+                                    <input asp-for="Content.DisplayOrder" class="form-control" type="number" min="0" value="0" />
+                                    <span asp-validation-for="Content.DisplayOrder" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card border-0 shadow-sm rounded-3">
+                            <div class="card-header bg-light py-3">
+                                <h6 class="mb-0"><i class="bi bi-search me-2"></i>SEO</h6>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="mb-3">
+                                    <label asp-for="Content.MetaDescription" class="form-label fw-medium">Mô tả (SEO)</label>
+                                    <textarea asp-for="Content.MetaDescription" class="form-control" rows="3"></textarea>
+                                    <div class="form-text text-muted">Giới hạn tối đa 160 ký tự</div>
+                                    <span asp-validation-for="Content.MetaDescription" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="Content.MetaKeywords" class="form-label fw-medium">Từ khóa (SEO)</label>
+                                    <input asp-for="Content.MetaKeywords" class="form-control" />
+                                    <div class="form-text text-muted">Phân cách các từ khóa bằng dấu phẩy</div>
+                                    <span asp-validation-for="Content.MetaKeywords" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary d-flex align-items-center">
+                        <i class="bi bi-x-circle me-2"></i> Hủy
+                    </a>
+                    <button type="submit" class="btn btn-primary d-flex align-items-center">
+                        <i class="bi bi-save me-2"></i> Lưu lại
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('editor', {
+                height: 400,
+                removeButtons: 'About'
+            });
+            
+            $('#Content_Title').on('input', function() {
+                var title = $(this).val();
+                var slug = title.toLowerCase()
+                    .replace(/đ/g, 'd')
+                    .replace(/[áàảãạâấầẩẫậăắằẳẵặ]/g, 'a')
+                    .replace(/[éèẻẽẹêếềểễệ]/g, 'e')
+                    .replace(/[íìỉĩị]/g, 'i')
+                    .replace(/[óòỏõọôốồổỗộơớờởỡợ]/g, 'o')
+                    .replace(/[úùủũụưứừửữự]/g, 'u')
+                    .replace(/[ýỳỷỹỵ]/g, 'y')
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w\-]+/g, '')
+                    .replace(/\-\-+/g, '-')
+                    .replace(/^-+/, '')
+                    .replace(/-+$/, '');
+                $('#Content_Slug').val(slug);
+            });
+        });
+    </script>
+    
+    <style>
+        .rounded-4 {
+            border-radius: 0.75rem !important;
+        }
+        .rounded-3 {
+            border-radius: 0.5rem !important;
+        }
+        .form-label.fw-medium {
+            font-weight: 500;
+        }
+    </style>
+} 

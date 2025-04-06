@@ -38,6 +38,9 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
 
             // Get total revenue from completed orders
             ViewBag.TotalRevenue = await _orderRepository.GetTotalRevenueAsync();
+            
+            // Get count of orders with "Pending" status
+            ViewBag.PendingOrdersCount = (await _orderRepository.GetOrdersByStatusAsync(OrderStatus.Pending)).Count;
 
             return View();
         }

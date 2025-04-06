@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dqAdTR/aTxBUgcunUQbtgjvhCdwfMYS3/McsDD6LUVQ=",
+  "Hash": "Nxr+uhZyDAZm0fSkpZgWGNrjEhi7K6/1ZRdIWHDFRjE=",
   "Source": "WebSiteBanHang",
   "BasePath": "_content/WebSiteBanHang",
   "Mode": "Default",
@@ -6898,8 +6898,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "hgjzugeswa",
-      "Integrity": "v7QRumubXRLMET+lY+cRDx+g1ROh2CVBF6zLoPlZ/ZY=",
+      "Fingerprint": "6t9ouglrao",
+      "Integrity": "qnXTQn7qRZcdINJhVtdvHbnrmLoTQ+PnyHF7i69Hagw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\cart-ajax.js"
@@ -32075,7 +32075,7 @@
       ]
     },
     {
-      "Route": "js/cart-ajax.hgjzugeswa.js",
+      "Route": "js/cart-ajax.6t9ouglrao.js",
       "AssetFile": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\cart-ajax.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -32085,7 +32085,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3586"
+          "Value": "5602"
         },
         {
           "Name": "Content-Type",
@@ -32093,11 +32093,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"v7QRumubXRLMET+lY+cRDx+g1ROh2CVBF6zLoPlZ/ZY=\""
+          "Value": "\"qnXTQn7qRZcdINJhVtdvHbnrmLoTQ+PnyHF7i69Hagw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 03:43:09 GMT"
+          "Value": "Mon, 31 Mar 2025 07:59:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -32107,7 +32107,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "hgjzugeswa"
+          "Value": "6t9ouglrao"
         },
         {
           "Name": "label",
@@ -32115,7 +32115,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-v7QRumubXRLMET+lY+cRDx+g1ROh2CVBF6zLoPlZ/ZY="
+          "Value": "sha256-qnXTQn7qRZcdINJhVtdvHbnrmLoTQ+PnyHF7i69Hagw="
         }
       ]
     },
@@ -32130,7 +32130,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3586"
+          "Value": "5602"
         },
         {
           "Name": "Content-Type",
@@ -32138,11 +32138,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"v7QRumubXRLMET+lY+cRDx+g1ROh2CVBF6zLoPlZ/ZY=\""
+          "Value": "\"qnXTQn7qRZcdINJhVtdvHbnrmLoTQ+PnyHF7i69Hagw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 03:43:09 GMT"
+          "Value": "Mon, 31 Mar 2025 07:59:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -32152,7 +32152,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-v7QRumubXRLMET+lY+cRDx+g1ROh2CVBF6zLoPlZ/ZY="
+          "Value": "sha256-qnXTQn7qRZcdINJhVtdvHbnrmLoTQ+PnyHF7i69Hagw="
         }
       ]
     },
@@ -36935,7 +36935,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 04:09:52 GMT"
+          "Value": "Sun, 06 Apr 2025 14:18:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -36980,7 +36980,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 04:09:52 GMT"
+          "Value": "Sun, 06 Apr 2025 14:18:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37025,7 +37025,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 04:09:52 GMT"
+          "Value": "Sun, 06 Apr 2025 14:18:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -37062,7 +37062,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 04:09:52 GMT"
+          "Value": "Sun, 06 Apr 2025 14:18:43 GMT"
         },
         {
           "Name": "Cache-Control",

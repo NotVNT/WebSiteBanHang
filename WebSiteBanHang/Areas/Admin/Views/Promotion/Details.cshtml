@@ -1,0 +1,129 @@
+@model WebSiteBanHang.Models.Promotion
+
+@{
+    ViewData["Title"] = "Chi tiết mã khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/Admin/Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Promotion" asp-action="Index">Quản lý khuyến mãi</a></li>
+        <li class="breadcrumb-item active">Chi tiết</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-info-circle me-1"></i>
+            Chi tiết mã khuyến mãi: @Model.Code
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 30%">Mã khuyến mãi</th>
+                            <td><strong>@Model.Code</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Mô tả</th>
+                            <td>@Model.Description</td>
+                        </tr>
+                        <tr>
+                            <th>Giá trị giảm</th>
+                            <td>
+                                @if (Model.IsPercentage)
+                                {
+                                    <span class="badge bg-info">@Model.DiscountAmount% (Phần trăm)</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-info">@Model.DiscountAmount.ToString("#,##0") đ (Cố định)</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Giá trị đơn hàng tối thiểu</th>
+                            <td>
+                                @if (Model.MinimumOrderAmount.HasValue)
+                                {
+                                    @Model.MinimumOrderAmount.Value.ToString("#,##0").Replace(",", ".")
+                                    <span> đ</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không giới hạn</span>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 30%">Thời gian hiệu lực</th>
+                            <td>
+                                <div>Từ: <strong>@Model.StartDate.ToString("dd/MM/yyyy")</strong></div>
+                                @if (Model.EndDate.HasValue)
+                                {
+                                    <div>Đến: <strong>@Model.EndDate.Value.ToString("dd/MM/yyyy")</strong></div>
+                                }
+                                else
+                                {
+                                    <div>Đến: <span class="text-muted">Không giới hạn</span></div>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Giới hạn sử dụng</th>
+                            <td>
+                                @if (Model.MaxUseTimes.HasValue)
+                                {
+                                    <div>
+                                        Đã sử dụng: <strong>@Model.UsedTimes / @Model.MaxUseTimes.Value</strong>
+                                        <div class="progress mt-1" style="height: 5px;">
+                                            <div class="progress-bar" role="progressbar" 
+                                                style="width: @(Math.Min(100, (Model.UsedTimes * 100 / Model.MaxUseTimes.Value)))%;" 
+                                                aria-valuenow="@Model.UsedTimes" aria-valuemin="0" aria-valuemax="@Model.MaxUseTimes">
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span>Đã sử dụng: <strong>@Model.UsedTimes</strong> lần</span><br />
+                                    <span class="text-muted">Không giới hạn số lần sử dụng</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái</th>
+                            <td>
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge bg-success">Đang hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Đã tắt</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Ngày tạo</th>
+                            <td>@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary"><i class="fas fa-edit"></i> Chỉnh sửa</a>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div> 
