@@ -46,7 +46,15 @@ namespace WebSiteBanHang.Repositories
 
         public async Task UpdateAsync(Promotion promotion)
         {
-            _context.Promotions.Update(promotion);
+            var existingPromotion = await _context.Promotions.FindAsync(promotion.Id);
+            if (existingPromotion != null)
+            {
+                // Detach the existing entity to avoid tracking conflicts
+                _context.Entry(existingPromotion).State = EntityState.Detached;
+            }
+            
+            // Attach and mark as modified
+            _context.Entry(promotion).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 

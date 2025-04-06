@@ -171,6 +171,30 @@
         <member name="M:WebSiteBanHang.Migrations.AddPromotionsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.FixOrderModel">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.FixOrderModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.FixOrderModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.FixOrderModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:WebSiteBanHang.Utilities.StringHelper.NormalizeVietnamese(System.String)">
             <summary>
             Normalizes a string by removing diacritics (accent marks) and converting to lowercase

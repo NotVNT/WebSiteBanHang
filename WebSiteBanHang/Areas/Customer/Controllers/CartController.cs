@@ -282,65 +282,116 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 return View("CheckoutProcess", model);
             }
 
-            // Phần code còn lại giữ nguyên
+            // Process selected items
             var processSelectedItemIds = selectedItemsString.Split(',').Select(int.Parse).ToList();
             var processUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var processCartItems = await _context.CartItems
+            
+            // Retrieve cart items
+            var orderCartItems = await _context.CartItems
                 .Where(c => c.UserId == processUserId && processSelectedItemIds.Contains(c.Id))
                 .Include(c => c.Product)
                 .ToListAsync();
-
-            if (!processCartItems.Any())
+                
+            if (!orderCartItems.Any())
             {
-                TempData["ErrorMessage"] = "Không có sản phẩm nào trong giỏ hàng để đặt hàng";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Tính tổng tiền đơn hàng
-            decimal processTotalAmount = processCartItems.Sum(c => c.Quantity * c.UnitPrice);
+            // Calculate order totals
+            decimal orderTotalAmount = orderCartItems.Sum(c => c.Quantity * c.UnitPrice);
+            
+            // Process promotion code if provided
+            int? promotionId = null;
+            decimal discountAmount = 0;
+            
+            if (!string.IsNullOrEmpty(model.PromotionCode))
+            {
+                var promotionRepository = HttpContext.RequestServices.GetService<IPromotionRepository>();
+                if (promotionRepository != null)
+                {
+                    var promotion = await promotionRepository.GetByCodeAsync(model.PromotionCode);
+                    if (promotion != null && 
+                        promotion.IsActive && 
+                        promotion.StartDate <= DateTime.Now && 
+                        (!promotion.EndDate.HasValue || promotion.EndDate >= DateTime.Now) &&
+                        (!promotion.MaxUseTimes.HasValue || promotion.UsedTimes < promotion.MaxUseTimes.Value) &&
+                        (!promotion.MinimumOrderAmount.HasValue || orderTotalAmount >= promotion.MinimumOrderAmount.Value))
+                    {
+                        // Valid promotion - apply discount
+                        promotionId = promotion.Id;
+                        
+                        // Calculate discount
+                        if (promotion.IsPercentage)
+                        {
+                            discountAmount = Math.Round(orderTotalAmount * promotion.DiscountAmount / 100, 0);
+                        }
+                        else
+                        {
+                            discountAmount = promotion.DiscountAmount;
+                        }
+                        
+                        // Increment usage counter
+                        await promotionRepository.IncrementUsageAsync(promotion.Id);
+                    }
+                }
+            }
+            else if (model.DiscountAmount > 0)
+            {
+                // If no promotion code is provided but DiscountAmount is set,
+                // use the DiscountAmount from the model
+                discountAmount = model.DiscountAmount;
+            }
 
-            // Tạo đơn hàng mới
+            // Create a new order
             var order = new Order
             {
                 UserId = processUserId,
                 OrderDate = DateTime.Now,
-                TotalAmount = processTotalAmount,
+                TotalAmount = orderTotalAmount - discountAmount,
+                FullName = model.FullName ?? "",
+                Email = model.Email ?? "",
+                PhoneNumber = model.PhoneNumber ?? "",
+                ShippingAddress = model.ShippingAddress ?? "",
+                Notes = model.Notes ?? "",
+                PaymentMethod = model.PaymentMethod ?? "COD",
+                PromotionId = promotionId,
+                DiscountAmount = discountAmount,
                 Status = OrderStatus.Pending,
                 PaymentStatus = false,
-                PaymentMethod = model.PaymentMethod,
                 TrackingNumber = GenerateTrackingNumber(),
-                FullName = model.FullName,
-                ShippingAddress = model.ShippingAddress,
-                PhoneNumber = model.PhoneNumber,
-                Email = model.Email,
-                Notes = model.Notes,
-                CancellationReason = "" // Add default empty value for CancellationReason
+                CancellationReason = ""
             };
-
-            // Thêm các sản phẩm vào đơn hàng
-            foreach (var item in processCartItems)
-            {
-                order.Items.Add(new OrderItem
-                {
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.UnitPrice
-                });
-            }
-
-            // Lưu đơn hàng vào database
-            var orderId = await _orderRepository.CreateOrderAsync(order);
-
-            // Xóa các mục đã chọn khỏi giỏ hàng
-            _context.CartItems.RemoveRange(processCartItems);
+            
+            // Add the order
+            _context.Orders.Add(order);
             await _context.SaveChangesAsync();
-
-            // Thêm thông báo thành công
-            TempData["SuccessMessage"] = "Đặt hàng thành công! Cảm ơn bạn đã mua hàng.";
-
-            // Chuyển hướng đến trang OrderComplete
-            return RedirectToAction(nameof(OrderComplete), new { orderId = orderId, amount = processTotalAmount });
+            
+            // Create order items
+            foreach (var cartItem in orderCartItems)
+            {
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.Id,
+                    ProductId = cartItem.ProductId,
+                    Quantity = cartItem.Quantity,
+                    UnitPrice = cartItem.UnitPrice
+                };
+                
+                _context.OrderItems.Add(orderItem);
+            }
+            
+            // Save order items
+            await _context.SaveChangesAsync();
+            
+            // Remove cart items
+            _context.CartItems.RemoveRange(orderCartItems);
+            await _context.SaveChangesAsync();
+            
+            // Set success message
+            TempData["SuccessMessage"] = "Đặt hàng thành công!";
+            
+            // Redirect to order confirmation page
+            return RedirectToAction("OrderComplete", new { orderId = order.Id, amount = order.TotalAmount });
         }
 
         public IActionResult OrderComplete(int orderId, decimal amount)
@@ -478,6 +529,103 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 message = $"{productName} đã được xóa khỏi giỏ hàng", 
                 cartCount = cartCount 
             });
+        }
+
+        // Add a new action method to validate promotion codes
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ValidatePromotion(string code, decimal amount)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return Json(new { isValid = false, message = "Mã khuyến mãi không được để trống" });
+            }
+
+            try
+            {
+                // Trim code to remove any whitespace
+                code = code.Trim();
+                
+                // Assuming you have a promotion repository or service
+                var promotionRepository = HttpContext.RequestServices.GetService<IPromotionRepository>();
+                
+                if (promotionRepository == null)
+                {
+                    return Json(new { isValid = false, message = "Không thể xác thực mã khuyến mãi" });
+                }
+
+                // Get all promotions and filter case-insensitively
+                var allPromotions = await promotionRepository.GetAllAsync();
+                var promotion = allPromotions.FirstOrDefault(p => 
+                    string.Equals(p.Code, code, StringComparison.OrdinalIgnoreCase));
+                
+                if (promotion == null)
+                {
+                    return Json(new { isValid = false, message = "Mã khuyến mãi không tồn tại" });
+                }
+
+                // Check if the promotion is active
+                if (!promotion.IsActive)
+                {
+                    return Json(new { isValid = false, message = "Mã khuyến mãi không hoạt động" });
+                }
+
+                // Check if the promotion is within valid date range
+                var now = DateTime.Now;
+                
+                if (promotion.StartDate > now)
+                {
+                    return Json(new { isValid = false, message = $"Mã khuyến mãi chỉ có hiệu lực từ {promotion.StartDate.ToString("dd/MM/yyyy")}" });
+                }
+
+                if (promotion.EndDate.HasValue && promotion.EndDate < now)
+                {
+                    return Json(new { isValid = false, message = $"Mã khuyến mãi đã hết hạn vào {promotion.EndDate.Value.ToString("dd/MM/yyyy")}" });
+                }
+
+                // Check usage limit
+                if (promotion.MaxUseTimes.HasValue && promotion.UsedTimes >= promotion.MaxUseTimes.Value)
+                {
+                    return Json(new { isValid = false, message = "Mã khuyến mãi đã hết lượt sử dụng" });
+                }
+
+                // Check minimum order amount
+                if (promotion.MinimumOrderAmount.HasValue && amount < promotion.MinimumOrderAmount.Value)
+                {
+                    return Json(new { 
+                        isValid = false, 
+                        message = $"Đơn hàng tối thiểu phải từ {promotion.MinimumOrderAmount.Value.ToString("N0")}đ để áp dụng mã này" 
+                    });
+                }
+
+                // Calculate discount amount
+                decimal discountAmount = 0;
+                if (promotion.IsPercentage)
+                {
+                    // Apply percentage discount
+                    discountAmount = Math.Round(amount * promotion.DiscountAmount / 100, 0);
+                }
+                else
+                {
+                    // Apply fixed amount discount
+                    discountAmount = promotion.DiscountAmount;
+                }
+                
+                // Return success with discount information
+                return Json(new { 
+                    isValid = true, 
+                    message = $"Áp dụng mã giảm giá thành công! {(promotion.IsPercentage ? promotion.DiscountAmount + "%" : "")}",
+                    discountAmount = discountAmount,
+                    promotionId = promotion.Id,
+                    isPercentage = promotion.IsPercentage,
+                    discountValue = promotion.DiscountAmount
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return Json(new { isValid = false, message = "Đã xảy ra lỗi khi xác thực mã khuyến mãi" });
+            }
         }
     }
 }

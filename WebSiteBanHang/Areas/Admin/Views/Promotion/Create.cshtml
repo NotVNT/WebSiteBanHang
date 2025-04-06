@@ -6,108 +6,172 @@
 }
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">@ViewData["Title"]</h1>
-
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/Admin/Admin/Index">Trang chủ</a></li>
-        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Promotion" asp-action="Index">Quản lý khuyến mãi</a></li>
-        <li class="breadcrumb-item active">Thêm mới</li>
-    </ol>
-
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-percent me-1"></i>
-            Thông tin mã khuyến mãi
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <div>
+            <h1 class="mb-1">@ViewData["Title"]</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/Admin/Admin/Index" class="text-decoration-none"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Promotion" asp-action="Index" class="text-decoration-none">Quản lý khuyến mãi</a></li>
+                    <li class="breadcrumb-item active">Thêm mới</li>
+                </ol>
+            </nav>
         </div>
-        <div class="card-body">
-            <form asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+        </a>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0 rounded-3">
+        <div class="card-header bg-gradient text-white py-3" style="background-color: #4e73df;">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-gift fa-fw me-2"></i>
+                <span class="font-weight-bold">Thông tin mã khuyến mãi</span>
+            </div>
+        </div>
+        
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4" role="alert"></div>
                 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label asp-for="Code" class="control-label">Mã khuyến mãi</label>
-                            <input asp-for="Code" class="form-control" required />
-                            <span asp-validation-for="Code" class="text-danger"></span>
-                            <small class="form-text text-muted">Mã khuyến mãi dùng khi thanh toán (VD: SUMMER2023)</small>
-                        </div>
-                        
-                        <div class="form-group mb-3">
-                            <label asp-for="Description" class="control-label">Mô tả</label>
-                            <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="DiscountAmount" class="control-label">Giá trị giảm</label>
-                                    <input asp-for="DiscountAmount" class="form-control" type="number" step="0.01" min="0" required />
-                                    <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+                <div class="row g-4">
+                    <!-- Cột trái -->
+                    <div class="col-lg-6">
+                        <div class="card h-100 bg-light border-0 rounded-3">
+                            <div class="card-body p-4">
+                                <h5 class="card-title border-bottom pb-2 mb-3">Thông tin cơ bản</h5>
+                                
+                                <div class="form-group mb-4">
+                                    <label asp-for="Code" class="form-label fw-bold">
+                                        <i class="fas fa-tag me-1 text-primary"></i> Mã khuyến mãi
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-key"></i>
+                                        </span>
+                                        <input asp-for="Code" class="form-control" required placeholder="Nhập mã khuyến mãi (ví dụ: SUMMER2023)" style="text-transform: uppercase;" />
+                                    </div>
+                                    <span asp-validation-for="Code" class="text-danger"></span>
+                                    <div class="form-text">Mã khuyến mãi dùng khi thanh toán (VD: SUMMER2023)</div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Loại giảm giá</label>
-                                    <div class="form-check mt-2">
-                                        <input asp-for="IsPercentage" class="form-check-input" type="checkbox" />
-                                        <label class="form-check-label" for="IsPercentage">
-                                            Giảm theo phần trăm (%)
-                                        </label>
+                                
+                                <div class="form-group mb-4">
+                                    <label asp-for="Description" class="form-label fw-bold">
+                                        <i class="fas fa-info-circle me-1 text-primary"></i> Mô tả
+                                    </label>
+                                    <textarea asp-for="Description" class="form-control" rows="3" required placeholder="Nhập mô tả về mã khuyến mãi này..."></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-percentage me-1 text-primary"></i> Thông tin giảm giá
+                                    </label>
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-7">
+                                            <div class="input-group">
+                                                <span class="input-group-text bg-success text-white">
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                </span>
+                                                <input asp-for="DiscountAmount" class="form-control" type="number" step="0.01" min="0" required placeholder="Giá trị giảm" />
+                                            </div>
+                                            <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-check form-switch">
+                                                <input asp-for="IsPercentage" class="form-check-input" type="checkbox" role="switch" id="IsPercentage" />
+                                                <label class="form-check-label" for="IsPercentage">
+                                                    Giảm theo %
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label asp-for="MinimumOrderAmount" class="control-label">Giá trị đơn hàng tối thiểu</label>
-                            <input asp-for="MinimumOrderAmount" id="minimumOrderAmount" class="form-control" type="text" />
-                            <input type="hidden" id="minimumOrderAmountValue" name="MinimumOrderAmount" />
-                            <span asp-validation-for="MinimumOrderAmount" class="text-danger"></span>
-                            <small class="form-text text-muted">Để trống nếu không áp dụng điều kiện này</small>
-                        </div>
-                        
-                        <div class="form-group mb-3">
-                            <label asp-for="MaxUseTimes" class="control-label">Số lần sử dụng tối đa</label>
-                            <input asp-for="MaxUseTimes" class="form-control" type="number" min="1" />
-                            <span asp-validation-for="MaxUseTimes" class="text-danger"></span>
-                            <small class="form-text text-muted">Để trống nếu không giới hạn số lần sử dụng</small>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="StartDate" class="control-label">Ngày bắt đầu</label>
-                                    <input asp-for="StartDate" class="form-control" type="date" required />
-                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                    <!-- Cột phải -->
+                    <div class="col-lg-6">
+                        <div class="card h-100 bg-light border-0 rounded-3">
+                            <div class="card-body p-4">
+                                <h5 class="card-title border-bottom pb-2 mb-3">Điều kiện áp dụng</h5>
+                                
+                                <div class="form-group mb-4">
+                                    <label asp-for="MinimumOrderAmount" class="form-label fw-bold">
+                                        <i class="fas fa-money-bill-wave me-1 text-primary"></i> Giá trị đơn hàng tối thiểu
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-secondary text-white">
+                                            <i class="fas fa-coins"></i>
+                                        </span>
+                                        <input id="minimumOrderAmount" class="form-control" type="text" placeholder="Để trống nếu không áp dụng điều kiện này" />
+                                        <span class="input-group-text">VNĐ</span>
+                                    </div>
+                                    <input type="hidden" id="minimumOrderAmountValue" name="MinimumOrderAmount" />
+                                    <span asp-validation-for="MinimumOrderAmount" class="text-danger"></span>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="EndDate" class="control-label">Ngày kết thúc</label>
-                                    <input asp-for="EndDate" class="form-control" type="date" />
-                                    <span asp-validation-for="EndDate" class="text-danger"></span>
-                                    <small class="form-text text-muted">Để trống nếu không có ngày hết hạn</small>
+                                
+                                <div class="form-group mb-4">
+                                    <label asp-for="MaxUseTimes" class="form-label fw-bold">
+                                        <i class="fas fa-redo me-1 text-primary"></i> Số lần sử dụng tối đa
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-secondary text-white">
+                                            <i class="fas fa-sort-numeric-up"></i>
+                                        </span>
+                                        <input asp-for="MaxUseTimes" class="form-control" type="number" min="1" placeholder="Để trống nếu không giới hạn số lần sử dụng" />
+                                    </div>
+                                    <span asp-validation-for="MaxUseTimes" class="text-danger"></span>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group mb-3">
-                            <div class="form-check">
-                                <input asp-for="IsActive" class="form-check-input" type="checkbox" checked />
-                                <label class="form-check-label" for="IsActive">
-                                    Kích hoạt ngay
-                                </label>
+                                
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label asp-for="StartDate" class="form-label fw-bold">
+                                            <i class="fas fa-calendar-alt me-1 text-primary"></i> Ngày bắt đầu
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-secondary text-white">
+                                                <i class="fas fa-calendar-day"></i>
+                                            </span>
+                                            <input asp-for="StartDate" class="form-control" type="date" required />
+                                        </div>
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EndDate" class="form-label fw-bold">
+                                            <i class="fas fa-calendar-times me-1 text-primary"></i> Ngày kết thúc
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-secondary text-white">
+                                                <i class="fas fa-calendar-day"></i>
+                                            </span>
+                                            <input asp-for="EndDate" class="form-control" type="date" placeholder="Để trống nếu không có ngày hết hạn" />
+                                        </div>
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <div class="form-check form-switch">
+                                        <input asp-for="IsActive" class="form-check-input" type="checkbox" role="switch" id="IsActive" checked />
+                                        <label class="form-check-label fw-bold" for="IsActive">
+                                            <i class="fas fa-toggle-on me-1 text-success"></i> Kích hoạt ngay
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Lưu</button>
-                    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Quay lại</a>
+                <div class="d-flex justify-content-center mt-4 gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-save me-2"></i> Lưu mã khuyến mãi
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg px-5">
+                        <i class="fas fa-times me-2"></i> Hủy bỏ
+                    </a>
                 </div>
             </form>
         </div>
@@ -128,10 +192,12 @@
             $('#IsPercentage').change(function() {
                 if ($(this).is(':checked')) {
                     $('#DiscountAmount').attr('max', '100');
+                    $('#DiscountAmount').attr('placeholder', 'Giá trị giảm (%)');
                 } else {
                     $('#DiscountAmount').removeAttr('max');
+                    $('#DiscountAmount').attr('placeholder', 'Giá trị giảm (VNĐ)');
                 }
-            });
+            }).trigger('change');
             
             // Format currency for minimum order amount
             $('#minimumOrderAmount').on('input', function() {
@@ -158,6 +224,27 @@
             function formatNumber(num) {
                 return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
             }
+            
+            // Bootstrap validation
+            (function () {
+                'use strict'
+                
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+                
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
         });
     </script>
 } 
