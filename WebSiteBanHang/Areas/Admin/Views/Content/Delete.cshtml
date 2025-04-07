@@ -1,0 +1,102 @@
+@model WebSiteBanHang.Models.Content
+
+@{
+    ViewData["Title"] = "Xóa nội dung";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">Xóa nội dung</h2>
+    
+    <div class="card border-0 shadow-lg rounded-4 mb-4">
+        <div class="card-header bg-white p-4 border-0 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">
+                <i class="bi bi-trash text-danger me-2"></i>Xác nhận xóa
+            </h5>
+            <a asp-action="Index" class="btn btn-outline-secondary d-flex align-items-center">
+                <i class="bi bi-arrow-left me-2"></i> Trở về danh sách
+            </a>
+        </div>
+        <div class="card-body p-4">
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill fs-4 me-2"></i>
+                <div>
+                    <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác. Bạn có chắc chắn muốn xóa nội dung này?
+                </div>
+            </div>
+            
+            <div class="card border-0 shadow-sm rounded-3 mb-4">
+                <div class="card-body p-4">
+                    <h6 class="border-bottom pb-2 mb-3">Thông tin nội dung</h6>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium text-muted">Tiêu đề:</label>
+                                <p class="fs-5 fw-medium">@Model.Title</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-medium text-muted">Loại nội dung:</label>
+                                <p>
+                                    <span class="badge bg-info bg-opacity-10 text-info">@Model.ContentType</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-medium text-muted">Đường dẫn:</label>
+                        <p><code>@Model.Slug</code></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-medium text-muted">Trạng thái:</label>
+                        <p>
+                            @if (Model.Published)
+                            {
+                                <span class="badge bg-success">Đã xuất bản</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Ẩn</span>
+                            }
+                        </p>
+                    </div>
+                    
+                    <div class="mb-0">
+                        <label class="form-label fw-medium text-muted">Ngày tạo:</label>
+                        <p class="text-muted">
+                            <i class="bi bi-calendar-event me-1"></i>@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <form asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-end gap-2">
+                    <a asp-action="Index" class="btn btn-outline-secondary d-flex align-items-center">
+                        <i class="bi bi-x-circle me-2"></i> Hủy
+                    </a>
+                    <button type="submit" class="btn btn-danger d-flex align-items-center">
+                        <i class="bi bi-trash me-2"></i> Xác nhận xóa
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rounded-4 {
+        border-radius: 0.75rem !important;
+    }
+    .rounded-3 {
+        border-radius: 0.5rem !important;
+    }
+    .form-label.fw-medium {
+        font-weight: 500;
+    }
+</style>

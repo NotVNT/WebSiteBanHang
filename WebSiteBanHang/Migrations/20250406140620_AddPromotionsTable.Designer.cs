@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebSiteBanHang.Models;
 
@@ -11,9 +12,11 @@ using WebSiteBanHang.Models;
 namespace WebSiteBanHang.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250406140620_AddPromotionsTable")]
+    partial class AddPromotionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -366,10 +369,6 @@ namespace WebSiteBanHang.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
-
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -396,9 +395,6 @@ namespace WebSiteBanHang.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PromotionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ShippingAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -421,8 +417,6 @@ namespace WebSiteBanHang.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PromotionId");
 
                     b.HasIndex("UserId");
 
@@ -680,17 +674,11 @@ namespace WebSiteBanHang.Migrations
 
             modelBuilder.Entity("WebSiteBanHang.Models.Order", b =>
                 {
-                    b.HasOne("WebSiteBanHang.Models.Promotion", "Promotion")
-                        .WithMany()
-                        .HasForeignKey("PromotionId");
-
                     b.HasOne("WebSiteBanHang.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Promotion");
 
                     b.Navigation("User");
                 });

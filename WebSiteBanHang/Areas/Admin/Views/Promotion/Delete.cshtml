@@ -1,0 +1,106 @@
+@model WebSiteBanHang.Models.Promotion
+
+@{
+    ViewData["Title"] = "Xóa mã khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/Admin/Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Promotion" asp-action="Index">Quản lý khuyến mãi</a></li>
+        <li class="breadcrumb-item active">Xóa</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <i class="fas fa-exclamation-triangle me-1"></i>
+            Xác nhận xóa mã khuyến mãi
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading">Cảnh báo!</h4>
+                <p>Bạn có chắc chắn muốn xóa mã khuyến mãi này? Hành động này không thể khôi phục.</p>
+                <hr>
+                <p class="mb-0">Thông tin mã khuyến mãi sẽ bị mất vĩnh viễn.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width: 30%">Mã khuyến mãi</th>
+                            <td><strong>@Model.Code</strong></td>
+                        </tr>
+                        <tr>
+                            <th>Mô tả</th>
+                            <td>@Model.Description</td>
+                        </tr>
+                        <tr>
+                            <th>Giá trị giảm</th>
+                            <td>
+                                @if (Model.IsPercentage)
+                                {
+                                    <span>@Model.DiscountAmount% (Phần trăm)</span>
+                                }
+                                else
+                                {
+                                    <span>@Model.DiscountAmount.ToString("#,##0") đ (Cố định)</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Thời gian hiệu lực</th>
+                            <td>
+                                @Model.StartDate.ToString("dd/MM/yyyy")
+                                @if (Model.EndDate.HasValue)
+                                {
+                                    <span> - @Model.EndDate.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái</th>
+                            <td>
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge bg-success">Đang hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Đã tắt</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Giá trị đơn hàng tối thiểu</th>
+                            <td>
+                                @if (Model.MinimumOrderAmount.HasValue)
+                                {
+                                    @Model.MinimumOrderAmount.Value.ToString("#,##0").Replace(",", ".")
+                                    <span> đ</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không giới hạn</span>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Xác nhận xóa
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

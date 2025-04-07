@@ -35,34 +35,38 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             }
             
             // Get all orders
-            var orders = await _orderRepository.GetAllAsync();
+            var allOrders = await _orderRepository.GetAllAsync();
             
             // Đếm số lượng đơn hàng theo trạng thái
-            ViewBag.PendingOrders = orders.Count(o => o.Status == OrderStatus.Pending);
-            ViewBag.ProcessingOrders = orders.Count(o => o.Status == OrderStatus.Processing);
-            ViewBag.CompletedOrders = orders.Count(o => o.Status == OrderStatus.Completed);
-            ViewBag.CancelledOrders = orders.Count(o => o.Status == OrderStatus.Cancelled);
+            ViewBag.TotalOrders = allOrders.Count; // Tổng số đơn hàng thực tế
+            ViewBag.PendingOrders = allOrders.Count(o => o.Status == OrderStatus.Pending);
+            ViewBag.ProcessingOrders = allOrders.Count(o => o.Status == OrderStatus.Processing);
+            ViewBag.CompletedOrders = allOrders.Count(o => o.Status == OrderStatus.Completed);
+            ViewBag.CancelledOrders = allOrders.Count(o => o.Status == OrderStatus.Cancelled);
+            
+            // Copy danh sách đơn hàng để áp dụng bộ lọc mà không ảnh hưởng đến tổng ban đầu
+            var filteredOrders = allOrders.ToList();
             
             // Apply filters
             if (filter.Status.HasValue)
             {
-                orders = orders.Where(o => o.Status == filter.Status.Value).ToList();
+                filteredOrders = filteredOrders.Where(o => o.Status == filter.Status.Value).ToList();
             }
             
             if (filter.StartDate.HasValue)
             {
-                orders = orders.Where(o => o.OrderDate >= filter.StartDate.Value).ToList();
+                filteredOrders = filteredOrders.Where(o => o.OrderDate >= filter.StartDate.Value).ToList();
             }
             
             if (filter.EndDate.HasValue)
             {
-                orders = orders.Where(o => o.OrderDate <= filter.EndDate.Value).ToList();
+                filteredOrders = filteredOrders.Where(o => o.OrderDate <= filter.EndDate.Value).ToList();
             }
             
             // Apply Order ID filter
             if (filter.OrderId.HasValue)
             {
-                orders = orders.Where(o => o.Id == filter.OrderId.Value).ToList();
+                filteredOrders = filteredOrders.Where(o => o.Id == filter.OrderId.Value).ToList();
             }
             
             // Apply Customer search with Vietnamese text normalization
@@ -70,7 +74,7 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             {
                 string normalizedSearch = StringHelper.NormalizeVietnamese(filter.CustomerSearch);
                 
-                orders = orders.Where(o => 
+                filteredOrders = filteredOrders.Where(o => 
                     (o.FullName != null && StringHelper.NormalizeVietnamese(o.FullName).Contains(normalizedSearch)) ||
                     (o.Email != null && StringHelper.NormalizeVietnamese(o.Email).Contains(normalizedSearch)) ||
                     (o.PhoneNumber != null && o.PhoneNumber.Contains(filter.CustomerSearch))
@@ -80,12 +84,12 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             // Apply price range filter
             if (filter.MinAmount.HasValue)
             {
-                orders = orders.Where(o => o.TotalAmount >= filter.MinAmount.Value).ToList();
+                filteredOrders = filteredOrders.Where(o => o.TotalAmount >= filter.MinAmount.Value).ToList();
             }
             
             if (filter.MaxAmount.HasValue)
             {
-                orders = orders.Where(o => o.TotalAmount <= filter.MaxAmount.Value).ToList();
+                filteredOrders = filteredOrders.Where(o => o.TotalAmount <= filter.MaxAmount.Value).ToList();
             }
             
             // Apply sorting based on SortBy and SortDirection
@@ -94,45 +98,45 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
                 switch (filter.SortBy)
                 {
                     case "date":
-                        orders = filter.SortDirection == "asc" 
-                            ? orders.OrderBy(o => o.OrderDate).ToList()
-                            : orders.OrderByDescending(o => o.OrderDate).ToList();
+                        filteredOrders = filter.SortDirection == "asc" 
+                            ? filteredOrders.OrderBy(o => o.OrderDate).ToList()
+                            : filteredOrders.OrderByDescending(o => o.OrderDate).ToList();
                         break;
                         
                     case "amount":
-                        orders = filter.SortDirection == "asc" 
-                            ? orders.OrderBy(o => o.TotalAmount).ToList()
-                            : orders.OrderByDescending(o => o.TotalAmount).ToList();
+                        filteredOrders = filter.SortDirection == "asc" 
+                            ? filteredOrders.OrderBy(o => o.TotalAmount).ToList()
+                            : filteredOrders.OrderByDescending(o => o.TotalAmount).ToList();
                         break;
                         
                     case "id":
-                        orders = filter.SortDirection == "asc" 
-                            ? orders.OrderBy(o => o.Id).ToList()
-                            : orders.OrderByDescending(o => o.Id).ToList();
+                        filteredOrders = filter.SortDirection == "asc" 
+                            ? filteredOrders.OrderBy(o => o.Id).ToList()
+                            : filteredOrders.OrderByDescending(o => o.Id).ToList();
                         break;
                         
                     case "status":
-                        orders = filter.SortDirection == "asc" 
-                            ? orders.OrderBy(o => o.Status).ToList()
-                            : orders.OrderByDescending(o => o.Status).ToList();
+                        filteredOrders = filter.SortDirection == "asc" 
+                            ? filteredOrders.OrderBy(o => o.Status).ToList()
+                            : filteredOrders.OrderByDescending(o => o.Status).ToList();
                         break;
                         
                     default:
                         // Default sort by date (newest first)
-                        orders = orders.OrderByDescending(o => o.OrderDate).ToList();
+                        filteredOrders = filteredOrders.OrderByDescending(o => o.OrderDate).ToList();
                         break;
                 }
             }
             else
             {
                 // Default sort by date (newest first) if no sort option specified
-                orders = orders.OrderByDescending(o => o.OrderDate).ToList();
+                filteredOrders = filteredOrders.OrderByDescending(o => o.OrderDate).ToList();
                 filter.SortBy = "date";
                 filter.SortDirection = "desc";
             }
             
             // Create paginated list
-            var paginatedOrders = PaginatedList<Order>.Create(orders, page, pageSize);
+            var paginatedOrders = PaginatedList<Order>.Create(filteredOrders, page, pageSize);
             
             // Pass the filter back to the view
             ViewBag.Filter = filter;

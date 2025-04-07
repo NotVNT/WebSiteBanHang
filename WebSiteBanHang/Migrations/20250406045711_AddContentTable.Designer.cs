@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebSiteBanHang.Models;
 
@@ -11,9 +12,11 @@ using WebSiteBanHang.Models;
 namespace WebSiteBanHang.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250406045711_AddContentTable")]
+    partial class AddContentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,7 +327,7 @@ namespace WebSiteBanHang.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contents", (string)null);
+                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("WebSiteBanHang.Models.Favorite", b =>
@@ -366,10 +369,6 @@ namespace WebSiteBanHang.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
-
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -396,9 +395,6 @@ namespace WebSiteBanHang.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PromotionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ShippingAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -421,8 +417,6 @@ namespace WebSiteBanHang.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PromotionId");
 
                     b.HasIndex("UserId");
 
@@ -511,56 +505,6 @@ namespace WebSiteBanHang.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("WebSiteBanHang.Models.Promotion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPercentage")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("MaxUseTimes")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("MinimumOrderAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UsedTimes")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Promotions");
                 });
 
             modelBuilder.Entity("WebSiteBanHang.Models.Rating", b =>
@@ -680,17 +624,11 @@ namespace WebSiteBanHang.Migrations
 
             modelBuilder.Entity("WebSiteBanHang.Models.Order", b =>
                 {
-                    b.HasOne("WebSiteBanHang.Models.Promotion", "Promotion")
-                        .WithMany()
-                        .HasForeignKey("PromotionId");
-
                     b.HasOne("WebSiteBanHang.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Promotion");
 
                     b.Navigation("User");
                 });

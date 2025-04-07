@@ -28,11 +28,16 @@ namespace WebSiteBanHang.Models.ViewModels
         [Display(Name = "Ghi chú")]
         public string Notes { get; set; }
 
+        [Display(Name = "Mã giảm giá")]
+        public string PromotionCode { get; set; }
+
         [Required(ErrorMessage = "Vui lòng chọn phương thức thanh toán")]
         [Display(Name = "Phương thức thanh toán")]
         public string PaymentMethod { get; set; }
 
         public decimal TotalAmount { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal FinalAmount => TotalAmount - DiscountAmount;
         public List<CartItemViewModel> CartItems { get; set; } = new List<CartItemViewModel>();
     }
 

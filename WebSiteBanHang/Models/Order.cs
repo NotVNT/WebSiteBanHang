@@ -47,6 +47,7 @@ namespace WebSiteBanHang.Models
         public string PaymentMethod { get; set; } = "COD";
 
         [Display(Name = "Mã vận đơn")]
+        [Required]
         public string TrackingNumber { get; set; }
 
         [Display(Name = "Họ tên người nhận")]
@@ -74,13 +75,35 @@ namespace WebSiteBanHang.Models
         public string Email { get; set; }
 
         [Display(Name = "Ghi chú")]
-        public string Notes { get; set; }
+        [Required(AllowEmptyStrings = true)]
+        public string Notes { get; set; } = "";
 
         public virtual ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
-        public string CancellationReason { get; set; }
+        [Required(AllowEmptyStrings = true)]
+        public string CancellationReason { get; set; } = "";
+
+        // New property for Promotion reference
+        public int? PromotionId { get; set; }
+        
+        // New property for discount amount
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal DiscountAmount { get; set; } = 0;
+
+        public virtual Promotion Promotion { get; set; }
+    }
+
+    public enum OrderStatus
+    {
+        Pending,    // Chờ xác nhận
+        Processing, // Đã xác nhận / đang xử lý
+        Confirmed,  // Đã xác nhận đơn hàng
+        Shipping,   // Đang giao hàng
+        Delivered,  // Đã giao hàng
+        Completed,  // Đã hoàn thành
+        Cancelled   // Đã hủy đơn hàng
     }
 } 

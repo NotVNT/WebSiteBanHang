@@ -1,0 +1,333 @@
+@model WebSiteBanHang.Models.Promotion
+
+@{
+    ViewData["Title"] = "Chỉnh sửa mã khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center my-4">
+        <div>
+            <h1 class="mb-0 fw-bold">@ViewData["Title"]</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="/Admin/Admin/Index" class="text-decoration-none"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Promotion" asp-action="Index" class="text-decoration-none">Quản lý khuyến mãi</a></li>
+                    <li class="breadcrumb-item active">Chỉnh sửa</li>
+                </ol>
+            </nav>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-header bg-gradient text-white py-3" style="background-color: #4e73df;">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-edit fa-fw me-2"></i>
+                <span class="font-weight-bold">Chỉnh sửa mã khuyến mãi: <strong>@Model.Code</strong></span>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="UsedTimes" />
+                
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <!-- Thông tin trạng thái hiện tại -->
+                <div class="alert alert-light border rounded-3 p-3 mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="bg-light rounded-circle p-3">
+                                <i class="fas fa-percent fa-2x text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="mb-1">
+                                @if (string.IsNullOrEmpty(Model.Description))
+                                {
+                                    <span class="text-muted fst-italic">Chưa có mô tả</span>
+                                }
+                                else
+                                {
+                                    @Model.Description
+                                }
+                            </h5>
+                            <p class="mb-0 text-muted small">Mã được tạo vào @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                        <div class="col-auto">
+                            @if (Model.IsActive)
+                            {
+                                <span class="badge bg-success rounded-pill px-3 py-2">
+                                    <i class="fas fa-check-circle me-1"></i> Đang hoạt động
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary rounded-pill px-3 py-2">
+                                    <i class="fas fa-times-circle me-1"></i> Đã tắt
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- Thông tin cơ bản -->
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 bg-light rounded-3">
+                            <div class="card-header bg-light border-0">
+                                <h5 class="mb-0"><i class="fas fa-info-circle me-2 text-primary"></i> Thông tin cơ bản</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Code" class="form-label fw-semibold">Mã khuyến mãi</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-tag text-primary"></i></span>
+                                        <input asp-for="Code" class="form-control" required placeholder="Nhập mã khuyến mãi..." />
+                                    </div>
+                                    <span asp-validation-for="Code" class="text-danger small"></span>
+                                    <div class="form-text">Mã khuyến mãi dùng khi thanh toán (VD: SUMMER2023)</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="Description" class="form-label fw-semibold">Mô tả</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-align-left text-primary"></i></span>
+                                        <textarea asp-for="Description" class="form-control" rows="3" required placeholder="Nhập mô tả khuyến mãi..."></textarea>
+                                    </div>
+                                    <span asp-validation-for="Description" class="text-danger small"></span>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label asp-for="DiscountAmount" class="form-label fw-semibold">Giá trị giảm</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light"><i class="fas fa-hand-holding-usd text-primary"></i></span>
+                                            <input asp-for="DiscountAmount" class="form-control" type="number" step="0.01" min="0" required placeholder="Nhập giá trị..." />
+                                        </div>
+                                        <span asp-validation-for="DiscountAmount" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Loại giảm giá</label>
+                                        <div class="card border-0 bg-white shadow-sm mt-2">
+                                            <div class="card-body py-2">
+                                                <div class="form-check form-switch">
+                                                    <input asp-for="IsPercentage" class="form-check-input" type="checkbox" role="switch" />
+                                                    <label class="form-check-label" for="IsPercentage">
+                                                        Giảm theo phần trăm (%)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Trạng thái</label>
+                                    <div class="card border-0 bg-white shadow-sm">
+                                        <div class="card-body py-2">
+                                            <div class="form-check form-switch">
+                                                <input asp-for="IsActive" class="form-check-input" type="checkbox" role="switch" />
+                                                <label class="form-check-label" for="IsActive">
+                                                    Kích hoạt mã khuyến mãi
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Thông tin áp dụng -->
+                    <div class="col-md-6">
+                        <div class="card h-100 border-0 bg-light rounded-3">
+                            <div class="card-header bg-light border-0">
+                                <h5 class="mb-0"><i class="fas fa-cog me-2 text-primary"></i> Điều kiện áp dụng</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label asp-for="MinimumOrderAmount" class="form-label fw-semibold">Giá trị đơn hàng tối thiểu</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-coins text-primary"></i></span>
+                                        <input id="minimumOrderAmount" class="form-control" type="text" placeholder="Nhập giá trị tối thiểu..." 
+                                               value="@(Model.MinimumOrderAmount.HasValue ? Model.MinimumOrderAmount.Value.ToString("#,##0").Replace(",", ".") : "")" />
+                                        <span class="input-group-text bg-light">đ</span>
+                                    </div>
+                                    <input type="hidden" asp-for="MinimumOrderAmount" id="minimumOrderAmountValue" 
+                                           value="@(Model.MinimumOrderAmount.HasValue ? Model.MinimumOrderAmount.Value.ToString() : "")" />
+                                    <span asp-validation-for="MinimumOrderAmount" class="text-danger small"></span>
+                                    <div class="form-text">Để trống nếu không áp dụng điều kiện này</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label asp-for="MaxUseTimes" class="form-label fw-semibold">Số lần sử dụng tối đa</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light"><i class="fas fa-sort-numeric-up text-primary"></i></span>
+                                        <input asp-for="MaxUseTimes" class="form-control" type="number" min="1" placeholder="Nhập số lần tối đa..." />
+                                    </div>
+                                    <span asp-validation-for="MaxUseTimes" class="text-danger small"></span>
+                                    <div class="form-text">Để trống nếu không giới hạn số lần sử dụng</div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label asp-for="StartDate" class="form-label fw-semibold">Ngày bắt đầu</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light"><i class="fas fa-calendar-alt text-primary"></i></span>
+                                            <input asp-for="StartDate" class="form-control" type="date" required />
+                                        </div>
+                                        <span asp-validation-for="StartDate" class="text-danger small"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="EndDate" class="form-label fw-semibold">Ngày kết thúc</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light"><i class="fas fa-calendar-times text-primary"></i></span>
+                                            <input asp-for="EndDate" class="form-control" type="date" />
+                                        </div>
+                                        <span asp-validation-for="EndDate" class="text-danger small"></span>
+                                        <div class="form-text">Để trống nếu không có ngày hết hạn</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Số lần đã sử dụng</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-white rounded-3 shadow-sm p-3 d-flex align-items-center me-2">
+                                            <i class="fas fa-chart-bar text-info me-2"></i>
+                                            <span class="fw-bold fs-5">@Model.UsedTimes</span>
+                                        </div>
+                                        <span class="text-muted">lần</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-center mt-4 gap-2">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="fas fa-save me-2"></i> Lưu thay đổi
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary px-4">
+                        <i class="fas fa-arrow-left me-2"></i> Quay lại
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger px-4">
+                        <i class="fas fa-trash-alt me-2"></i> Xóa
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function () {
+            // Format dates for editing
+            var startDate = new Date('@Model.StartDate.ToString("yyyy-MM-dd")');
+            $('#StartDate').val(startDate.toISOString().split('T')[0]);
+            
+            @if (Model.EndDate.HasValue)
+            {
+                <text>
+                var endDate = new Date('@Model.EndDate.Value.ToString("yyyy-MM-dd")');
+                $('#EndDate').val(endDate.toISOString().split('T')[0]);
+                </text>
+            }
+            
+            // Validation for percentage values
+            $('#IsPercentage').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#DiscountAmount').attr('max', '100');
+                } else {
+                    $('#DiscountAmount').removeAttr('max');
+                }
+            }).trigger('change');
+            
+            // Debug current values
+            console.log('Model.MinimumOrderAmount: @(Model.MinimumOrderAmount?.ToString() ?? "null")');
+            console.log('Current minimumOrderAmount display value: ' + $('#minimumOrderAmount').val());
+            console.log('Current minimumOrderAmountValue: ' + $('#minimumOrderAmountValue').val());
+            
+            // Format currency for minimum order amount
+            $('#minimumOrderAmount').on('input', function() {
+                // Store cursor position to maintain it after formatting
+                var cursorPos = this.selectionStart;
+                var originalLength = $(this).val().length;
+                
+                // Remove all non-digit characters from current value
+                let value = $(this).val().replace(/\D/g, '');
+                
+                // Store the raw value in the hidden field
+                $('#minimumOrderAmountValue').val(value);
+                console.log('Hidden value updated: ' + value);
+                
+                // Format with thousand separators
+                if (value) {
+                    var formattedValue = formatNumber(value);
+                    $(this).val(formattedValue);
+                    
+                    // Calculate new cursor position (accounting for added separators)
+                    var newLength = formattedValue.length;
+                    var newPosition = cursorPos;
+                    
+                    // Adjust position based on number of separators added or removed
+                    var separatorDiff = newLength - originalLength;
+                    newPosition += separatorDiff;
+                    
+                    // Enforce bounds
+                    if (newPosition < 0) newPosition = 0;
+                    if (newPosition > newLength) newPosition = newLength;
+                    
+                    // Set cursor position
+                    this.setSelectionRange(newPosition, newPosition);
+                }
+            });
+            
+            // Format on focus
+            $('#minimumOrderAmount').on('focus', function() {
+                let rawValue = $(this).val().replace(/\D/g, '');
+                if (rawValue) {
+                    $(this).val(formatNumber(rawValue));
+                }
+            });
+            
+            // Format on blur (when leaving field)
+            $('#minimumOrderAmount').on('blur', function() {
+                let rawValue = $(this).val().replace(/\D/g, '');
+                $('#minimumOrderAmountValue').val(rawValue);
+                if (rawValue) {
+                    $(this).val(formatNumber(rawValue));
+                }
+            });
+            
+            // Handle form submission
+            $('form').on('submit', function(e) {
+                // Get the value from the visible field and clean it
+                let rawValue = $('#minimumOrderAmount').val().replace(/\./g, '');
+                
+                // Make sure to update the hidden field with the cleaned value
+                $('#minimumOrderAmountValue').val(rawValue);
+                
+                // Log for debugging
+                console.log('Form submitted with MinimumOrderAmount: ' + rawValue);
+                
+                // Continue with form submission
+                return true;
+            });
+            
+            // Function to format number with thousand separators
+            function formatNumber(num) {
+                if (!num) return '';
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+        });
+    </script>
+} 

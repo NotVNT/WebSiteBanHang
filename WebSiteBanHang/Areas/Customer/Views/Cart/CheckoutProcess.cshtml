@@ -61,6 +61,18 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <label asp-for="PromotionCode" class="form-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-percent"></i></span>
+                                <input asp-for="PromotionCode" class="form-control" placeholder="Nhập mã giảm giá (nếu có)..." />
+                                <button type="button" id="btnApplyPromotion" class="btn btn-outline-primary">
+                                    <i class="bi bi-check-lg"></i> Áp dụng
+                                </button>
+                            </div>
+                            <div id="promotionFeedback" class="mt-2"></div>
+                        </div>
+
                         <div class="mb-4">
                             <label asp-for="PaymentMethod" class="form-label"></label>
                             <div class="row g-3">
@@ -101,6 +113,7 @@
                         </div>
 
                         <input type="hidden" asp-for="TotalAmount" />
+                        <input type="hidden" asp-for="DiscountAmount" id="DiscountAmount" />
 
                         <div class="d-flex justify-content-between mt-4">
                             <a asp-action="Index" class="btn btn-outline-secondary">
@@ -153,10 +166,24 @@
                     </div>
                 </div>
                 <div class="card-footer bg-light p-3">
+                    <div class="d-flex justify-content-between align-items-center fw-bold fs-5 mb-2">
+                        <span>Tạm tính:</span>
+                        <span>@Model.TotalAmount.ToString("N0") đ</span>
+                    </div>
+                    
+                    <div id="discountRow" class="d-flex justify-content-between align-items-center text-success mb-2 @(Model.DiscountAmount > 0 ? "" : "d-none")">
+                        <span><i class="bi bi-tag-fill me-1"></i>Giảm giá:</span>
+                        <span>-<span id="discountAmount">@Model.DiscountAmount.ToString("N0")</span> đ</span>
+                    </div>
+                    
+                    <hr>
+                    
                     <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
                         <span>Tổng cộng:</span>
-                        <span class="text-primary">@Model.TotalAmount.ToString("N0") đ</span>
+                        <span class="text-primary" id="finalAmount">@Model.FinalAmount.ToString("N0") đ</span>
                     </div>
+                    
+                    <input type="hidden" asp-for="DiscountAmount" id="discountAmountInput" />
                 </div>
             </div>
         </div>
@@ -182,6 +209,15 @@
 
         // Hiển thị form validation trực tiếp khi người dùng nhập liệu
         $(document).ready(function() {
+            // Initialize discount amount if already set
+            const initialDiscountAmount = @Model.DiscountAmount;
+            if (initialDiscountAmount > 0) {
+                $("#discountAmountInput").val(initialDiscountAmount);
+                $("#DiscountAmount").val(initialDiscountAmount);
+                $("#discountRow").removeClass("d-none");
+                $("#discountAmount").text(initialDiscountAmount.toLocaleString('vi-VN'));
+            }
+            
             // Kiểm tra số điện thoại khi nhập
             $("#PhoneNumber").on("input", function() {
                 var value = $(this).val();
@@ -212,6 +248,171 @@
                     $(this).addClass("is-valid");
                 }
             });
+            
+            // Xử lý áp dụng mã giảm giá
+            $("#btnApplyPromotion").click(function() {
+                // Get the value from the input
+                let promoCode = $("#PromotionCode").val();
+                
+                if (!promoCode) {
+                    $("#promotionFeedback").html('<div class="text-danger"><i class="bi bi-exclamation-circle"></i> Vui lòng nhập mã giảm giá</div>');
+                    return;
+                }
+                
+                // Ensure code is trimmed of whitespace
+                promoCode = promoCode.trim();
+                console.log("Promotion code entered:", promoCode);
+                
+                $("#promotionFeedback").html('<div class="text-info"><i class="bi bi-hourglass-split"></i> Đang kiểm tra mã...</div>');
+                
+                const totalAmount = @Model.TotalAmount;
+                
+                // Gọi API kiểm tra mã giảm giá
+                $.ajax({
+                    url: '/Customer/Cart/ValidatePromotion',
+                    type: 'POST',
+                    data: { 
+                        code: promoCode,
+                        amount: totalAmount
+                    },
+                    success: function(response) {
+                        console.log("Promotion validation response:", response);
+                        if (response.isValid) {
+                            // Hiển thị thông báo thành công
+                            $("#promotionFeedback").html('<div class="text-success"><i class="bi bi-check-circle"></i> ' + response.message + '</div>');
+                            
+                            // Cập nhật giá trị giảm giá
+                            const discountAmount = response.discountAmount;
+                            $("#discountAmount").text(discountAmount.toLocaleString('vi-VN'));
+                            $("#discountAmountInput").val(discountAmount);
+                            
+                            // Hiển thị dòng giảm giá
+                            $("#discountRow").removeClass("d-none");
+                            
+                            // Cập nhật tổng cộng
+                            const finalAmount = totalAmount - discountAmount;
+                            
+                            // Cập nhật hiển thị tổng cộng
+                            $("#finalAmount").text(finalAmount.toLocaleString('vi-VN') + " đ");
+                            
+                            // Cập nhật hidden input cho form submission
+                            $("#TotalAmount").val(finalAmount);
+                            $("#DiscountAmount").val(discountAmount);
+                            
+                            // Thêm hiệu ứng highlight cho phần giảm giá
+                            $("#discountRow").addClass("highlight-discount");
+                            setTimeout(function() {
+                                $("#discountRow").removeClass("highlight-discount");
+                            }, 2000);
+                            
+                            // Thêm hiệu ứng hoạt ảnh cho tổng tiền khi thay đổi
+                            $("#finalAmount").addClass("price-changed");
+                            setTimeout(function() {
+                                $("#finalAmount").removeClass("price-changed");
+                            }, 2000);
+                            
+                            // Hiển thị badge thành công
+                            $("#promoCodeBadge").remove();
+                            $("#PromotionCode").after('<span id="promoCodeBadge" class="badge bg-success ms-2">Mã hợp lệ</span>');
+                            
+                            // Thêm nút xóa mã
+                            if (!$("#btnRemovePromotion").length) {
+                                $("#btnApplyPromotion").after('<button type="button" id="btnRemovePromotion" class="btn btn-outline-danger ms-2"><i class="bi bi-x-lg"></i> Xóa</button>');
+                                
+                                // Thêm event handler cho nút xóa
+                                $("#btnRemovePromotion").click(function() {
+                                    // Xóa mã giảm giá
+                                    $("#PromotionCode").val('').prop('readonly', false);
+                                    $("#discountAmountInput").val(0);
+                                    $("#DiscountAmount").val(0);
+                                    $("#discountRow").addClass("d-none");
+                                    
+                                    // Reset tổng cộng
+                                    const resetAmount = @Model.TotalAmount;
+                                    $("#finalAmount").text(resetAmount.toLocaleString('vi-VN') + " đ");
+                                    
+                                    // Reset hidden input
+                                    $("#TotalAmount").val(resetAmount);
+                                    
+                                    // Hiệu ứng thay đổi giá
+                                    $("#finalAmount").addClass("price-changed");
+                                    setTimeout(function() {
+                                        $("#finalAmount").removeClass("price-changed");
+                                    }, 2000);
+                                    
+                                    $("#promotionFeedback").html('');
+                                    $("#promoCodeBadge").remove();
+                                    $(this).remove();
+                                    $("#btnApplyPromotion").prop('disabled', false).html('<i class="bi bi-check-lg"></i> Áp dụng');
+                                });
+                            }
+                        } else {
+                            // Hiển thị thông báo lỗi
+                            $("#promotionFeedback").html('<div class="text-danger"><i class="bi bi-exclamation-circle"></i> ' + response.message + '</div>');
+                            
+                            // Ẩn dòng giảm giá
+                            $("#discountRow").addClass("d-none");
+                            $("#discountAmountInput").val(0);
+                            
+                            // Reset tổng cộng
+                            const resetAmount = @Model.TotalAmount;
+                            $("#finalAmount").text(resetAmount.toLocaleString('vi-VN') + " đ");
+                            
+                            // Reset hidden input
+                            $("#TotalAmount").val(resetAmount);
+                            $("#DiscountAmount").val(0);
+                            
+                            // Hiệu ứng thay đổi giá
+                            $("#finalAmount").addClass("price-changed");
+                            setTimeout(function() {
+                                $("#finalAmount").removeClass("price-changed");
+                            }, 2000);
+                        }
+                    },
+                    error: function() {
+                        $("#promotionFeedback").html('<div class="text-danger"><i class="bi bi-exclamation-triangle"></i> Có lỗi xảy ra, vui lòng thử lại</div>');
+                    }
+                });
+            });
         });
     </script>
+    
+    <style>
+        .highlight-discount {
+            animation: highlight-fade 2s;
+            border-radius: 0.25rem;
+        }
+        
+        @@keyframes highlight-fade {
+            0% { background-color: rgba(25, 135, 84, 0.2); }
+            100% { background-color: transparent; }
+        }
+        
+        #discountRow {
+            transition: all 0.3s ease;
+        }
+        
+        #discountAmount {
+            font-weight: bold;
+        }
+        
+        .badge.bg-success {
+            animation: badge-pop 0.5s;
+        }
+        
+        @@keyframes badge-pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .price-changed {
+            animation: price-highlight 2s;
+            transition: all 0.3s ease;
+        }
+        
+        @@keyframes price-highlight {
+            0% { color: #198754; transform: scale(1.05); }
+            100% { color: #0d6efd; transform: scale(1); }
+        }
+    </style>
 }

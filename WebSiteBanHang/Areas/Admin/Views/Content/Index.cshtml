@@ -1,0 +1,148 @@
+@model WebSiteBanHang.Models.ViewModels.ContentListViewModel
+
+@{
+    ViewData["Title"] = "Quản lý nội dung";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2 class="mt-4 mb-4">Quản lý nội dung</h2>
+    
+    <div class="card border-0 shadow-lg rounded-4 mb-4">
+        <div class="card-header bg-white p-4 border-0 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold">
+                <i class="bi bi-file-richtext text-primary me-2"></i>Danh sách trang nội dung
+            </h5>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-1"></i> Thêm mới
+            </a>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Index" method="get" class="mb-4 bg-light p-3 rounded-3">
+                <div class="row g-3">
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Nhập từ khóa..." value="@Model.SearchTerm">
+                            <label for="searchTerm">Tìm kiếm</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select id="contentType" name="contentType" class="form-select" asp-items="Model.ContentTypes">
+                            </select>
+                            <label for="contentType">Loại nội dung</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center">
+                        <button type="submit" class="btn btn-primary me-2 d-flex align-items-center">
+                            <i class="bi bi-search me-2"></i> Tìm kiếm
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary d-flex align-items-center">
+                            <i class="bi bi-arrow-clockwise me-2"></i> Làm mới
+                        </a>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle" id="contentTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tiêu đề</th>
+                            <th>Đường dẫn</th>
+                            <th>Loại</th>
+                            <th>Trạng thái</th>
+                            <th>Thứ tự</th>
+                            <th>Ngày cập nhật</th>
+                            <th class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Contents)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="fw-medium">@item.Title</span>
+                                </td>
+                                <td>
+                                    <code class="small">@item.Slug</code>
+                                </td>
+                                <td>
+                                    @{
+                                        var contentType = Model.ContentTypes.FirstOrDefault(c => c.Value == item.ContentType);
+                                    }
+                                    <span class="badge bg-info bg-opacity-10 text-info">
+                                        @(contentType != null ? contentType.Text : item.ContentType)
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (item.Published)
+                                    {
+                                        <span class="badge bg-success">Đã xuất bản</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Ẩn</span>
+                                    }
+                                </td>
+                                <td>@item.DisplayOrder</td>
+                                <td>
+                                    <span class="text-muted small">
+                                        <i class="bi bi-clock me-1"></i>@item.UpdatedAt.ToString("dd/MM/yyyy HH:mm")
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Chỉnh sửa">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip" title="Xóa">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            @if (!Model.Contents.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-inbox text-muted fs-1"></i>
+                    <p class="text-muted mt-3">Không tìm thấy dữ liệu</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#contentType').val('@Model.ContentType');
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+    
+    <style>
+        .rounded-4 {
+            border-radius: 0.75rem !important;
+        }
+        
+        .table th {
+            font-weight: 600;
+        }
+        
+        .badge {
+            font-weight: 500;
+            padding: 0.5em 0.75em;
+        }
+    </style>
+} 

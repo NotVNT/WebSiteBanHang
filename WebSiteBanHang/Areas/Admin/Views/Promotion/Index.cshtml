@@ -1,0 +1,204 @@
+@model IEnumerable<WebSiteBanHang.Models.Promotion>
+
+@{
+    ViewData["Title"] = "Quản lý khuyến mãi & mã giảm giá";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center my-4">
+        <div>
+            <h1 class="mb-0 fw-bold">@ViewData["Title"]</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 mt-2">
+                    <li class="breadcrumb-item"><a href="/Admin/Admin/Index" class="text-decoration-none"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Quản lý khuyến mãi</li>
+                </ol>
+            </nav>
+        </div>
+        <a href="@Url.Action("Create", "Promotion", new { area = "Admin" })" class="btn btn-primary d-flex align-items-center">
+            <i class="fas fa-plus-circle me-2"></i> Thêm mã khuyến mãi mới
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle me-2 fs-5"></i>
+                <strong>@TempData["SuccessMessage"]</strong>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card mb-4 shadow-sm border-0 rounded-3">
+        <div class="card-header bg-gradient text-white py-3 d-flex justify-content-between align-items-center" style="background-color: #4e73df;">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-percent fa-fw me-2"></i>
+                <span class="font-weight-bold">Danh sách mã khuyến mãi</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="badge bg-light text-dark rounded-pill px-3 py-2 shadow-sm">
+                    <i class="fas fa-tag me-1"></i> Tổng: <strong>@Model.Count()</strong> mã
+                </span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table id="promotionTable" class="table table-hover mb-0 align-middle">
+                    <thead class="bg-light">
+                        <tr class="text-dark text-nowrap">
+                            <th class="fw-bold py-3 ps-4">Mã khuyến mãi</th>
+                            <th class="fw-bold py-3">Mô tả</th>
+                            <th class="fw-bold py-3">Giá trị giảm</th>
+                            <th class="fw-bold py-3">Đơn hàng tối thiểu</th>
+                            <th class="fw-bold py-3">Thời gian hiệu lực</th>
+                            <th class="fw-bold py-3">Sử dụng</th>
+                            <th class="fw-bold py-3">Trạng thái</th>
+                            <th class="fw-bold py-3 text-end pe-4">Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Model.Any())
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4 text-nowrap">
+                                        <span class="fw-bold text-primary">@item.Code</span>
+                                    </td>
+                                    <td>
+                                        <div class="text-truncate" style="max-width: 250px;" title="@item.Description">
+                                            @item.Description
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @if (item.IsPercentage)
+                                        {
+                                            <span class="badge bg-primary">@item.DiscountAmount%</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-success">@($"{item.DiscountAmount:#,##0}".Replace(",", "."))đ</span>
+                                        }
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @if (item.MinimumOrderAmount.HasValue)
+                                        {
+                                            <span class="badge bg-secondary">@($"{item.MinimumOrderAmount.Value:#,##0}".Replace(",", "."))đ</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-light text-dark">-</span>
+                                        }
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @item.StartDate.ToString("dd/MM/yyyy")
+                                        @if (item.EndDate.HasValue)
+                                        {
+                                            <span>- @item.EndDate.Value.ToString("dd/MM/yyyy")</span>
+                                        }
+                                        else
+                                        {
+                                            <span>- ∞</span>
+                                        }
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @if (item.MaxUseTimes.HasValue)
+                                        {
+                                            <span class="badge bg-info">@item.UsedTimes/@item.MaxUseTimes.Value</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-light text-dark">@item.UsedTimes lần</span>
+                                        }
+                                    </td>
+                                    <td class="text-nowrap">
+                                        <form asp-action="ToggleStatus" asp-route-id="@item.Id" method="post" class="d-inline">
+                                            @if (item.IsActive)
+                                            {
+                                                <button type="submit" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-check-circle"></i> Đang hoạt động
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-sm btn-secondary">
+                                                    <i class="fas fa-times-circle"></i> Đã tắt
+                                                </button>
+                                            }
+                                        </form>
+                                    </td>
+                                    <td class="text-end pe-4 text-nowrap">
+                                        <div class="d-inline-flex">
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm me-1 p-1" 
+                                               style="background-color: white; color: #00AAFF; border: 1px solid #00AAFF; width: 30px; height: 30px; display: inline-flex; justify-content: center; align-items: center;"
+                                               data-bs-toggle="tooltip" title="Xem chi tiết">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm me-1 p-1" 
+                                               style="background-color: white; color: #FFD700; border: 1px solid #FFD700; width: 30px; height: 30px; display: inline-flex; justify-content: center; align-items: center;"
+                                               data-bs-toggle="tooltip" title="Chỉnh sửa mã khuyến mãi">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm p-1" 
+                                               style="background-color: white; color: #FF0000; border: 1px solid #FF0000; width: 30px; height: 30px; display: inline-flex; justify-content: center; align-items: center;"
+                                               data-bs-toggle="tooltip" title="Xóa mã khuyến mãi">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8" class="text-center py-5">
+                                    <div class="py-5">
+                                        <i class="fas fa-tag fa-4x text-muted mb-3"></i>
+                                        <h5>Chưa có mã khuyến mãi nào</h5>
+                                        <p class="text-muted">Bạn có thể thêm mã khuyến mãi mới bằng cách nhấn nút "Thêm mã khuyến mãi mới"</p>
+                                        <a href="@Url.Action("Create", "Promotion", new { area = "Admin" })" class="btn btn-primary mt-2">
+                                            <i class="fas fa-plus-circle me-2"></i> Thêm mã khuyến mãi mới
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#promotionTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/vi.json'
+                },
+                dom: '<"d-flex justify-content-between align-items-center mb-3"lf>rt<"d-flex justify-content-between align-items-center mt-3"ip>',
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'Tất cả']
+                ],
+                columnDefs: [
+                    { orderable: false, targets: [7] }
+                ],
+                order: [[0, 'asc']]
+            });
+            
+            // Apply tooltip to truncated descriptions
+            $('[title]').tooltip();
+            
+            // FadeOut alert after 5 seconds
+            setTimeout(function() {
+                $('.alert-success').fadeOut('slow');
+            }, 5000);
+        });
+    </script>
+} 
