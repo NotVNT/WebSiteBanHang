@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebSiteBanHang</name>
+    </assembly>
+    <members>
+        <member name="M:WebSiteBanHang.Controllers.Api.ProductApiController.GetProducts">
+            <summary>
+            Lấy danh sách tất cả sản phẩm
+            </summary>
+            <returns>Danh sách sản phẩm</returns>
+        </member>
+        <member name="M:WebSiteBanHang.Controllers.Api.ProductApiController.GetProduct(System.Int32)">
+            <summary>
+            Lấy thông tin chi tiết của một sản phẩm theo ID
+            </summary>
+            <param name="id">ID của sản phẩm</param>
+            <returns>Thông tin sản phẩm</returns>
+        </member>
+        <member name="M:WebSiteBanHang.Controllers.Api.ProductApiController.CreateProduct(WebSiteBanHang.Models.Product)">
+            <summary>
+            Tạo mới sản phẩm
+            </summary>
+            <param name="product">Thông tin sản phẩm cần tạo</param>
+            <returns>Sản phẩm đã được tạo</returns>
+        </member>
+        <member name="M:WebSiteBanHang.Controllers.Api.ProductApiController.UpdateProduct(System.Int32,WebSiteBanHang.Models.Product)">
+            <summary>
+            Cập nhật thông tin sản phẩm
+            </summary>
+            <param name="id">ID của sản phẩm</param>
+            <param name="product">Thông tin sản phẩm cập nhật</param>
+            <returns>Không có nội dung trả về</returns>
+        </member>
+        <member name="M:WebSiteBanHang.Controllers.Api.ProductApiController.DeleteProduct(System.Int32)">
+            <summary>
+            Xóa sản phẩm
+            </summary>
+            <param name="id">ID của sản phẩm cần xóa</param>
+            <returns>Không có nội dung trả về</returns>
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.Initial">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.ExtendIdentityUser">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.ExtendIdentityUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.ExtendIdentityUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.ExtendIdentityUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddUserFields">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddUserFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddUserFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddUserFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddCartItemsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddCartItemsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddCartItemsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddCartItemsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddFavoritesAndRatings">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddFavoritesAndRatings.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddFavoritesAndRatings.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddFavoritesAndRatings.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddNameToApplicationUser">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddNameToApplicationUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddNameToApplicationUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddNameToApplicationUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.Order">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.Order.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.Order.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.Order.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddCancellationReasonToOrder">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddCancellationReasonToOrder.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddCancellationReasonToOrder.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddCancellationReasonToOrder.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddContentTable">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddContentTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddContentTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddContentTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddPromotionsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.AddPromotionFieldsToOrders.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebSiteBanHang.Migrations.FixOrderModel">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.FixOrderModel.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.FixOrderModel.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.FixOrderModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Utilities.StringHelper.NormalizeVietnamese(System.String)">
+            <summary>
+            Normalizes a string by removing diacritics (accent marks) and converting to lowercase
+            </summary>
+            <param name="text">The input text to normalize</param>
+            <returns>Normalized text without diacritics in lowercase</returns>
+        </member>
+    </members>
+</doc>

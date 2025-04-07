@@ -1,0 +1,1325 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\WebSiteBanHang.bundle.scp.css",
+      "PackagePath": "staticwebassets\\WebSiteBanHang.bie7m6vy38.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\banner-scroll-image\\decor1.jpg",
+      "PackagePath": "staticwebassets\\banner-scroll-image\\decor1.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\banner-scroll-image\\decor2.jpg",
+      "PackagePath": "staticwebassets\\banner-scroll-image\\decor2.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\banner-scroll-image\\decor3.jpg",
+      "PackagePath": "staticwebassets\\banner-scroll-image\\decor3.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\banner-scroll-image\\decor4.jpg",
+      "PackagePath": "staticwebassets\\banner-scroll-image\\decor4.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\banner-scroll-image\\decor5.jpg",
+      "PackagePath": "staticwebassets\\banner-scroll-image\\decor5.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\css\\banner-scroll.css",
+      "PackagePath": "staticwebassets\\css\\banner-scroll.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\1000-san-pham-nha-xinh56-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\1000-san-pham-nha-xinh56-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\1000-tu-tv-iris-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\1000-tu-tv-iris-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\1000-tu-tv-pop-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\1000-tu-tv-pop-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\103105-den-ban-savona-ma-trang-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\103105-den-ban-savona-ma-trang-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\103185-bat-gom-ma-vang-flower-bloom-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\103185-bat-gom-ma-vang-flower-bloom-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\104679-tham-magic-ocean-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\104679-tham-magic-ocean-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\17-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\17-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\2280603707_TranNgocVinh.jpg",
+      "PackagePath": "staticwebassets\\images\\2280603707_TranNgocVinh.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\3-99496-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\3-99496-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\3_91000_1-768x513.jpg",
+      "PackagePath": "staticwebassets\\images\\3_91000_1-768x513.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\47878-dia-gom-kalika-calligaris-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\47878-dia-gom-kalika-calligaris-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\92704-dong-ho-osvaldo-grey-calligaris-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\92704-dong-ho-osvaldo-grey-calligaris-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\99189-1000-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\99189-1000-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ARMCHAIR-XOAY-ALBERT-KUIP-TAUPE-120233Z-8-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ARMCHAIR-XOAY-ALBERT-KUIP-TAUPE-120233Z-8-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BAN-AN-CAMEO-8-CHO-CERAMIC-P18C-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BAN-AN-CAMEO-8-CHO-CERAMIC-P18C-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BAN-AN-NO-RONG-APIAN-CERAMIC-P28C-01-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BAN-AN-NO-RONG-APIAN-CERAMIC-P28C-01-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BAN-LAM-VIEC-WING-MAU-DEN-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BAN-LAM-VIEC-WING-MAU-DEN-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-Lucia-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-Lucia-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-an-6-cho-Coastal-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-an-6-cho-Coastal-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-lam-viec-Coastal-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-lam-viec-Coastal-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-lam-viec-Fence-129-70-30-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-lam-viec-Fence-129-70-30-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-nuoc-Fence-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-nuoc-Fence-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-phan-Madame-Termocotto-P67W-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-phan-Madame-Termocotto-P67W-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ban-phan-Madame-mau-Ebony-P87W-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ban-phan-Madame-mau-Ebony-P87W-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanAn\\BAN-AN-CAMEO-8-CHO-CERAMIC-P18C-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanAn\\BAN-AN-CAMEO-8-CHO-CERAMIC-P18C-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanAn\\BAN-AN-NO-RONG-APIAN-CERAMIC-P28C-01-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanAn\\BAN-AN-NO-RONG-APIAN-CERAMIC-P28C-01-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanAn\\Ban-Lucia-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanAn\\Ban-Lucia-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanAn\\Ban-an-6-cho-Coastal-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanAn\\Ban-an-6-cho-Coastal-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanAn\\ban-an-8-cho-Napoli-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanAn\\ban-an-8-cho-Napoli-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\SOFA-3-CHO-LOUIS-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\SOFA-3-CHO-LOUIS-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\Sofa-3-Cho-Vai-Mau-Xam-Mb2-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\Sofa-3-Cho-Vai-Mau-Xam-Mb2-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\Sofa-3-cho-torino-vai-2.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\Sofa-3-cho-torino-vai-2.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\Sofa-Bolero-3-cho-Don-M3-vai-xam-MB4010-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\Sofa-Bolero-3-cho-Don-M3-vai-xam-MB4010-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\Sofa-Jadora-25-cho-5-goi-vai-VACT3564-6542-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\Sofa-Jadora-25-cho-5-goi-vai-VACT3564-6542-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\sofa-2-cho-may-moi-mau-xanh-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\sofa-2-cho-may-moi-mau-xanh-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\sofa-maxine-3-cho-da-english-mau-nau-co-dien-87472-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\sofa-maxine-3-cho-da-english-mau-nau-co-dien-87472-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanGhe&Sofa\\sofe-2-cho-tet-vai-vact10499-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanGhe&Sofa\\sofe-2-cho-tet-vai-vact10499-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanLamViec\\BAN-LAM-VIEC-WING-MAU-DEN-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanLamViec\\BAN-LAM-VIEC-WING-MAU-DEN-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanLamViec\\Ban-lam-viec-Coastal-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanLamViec\\Ban-lam-viec-Coastal-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanLamViec\\Ban-lam-viec-Fence-129-70-30-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanLamViec\\Ban-lam-viec-Fence-129-70-30-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanLamViec\\ban-lam-viec-foldy-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanLamViec\\ban-lam-viec-foldy-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanLamViec\\ban-lam-viec-osaka-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanLamViec\\ban-lam-viec-osaka-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\Ban-nuoc-Fence-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\Ban-nuoc-Fence-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-chu-nhat-valente-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-chu-nhat-valente-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-dura.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-dura.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-hung-king-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-hung-king-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-mat-da-tet-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-mat-da-tet-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-orientale-walnut-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-orientale-walnut-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-osaka-3-101892-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-osaka-3-101892-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanNuoc\\ban-nuoc-pallete-ceramic-hien-dai-calligaris-103163-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanNuoc\\ban-nuoc-pallete-ceramic-hien-dai-calligaris-103163-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanTrangDiem\\Ban-phan-Madame-Termocotto-P67W-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanTrangDiem\\Ban-phan-Madame-Termocotto-P67W-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanTrangDiem\\Ban-phan-Madame-mau-Ebony-P87W-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanTrangDiem\\Ban-phan-Madame-mau-Ebony-P87W-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanTrangDiem\\CONSOLE-MIRROR-CURVE-ART-84839K-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanTrangDiem\\CONSOLE-MIRROR-CURVE-ART-84839K-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\BanTrangDiem\\ban-trang-diem-dep-tinh-te-co-hoc-3-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\BanTrangDiem\\ban-trang-diem-dep-tinh-te-co-hoc-3-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\GIUONG-COASTAL-1M8-VAI-SALUMWV-165.png",
+      "PackagePath": "staticwebassets\\images\\Bed\\GIUONG-COASTAL-1M8-VAI-SALUMWV-165.png"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\GIUONG-LAC-VIEN-1M6-VAI-SEVILLA-108523-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\GIUONG-LAC-VIEN-1M6-VAI-SEVILLA-108523-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\GIUONG-MARRY-1M8-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\GIUONG-MARRY-1M8-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\Giuong-Kilian-1m8-da-brown-L01-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\Giuong-Kilian-1m8-da-brown-L01-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\Giuong-LEMAN-1M8-VAI-VACT4328-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\Giuong-LEMAN-1M8-VAI-VACT4328-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\Giuong-Miami-1m6-Vai-Hooland-162.png",
+      "PackagePath": "staticwebassets\\images\\Bed\\Giuong-Miami-1m6-Vai-Hooland-162.png"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\Giuong-ngu-boc-vai-Softly-G-1m6-S8W-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\Giuong-ngu-boc-vai-Softly-G-1m6-S8W-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\giuong-leman-1m8-111430-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\giuong-leman-1m8-111430-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\giuong-leman-1m8-vai-vact10370-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\giuong-leman-1m8-vai-vact10370-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\giuong-leman-1m8-vai-vact8324-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\giuong-leman-1m8-vai-vact8324-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bed\\giuong-penny-boc-vai-1m6-1m82-768x513.jpg",
+      "PackagePath": "staticwebassets\\images\\Bed\\giuong-penny-boc-vai-1m6-1m82-768x513.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Bo-2-tuong-chan-sach-Alum-hinh-con-ngua-Bookend-S2-52126-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\Bo-2-tuong-chan-sach-Alum-hinh-con-ngua-Bookend-S2-52126-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\CHIM-HAC-DECO-FLAMINGO-h66-63948K-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\CHIM-HAC-DECO-FLAMINGO-h66-63948K-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\CONSOLE-MIRROR-CURVE-ART-84839K-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\CONSOLE-MIRROR-CURVE-ART-84839K-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Chu-love-trang-tri-Alu-bookend-nickel-S2-41646-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\Chu-love-trang-tri-Alu-bookend-nickel-S2-41646-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DEN-BAN-GIANFRANCO-GUNMETAL-116914E-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DEN-BAN-GIANFRANCO-GUNMETAL-116914E-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DEN-BAN-GROOVE-CERAMIC-37727P-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DEN-BAN-GROOVE-CERAMIC-37727P-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DEN-BAN-JASMIN-GOLD-52891K-1.jpg",
+      "PackagePath": "staticwebassets\\images\\DEN-BAN-JASMIN-GOLD-52891K-1.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DO-TRANG-TRI-WALL-MIRR-GD-68x120-7723J-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\DO-TRANG-TRI-WALL-MIRR-GD-68x120-7723J-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DO-TT-GARDEN-ROUND-TREE-100CM-20211J-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DO-TT-GARDEN-ROUND-TREE-100CM-20211J-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DONG-HO-DE-BAN-ALUM-GRANITE-54794-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DONG-HO-DE-BAN-ALUM-GRANITE-54794-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DONG-HO-DE-BAN-STEEL-ALUM-52979-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DONG-HO-DE-BAN-STEEL-ALUM-52979-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DONG-HO-TREO-TUONG-STOPPER-53293K-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DONG-HO-TREO-TUONG-STOPPER-53293K-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den-Ban-Olympia-Nickel-106569E-3103108-768x454.jpg",
+      "PackagePath": "staticwebassets\\images\\Den-Ban-Olympia-Nickel-106569E-3103108-768x454.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\103105-den-ban-savona-ma-trang-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\103105-den-ban-savona-ma-trang-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\DEN-BAN-GIANFRANCO-GUNMETAL-116914E-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\DEN-BAN-GIANFRANCO-GUNMETAL-116914E-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\DEN-BAN-GROOVE-CERAMIC-37727P-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\DEN-BAN-GROOVE-CERAMIC-37727P-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\DEN-BAN-JASMIN-GOLD-52891K-1.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\DEN-BAN-JASMIN-GOLD-52891K-1.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\Den-Ban-Olympia-Nickel-106569E-3103108-768x454.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\Den-Ban-Olympia-Nickel-106569E-3103108-768x454.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\den-ban-3-101680-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\den-ban-3-101680-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\den-ban-aria-marb-nickel-60x42cm-50191a-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\den-ban-aria-marb-nickel-60x42cm-50191a-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\den-ban-jeff-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\den-ban-jeff-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\den-table-lamp-osiris-gold-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\den-table-lamp-osiris-gold-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Den\\den-tran-universe-chrome-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Den\\den-tran-universe-chrome-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Dong-ho-treo-tuong-CUCKOO-BIRD-MATTE-GOLD-3105421-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Dong-ho-treo-tuong-CUCKOO-BIRD-MATTE-GOLD-3105421-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\92704-dong-ho-osvaldo-grey-calligaris-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\92704-dong-ho-osvaldo-grey-calligaris-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\99189-1000-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\99189-1000-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\DONG-HO-DE-BAN-ALUM-GRANITE-54794-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\DONG-HO-DE-BAN-ALUM-GRANITE-54794-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\DONG-HO-DE-BAN-STEEL-ALUM-52979-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\DONG-HO-DE-BAN-STEEL-ALUM-52979-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\DONG-HO-TREO-TUONG-STOPPER-53293K-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\DONG-HO-TREO-TUONG-STOPPER-53293K-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\Dong-ho-treo-tuong-CUCKOO-BIRD-MATTE-GOLD-3105421-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\Dong-ho-treo-tuong-CUCKOO-BIRD-MATTE-GOLD-3105421-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\dong-ho-treo-tuong-ecalyptus-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\dong-ho-treo-tuong-ecalyptus-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\DongHo\\dsc057134.jpg",
+      "PackagePath": "staticwebassets\\images\\DongHo\\dsc057134.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GHE-AN-ANIME-VAI-T2J-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GHE-AN-ANIME-VAI-T2J-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GHE-AN-FOYER-VAI-S8Q.png",
+      "PackagePath": "staticwebassets\\images\\GHE-AN-FOYER-VAI-S8Q.png"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GHE-LAM-VIEC-LABORA-HIGH-BROWN-80724K-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\GHE-LAM-VIEC-LABORA-HIGH-BROWN-80724K-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GIUONG-COASTAL-1M8-VAI-SALUMWV-165.png",
+      "PackagePath": "staticwebassets\\images\\GIUONG-COASTAL-1M8-VAI-SALUMWV-165.png"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GIUONG-LAC-VIEN-1M6-VAI-SEVILLA-108523-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GIUONG-LAC-VIEN-1M6-VAI-SEVILLA-108523-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GIUONG-MARRY-1M8-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GIUONG-MARRY-1M8-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ghe-Lam-Viec-Check-Out-3105575-768x454.jpg",
+      "PackagePath": "staticwebassets\\images\\Ghe-Lam-Viec-Check-Out-3105575-768x454.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ghe-an-cla-metpoly-gre-55x45x85-46341j-01-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ghe-an-cla-metpoly-gre-55x45x85-46341j-01-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ghe-xoay-Patron-Walnut-3105579-11-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ghe-xoay-Patron-Walnut-3105579-11-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheAn\\GHE-AN-ANIME-VAI-T2J-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GheAn\\GHE-AN-ANIME-VAI-T2J-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheAn\\GHE-AN-FOYER-VAI-S8Q.png",
+      "PackagePath": "staticwebassets\\images\\GheAn\\GHE-AN-FOYER-VAI-S8Q.png"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheAn\\ghe-an-Arco-chan-kim-loai.jpg",
+      "PackagePath": "staticwebassets\\images\\GheAn\\ghe-an-Arco-chan-kim-loai.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheAn\\ghe-an-arco-chan-go-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GheAn\\ghe-an-arco-chan-go-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheAn\\ghe-an-co-tay-tet-vai-vact10499-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GheAn\\ghe-an-co-tay-tet-vai-vact10499-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheLamViec\\ARMCHAIR-XOAY-ALBERT-KUIP-TAUPE-120233Z-8-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GheLamViec\\ARMCHAIR-XOAY-ALBERT-KUIP-TAUPE-120233Z-8-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheLamViec\\GHE-LAM-VIEC-LABORA-HIGH-BROWN-80724K-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\GheLamViec\\GHE-LAM-VIEC-LABORA-HIGH-BROWN-80724K-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheLamViec\\Ghe-Lam-Viec-Check-Out-3105575-768x454.jpg",
+      "PackagePath": "staticwebassets\\images\\GheLamViec\\Ghe-Lam-Viec-Check-Out-3105575-768x454.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheLamViec\\Ghe-an-cla-metpoly-gre-55x45x85-46341j-01-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GheLamViec\\Ghe-an-cla-metpoly-gre-55x45x85-46341j-01-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\GheLamViec\\Ghe-xoay-Patron-Walnut-3105579-11-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\GheLamViec\\Ghe-xoay-Patron-Walnut-3105579-11-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Giuong-Kilian-1m8-da-brown-L01-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Giuong-Kilian-1m8-da-brown-L01-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Giuong-LEMAN-1M8-VAI-VACT4328-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Giuong-LEMAN-1M8-VAI-VACT4328-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Giuong-Miami-1m6-Vai-Hooland-162.png",
+      "PackagePath": "staticwebassets\\images\\Giuong-Miami-1m6-Vai-Hooland-162.png"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Giuong-ngu-boc-vai-Softly-G-1m6-S8W-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\Giuong-ngu-boc-vai-Softly-G-1m6-S8W-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\DONG-HO-DE-BAN-ALUM-GRANITE-54794-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\DONG-HO-DE-BAN-ALUM-GRANITE-54794-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-berry-mau-cam-h120cm-142667s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-berry-mau-cam-h120cm-142667s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-berry-mau-tim-136457s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-berry-mau-tim-136457s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-blossom-mau-hong-lt-138206s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-blossom-mau-hong-lt-138206s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-blossom-prp-lt-136665s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-blossom-prp-lt-136665s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-cam-tu-cau-lavend-136407s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-cam-tu-cau-lavend-136407s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-helleborus-beauty-140653s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-helleborus-beauty-140653s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Hoa&Cay\\canh-hoa-huong-duong-mauve-140568s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Hoa&Cay\\canh-hoa-huong-duong-mauve-140568s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KHUNG-HINH-80X120-PEACOCK-853364I-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\KHUNG-HINH-80X120-PEACOCK-853364I-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KHUNG-HINH-PARROT-95X95-853096I-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\KHUNG-HINH-PARROT-95X95-853096I-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Ke-giay-Caruso-5-Doors-3105870-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Ke-giay-Caruso-5-Doors-3105870-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\Ke-giay-Caruso-5-Doors-3105870-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\Ke-giay-Caruso-5-Doors-3105870-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\TU-GIAY-CARUSO-DBLE-BRZ-75X77-86217K-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\TU-GIAY-CARUSO-DBLE-BRZ-75X77-86217K-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\pro_mau_tu_nhien_noi_that_moho_tu_giay_trang_tri_vienna_202_9_42a290fbc1674f0f927180d0686a8683_large.webp",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\pro_mau_tu_nhien_noi_that_moho_tu_giay_trang_tri_vienna_202_9_42a290fbc1674f0f927180d0686a8683_large.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\pro_nau_noi_that_moho_tu_giay_trang_tri_vienna_202_1_1d1568b75fee44d5af7a0dc4d862dea7_master.jpg",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\pro_nau_noi_that_moho_tu_giay_trang_tri_vienna_202_1_1d1568b75fee44d5af7a0dc4d862dea7_master.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\tu-giay-chio-nau-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\tu-giay-chio-nau-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\tu-giay-luxury-3-drawer-84993k-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\tu-giay-luxury-3-drawer-84993k-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeGiay\\tu-giay-pisa-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeGiay\\tu-giay-pisa-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\1000-san-pham-nha-xinh56-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\1000-san-pham-nha-xinh56-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\1000-tu-tv-iris-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\1000-tu-tv-iris-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\1000-tu-tv-pop-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\1000-tu-tv-pop-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\TU-TIVI-CABO-PMA712042-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\TU-TIVI-CABO-PMA712042-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\nha-xinh-tu-tivi-bem-500.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\nha-xinh-tu-tivi-bem-500.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\tu-ti-vi-valente-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\tu-ti-vi-valente-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\tu-tivi-82005.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\tu-tivi-82005.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\tu-tivi-moretti-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\tu-tivi-moretti-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\KeTV\\tu-tivi-sai-gon-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\KeTV\\tu-tivi-sai-gon-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Khung-tranh-Forest-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Khung-tranh-Forest-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Nem\\17-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Nem\\17-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Nem\\nem-eco-ruby-col-logo3.jpg",
+      "PackagePath": "staticwebassets\\images\\Nem\\nem-eco-ruby-col-logo3.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Nem\\nem-kingsnight.jpg",
+      "PackagePath": "staticwebassets\\images\\Nem\\nem-kingsnight.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Nem\\nem-lo-xo-tui-senviet-1m6.jpg",
+      "PackagePath": "staticwebassets\\images\\Nem\\nem-lo-xo-tui-senviet-1m6.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Nem\\nem-luxury-golden-black5-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Nem\\nem-luxury-golden-black5-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\SOFA-3-CHO-LOUIS-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\SOFA-3-CHO-LOUIS-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Sofa-3-Cho-Vai-Mau-Xam-Mb2-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Sofa-3-Cho-Vai-Mau-Xam-Mb2-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Sofa-3-cho-torino-vai-2.jpg",
+      "PackagePath": "staticwebassets\\images\\Sofa-3-cho-torino-vai-2.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Sofa-Bolero-3-cho-Don-M3-vai-xam-MB4010-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Sofa-Bolero-3-cho-Don-M3-vai-xam-MB4010-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Sofa-Jadora-25-cho-5-goi-vai-VACT3564-6542-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Sofa-Jadora-25-cho-5-goi-vai-VACT3564-6542-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\THAM-5211ETIF161623-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\THAM-5211ETIF161623-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\THAM-5211QGEW061623-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\THAM-5211QGEW061623-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\THAM-ARABIA-ECRU-2mx3m-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\THAM-ARABIA-ECRU-2mx3m-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\THAM-F2D15MAB031623-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\THAM-F2D15MAB031623-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\THAM-ROCHE-B-200x300-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\THAM-ROCHE-B-200x300-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TRANH-CHEP-SON-DAU-SAVIO-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TRANH-CHEP-SON-DAU-SAVIO-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TRANH-FRAME-VASE-W-FLOW-60X60CM-YC2005L-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TRANH-FRAME-VASE-W-FLOW-60X60CM-YC2005L-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TU-GIAY-CARUSO-DBLE-BRZ-75X77-86217K-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\TU-GIAY-CARUSO-DBLE-BRZ-75X77-86217K-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TU-TIVI-CABO-PMA712042-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TU-TIVI-CABO-PMA712042-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\104679-tham-magic-ocean-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\104679-tham-magic-ocean-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\THAM-5211ETIF161623-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\THAM-5211ETIF161623-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\THAM-5211QGEW061623-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\THAM-5211QGEW061623-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\THAM-ARABIA-ECRU-2mx3m-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\THAM-ARABIA-ECRU-2mx3m-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\THAM-F2D15MAB031623-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\THAM-F2D15MAB031623-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\THAM-ROCHE-B-200x300-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\THAM-ROCHE-B-200x300-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\tham-hartford.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\tham-hartford.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\tham-losanges-outdoor-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\tham-losanges-outdoor-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ThamTrangTri\\tham-riga-ivory-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ThamTrangTri\\tham-riga-ivory-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\103185-bat-gom-ma-vang-flower-bloom-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\103185-bat-gom-ma-vang-flower-bloom-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\47878-dia-gom-kalika-calligaris-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\47878-dia-gom-kalika-calligaris-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\Bo-2-tuong-chan-sach-Alum-hinh-con-ngua-Bookend-S2-52126-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\Bo-2-tuong-chan-sach-Alum-hinh-con-ngua-Bookend-S2-52126-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\CHIM-HAC-DECO-FLAMINGO-h66-63948K-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\CHIM-HAC-DECO-FLAMINGO-h66-63948K-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\Chu-love-trang-tri-Alu-bookend-nickel-S2-41646-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\Chu-love-trang-tri-Alu-bookend-nickel-S2-41646-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\DO-TRANG-TRI-WALL-MIRR-GD-68x120-7723J-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\DO-TRANG-TRI-WALL-MIRR-GD-68x120-7723J-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TrangTri\\DO-TT-GARDEN-ROUND-TREE-100CM-20211J-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TrangTri\\DO-TT-GARDEN-ROUND-TREE-100CM-20211J-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh-ABSTR-mau-xanh-vang-100X100-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh-ABSTR-mau-xanh-vang-100X100-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh-trang-tri-Autumn-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh-trang-tri-Autumn-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\KHUNG-HINH-80X120-PEACOCK-853364I-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\KHUNG-HINH-80X120-PEACOCK-853364I-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\KHUNG-HINH-PARROT-95X95-853096I-768x495.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\KHUNG-HINH-PARROT-95X95-853096I-768x495.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\Khung-tranh-Forest-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\Khung-tranh-Forest-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\TRANH-CHEP-SON-DAU-SAVIO-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\TRANH-CHEP-SON-DAU-SAVIO-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\TRANH-FRAME-VASE-W-FLOW-60X60CM-YC2005L-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\TRANH-FRAME-VASE-W-FLOW-60X60CM-YC2005L-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\Tranh-ABSTR-mau-xanh-vang-100X100-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\Tranh-ABSTR-mau-xanh-vang-100X100-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\Tranh-trang-tri-Autumn-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\Tranh-trang-tri-Autumn-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\tranh-blue-door-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\tranh-blue-door-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tranh\\tranh-decor-115215-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\Tranh\\tranh-decor-115215-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\Tu-ao-Acrylic.jpg",
+      "PackagePath": "staticwebassets\\images\\Tu-ao-Acrylic.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TuQuanAo\\3-99496-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\TuQuanAo\\3-99496-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TuQuanAo\\3_91000_1-768x513.jpg",
+      "PackagePath": "staticwebassets\\images\\TuQuanAo\\3_91000_1-768x513.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TuQuanAo\\Tu-ao-Acrylic.jpg",
+      "PackagePath": "staticwebassets\\images\\TuQuanAo\\Tu-ao-Acrylic.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TuQuanAo\\pro_nau_noi_that_moho_tu_quan_ao_dalumd_ngan_60cm_23c359698ae44c50ae27067c4739743e_master.webp",
+      "PackagePath": "staticwebassets\\images\\TuQuanAo\\pro_nau_noi_that_moho_tu_quan_ao_dalumd_ngan_60cm_23c359698ae44c50ae27067c4739743e_master.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TuQuanAo\\pro_nau_noi_that_moho_tu_quan_ao_hobro_3_canh_1m5_8_3219fa946ce34d74ba14e9f30a277c74_master.webp",
+      "PackagePath": "staticwebassets\\images\\TuQuanAo\\pro_nau_noi_that_moho_tu_quan_ao_hobro_3_canh_1m5_8_3219fa946ce34d74ba14e9f30a277c74_master.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\TuQuanAo\\productpro_mau_tu_nhien_tu_quan_ao_vline_601_1m_3_1__8a458fef97714028b1f3278d7aa936b1_master.webp",
+      "PackagePath": "staticwebassets\\images\\TuQuanAo\\productpro_mau_tu_nhien_tu_quan_ao_vline_601_1m_3_1__8a458fef97714028b1f3278d7aa936b1_master.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-an-8-cho-Napoli-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-an-8-cho-Napoli-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-lam-viec-foldy-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-lam-viec-foldy-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-lam-viec-osaka-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-lam-viec-osaka-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-chu-nhat-valente-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-chu-nhat-valente-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-dura.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-dura.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-hung-king-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-hung-king-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-mat-da-tet-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-mat-da-tet-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-orientale-walnut-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-orientale-walnut-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-osaka-3-101892-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-osaka-3-101892-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-nuoc-pallete-ceramic-hien-dai-calligaris-103163-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-nuoc-pallete-ceramic-hien-dai-calligaris-103163-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ban-trang-diem-dep-tinh-te-co-hoc-3-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ban-trang-diem-dep-tinh-te-co-hoc-3-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-berry-mau-cam-h120cm-142667s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-berry-mau-cam-h120cm-142667s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-berry-mau-tim-136457s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-berry-mau-tim-136457s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-blossom-mau-hong-lt-138206s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-blossom-mau-hong-lt-138206s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-blossom-prp-lt-136665s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-blossom-prp-lt-136665s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-cam-tu-cau-lavend-136407s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-cam-tu-cau-lavend-136407s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-helleborus-beauty-140653s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-helleborus-beauty-140653s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\canh-hoa-huong-duong-mauve-140568s-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\canh-hoa-huong-duong-mauve-140568s-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\den-ban-3-101680-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\den-ban-3-101680-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\den-ban-aria-marb-nickel-60x42cm-50191a-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\den-ban-aria-marb-nickel-60x42cm-50191a-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\den-ban-jeff-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\den-ban-jeff-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\den-table-lamp-osiris-gold-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\den-table-lamp-osiris-gold-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\den-tran-universe-chrome-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\den-tran-universe-chrome-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\dong-ho-treo-tuong-ecalyptus-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\dong-ho-treo-tuong-ecalyptus-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\dsc057134.jpg",
+      "PackagePath": "staticwebassets\\images\\dsc057134.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ghe-an-Arco-chan-kim-loai.jpg",
+      "PackagePath": "staticwebassets\\images\\ghe-an-Arco-chan-kim-loai.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ghe-an-arco-chan-go-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ghe-an-arco-chan-go-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\ghe-an-co-tay-tet-vai-vact10499-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\ghe-an-co-tay-tet-vai-vact10499-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\giuong-leman-1m8-vai-vact10370-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\giuong-leman-1m8-vai-vact10370-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\giuong-leman-1m8-vai-vact8324-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\giuong-leman-1m8-vai-vact8324-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\giuong-penny-boc-vai-1m6-1m82-768x513.jpg",
+      "PackagePath": "staticwebassets\\images\\giuong-penny-boc-vai-1m6-1m82-768x513.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\nem-eco-ruby-col-logo3.jpg",
+      "PackagePath": "staticwebassets\\images\\nem-eco-ruby-col-logo3.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\nem-kingsnight.jpg",
+      "PackagePath": "staticwebassets\\images\\nem-kingsnight.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\nem-lo-xo-tui-senviet-1m6.jpg",
+      "PackagePath": "staticwebassets\\images\\nem-lo-xo-tui-senviet-1m6.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\nem-luxury-golden-black5-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\nem-luxury-golden-black5-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\nha-xinh-tu-tivi-bem-500.jpg",
+      "PackagePath": "staticwebassets\\images\\nha-xinh-tu-tivi-bem-500.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\pro_nau_noi_that_moho_tu_giay_trang_tri_vienna_202_1_1d1568b75fee44d5af7a0dc4d862dea7_master.jpg",
+      "PackagePath": "staticwebassets\\images\\pro_nau_noi_that_moho_tu_giay_trang_tri_vienna_202_1_1d1568b75fee44d5af7a0dc4d862dea7_master.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\pro_nau_noi_that_moho_tu_quan_ao_dalumd_ngan_60cm_23c359698ae44c50ae27067c4739743e_master.webp",
+      "PackagePath": "staticwebassets\\images\\pro_nau_noi_that_moho_tu_quan_ao_dalumd_ngan_60cm_23c359698ae44c50ae27067c4739743e_master.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\pro_nau_noi_that_moho_tu_quan_ao_hobro_3_canh_1m5_8_3219fa946ce34d74ba14e9f30a277c74_master.webp",
+      "PackagePath": "staticwebassets\\images\\pro_nau_noi_that_moho_tu_quan_ao_hobro_3_canh_1m5_8_3219fa946ce34d74ba14e9f30a277c74_master.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\productpro_mau_tu_nhien_tu_quan_ao_vline_601_1m_3_1__8a458fef97714028b1f3278d7aa936b1_master.webp",
+      "PackagePath": "staticwebassets\\images\\productpro_mau_tu_nhien_tu_quan_ao_vline_601_1m_3_1__8a458fef97714028b1f3278d7aa936b1_master.webp"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\sofa-2-cho-may-moi-mau-xanh-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\sofa-2-cho-may-moi-mau-xanh-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\sofa-maxine-3-cho-da-english-mau-nau-co-dien-87472-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\sofa-maxine-3-cho-da-english-mau-nau-co-dien-87472-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\sofe-2-cho-tet-vai-vact10499-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\sofe-2-cho-tet-vai-vact10499-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tham-hartford.jpg",
+      "PackagePath": "staticwebassets\\images\\tham-hartford.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tham-losanges-outdoor-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tham-losanges-outdoor-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tham-riga-ivory-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tham-riga-ivory-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tranh-blue-door-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tranh-blue-door-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tranh-decor-115215-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tranh-decor-115215-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-giay-chio-nau-1-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-giay-chio-nau-1-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-giay-luxury-3-drawer-84993k-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-giay-luxury-3-drawer-84993k-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-giay-pisa-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-giay-pisa-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-ti-vi-valente-2-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-ti-vi-valente-2-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-tivi-82005.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-tivi-82005.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-tivi-moretti-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-tivi-moretti-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\images\\tu-tivi-sai-gon-768x511.jpg",
+      "PackagePath": "staticwebassets\\images\\tu-tivi-sai-gon-768x511.jpg"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\banner-scroll.js",
+      "PackagePath": "staticwebassets\\js\\banner-scroll.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\cart-ajax.js",
+      "PackagePath": "staticwebassets\\js\\cart-ajax.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\WebSiteBanHang\\WebSiteBanHang\\WebSiteBanHang\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebSiteBanHang.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebSiteBanHang.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WebSiteBanHang.props",
+      "PackagePath": "build\\WebSiteBanHang.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebSiteBanHang.props",
+      "PackagePath": "buildMultiTargeting\\WebSiteBanHang.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebSiteBanHang.props",
+      "PackagePath": "buildTransitive\\WebSiteBanHang.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
