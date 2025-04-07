@@ -7,6 +7,7 @@ using WebSiteBanHang.Repositories;
 using WebSiteBanHang.Models.ViewModels;
 using System.Linq;
 using WebSiteBanHang.Utilities;
+using WebSiteBanHang.Services;
 
 namespace WebSiteBanHang.Areas.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly ICustomEmailSender _emailSender;
 
-        public OrderController(IOrderRepository orderRepository)
+        public OrderController(IOrderRepository orderRepository, ICustomEmailSender emailSender)
         {
             _orderRepository = orderRepository;
+            _emailSender = emailSender;
         }
 
         public async Task<IActionResult> Index(OrderFilterViewModel filter, int page = 1)
@@ -40,7 +43,7 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             // Đếm số lượng đơn hàng theo trạng thái
             ViewBag.TotalOrders = allOrders.Count; // Tổng số đơn hàng thực tế
             ViewBag.PendingOrders = allOrders.Count(o => o.Status == OrderStatus.Pending);
-            ViewBag.ProcessingOrders = allOrders.Count(o => o.Status == OrderStatus.Processing);
+            ViewBag.ProcessingOrders = allOrders.Count(o => o.Status == OrderStatus.Confirmed);
             ViewBag.CompletedOrders = allOrders.Count(o => o.Status == OrderStatus.Completed);
             ViewBag.CancelledOrders = allOrders.Count(o => o.Status == OrderStatus.Cancelled);
             
@@ -201,11 +204,47 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             string statusMessage = status switch
             {
                 OrderStatus.Pending => "Đơn hàng đã được đặt lại trạng thái chờ xác nhận",
-                OrderStatus.Processing => "Đơn hàng đã được xác nhận thành công",
+                OrderStatus.Confirmed => "Đơn hàng đã được xác nhận thành công",
                 OrderStatus.Completed => "Đơn hàng đã được giao thành công",
                 OrderStatus.Cancelled => "Đơn hàng đã bị hủy",
                 _ => "Trạng thái đơn hàng đã được cập nhật"
             };
+
+            // Send email notification when order is confirmed
+            if (status == OrderStatus.Confirmed)
+            {
+                try 
+                {
+                    await SendOrderConfirmationEmail(order);
+                    // Add success message for email
+                    statusMessage += " và email xác nhận đã được gửi đến khách hàng";
+                }
+                catch (Exception ex)
+                {
+                    // Log the error but don't stop the process
+                    Console.WriteLine($"Error sending confirmation email: {ex.Message}");
+                    // Add warning about email
+                    statusMessage += " nhưng không thể gửi email đến khách hàng";
+                }
+            }
+            
+            // Send email notification when order is completed
+            if (status == OrderStatus.Completed)
+            {
+                try 
+                {
+                    await SendOrderCompletedEmail(order);
+                    // Add success message for email
+                    statusMessage += " và email thông báo đã được gửi đến khách hàng";
+                }
+                catch (Exception ex)
+                {
+                    // Log the error but don't stop the process
+                    Console.WriteLine($"Error sending completed order email: {ex.Message}");
+                    // Add warning about email
+                    statusMessage += " nhưng không thể gửi email đến khách hàng";
+                }
+            }
             
             // If it's an AJAX request, return JSON response
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
@@ -240,7 +279,7 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             return status switch
             {
                 OrderStatus.Pending => "bg-warning text-dark",
-                OrderStatus.Processing => "bg-info text-dark",
+                OrderStatus.Confirmed => "bg-info text-dark",
                 OrderStatus.Completed => "bg-success",
                 OrderStatus.Cancelled => "bg-danger",
                 _ => "bg-secondary"
@@ -252,8 +291,8 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             return status switch
             {
                 OrderStatus.Pending => "Chờ xác nhận",
-                OrderStatus.Processing => "Đã xác nhận",
-                OrderStatus.Completed => "Đã giao hàng",
+                OrderStatus.Confirmed => "Đã xác nhận",
+                OrderStatus.Completed => "Đã hoàn thành",
                 OrderStatus.Cancelled => "Đã hủy",
                 _ => status.ToString()
             };
@@ -264,28 +303,312 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
             return order.Items.Sum(item => item.Quantity * item.UnitPrice);
         }
 
+        private async Task SendOrderCancellationEmail(Order order, string cancellationReason)
+        {
+            if (string.IsNullOrEmpty(order.Email))
+                return;
+
+            string subject = $"Đơn hàng #{order.Id} đã bị hủy";
+            
+            // Create HTML for order items
+            string orderItemsHtml = "";
+            if (order.Items != null && order.Items.Any())
+            {
+                orderItemsHtml = "<table class='product-list'>" +
+                    "<tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr>";
+
+                foreach (var item in order.Items)
+                {
+                    orderItemsHtml += $"<tr>" +
+                        $"<td>{item.Product?.Name ?? "Sản phẩm"}</td>" +
+                        $"<td>{item.Quantity}</td>" +
+                        $"<td>{item.UnitPrice:N0} đ</td>" +
+                        $"<td>{(item.UnitPrice * item.Quantity):N0} đ</td>" +
+                        $"</tr>";
+                }
+
+                orderItemsHtml += "</table>";
+            }
+            
+            string message = $@"
+            <html>
+            <head>
+                <style>
+                    body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                    .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                    .header {{ background-color: #dc3545; color: white; padding: 10px 20px; text-align: center; }}
+                    .content {{ padding: 20px; border: 1px solid #ddd; border-top: none; }}
+                    .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #777; }}
+                    .order-details {{ margin: 20px 0; }}
+                    .product-list {{ border-collapse: collapse; width: 100%; margin: 15px 0; }}
+                    .product-list th, .product-list td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                    .product-list th {{ background-color: #f2f2f2; }}
+                    .total {{ font-weight: bold; text-align: right; margin-top: 10px; }}
+                    .btn {{ display: inline-block; padding: 10px 20px; background-color: #dc3545; color: white; 
+                           text-decoration: none; border-radius: 4px; }}
+                    .highlight {{ background-color: #f8d7da; padding: 10px; border-radius: 5px; margin: 10px 0; }}
+                    .reason-box {{ background-color: #f8f9fa; padding: 15px; border-left: 4px solid #dc3545; margin: 15px 0; }}
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <div class='header'>
+                        <h2>Thông báo hủy đơn hàng</h2>
+                    </div>
+                    <div class='content'>
+                        <p>Chào <strong>{order.FullName}</strong>,</p>
+                        
+                        <div class='highlight'>
+                            <p>Đơn hàng <strong>#{order.Id}</strong> của bạn đã bị hủy.</p>
+                        </div>
+                        
+                        <div class='reason-box'>
+                            <h3 style='margin-top: 0;'>Lý do hủy đơn:</h3>
+                            <p style='margin-bottom: 0;'>{cancellationReason}</p>
+                        </div>
+                        
+                        <div class='order-details'>
+                            <h3>Thông tin đơn hàng:</h3>
+                            <p><strong>Mã đơn hàng:</strong> #{order.Id}</p>
+                            <p><strong>Ngày đặt:</strong> {order.OrderDate:dd/MM/yyyy HH:mm}</p>
+                            <p><strong>Ngày hủy:</strong> {DateTime.Now:dd/MM/yyyy HH:mm}</p>
+                            <p><strong>Tổng tiền:</strong> {order.TotalAmount:N0} đ</p>
+                            <p><strong>Phương thức thanh toán:</strong> {(order.PaymentMethod == "COD" ? "Thanh toán khi nhận hàng (COD)" : order.PaymentMethod)}</p>
+                        </div>
+                        
+                        <h3>Chi tiết đơn hàng đã hủy:</h3>
+                        {orderItemsHtml}
+                        <p class='total'>Tổng giá trị đơn hàng: <strong>{order.TotalAmount:N0} đ</strong></p>
+                        
+                        <p>Nếu bạn có bất kỳ thắc mắc nào hoặc cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại được cung cấp trên trang web.</p>
+                        
+                        <p>Cảm ơn bạn đã quan tâm đến sản phẩm của GocNhoDecor!</p>
+                    </div>
+                    <div class='footer'>
+                        <p>© 2025 GocNhoDecor - Nơi mang đến không gian sống đẹp cho ngôi nhà của bạn</p>
+                    </div>
+                </div>
+            </body>
+            </html>";
+
+            await _emailSender.SendEmailAsync(order.Email, subject, message);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CancelOrder(int id, string cancellationReason, string otherReason)
         {
-            // Handle other reason if selected
-            if (cancellationReason == "other" && !string.IsNullOrEmpty(otherReason))
+            var order = await _orderRepository.GetOrderWithItemsAsync(id);
+            if (order == null)
             {
-                cancellationReason = otherReason;
+                return NotFound();
             }
-            
-            await _orderRepository.CancelOrderAsync(id, cancellationReason);
-            
-            // Change to SuccessMessage for consistent styling
-            TempData["SuccessMessage"] = "Đơn hàng đã được hủy thành công.";
-            
-            // Check if the request came from details page
-            string referer = Request.Headers["Referer"].ToString();
-            if (referer.Contains("/Admin/Order/Details"))
+
+            // Combine reasons if "Other" is selected
+            string finalReason = cancellationReason;
+            if (cancellationReason == "Khác" && !string.IsNullOrEmpty(otherReason))
             {
-                return RedirectToAction(nameof(Details), new { id });
+                finalReason = otherReason;
             }
-            
+
+            // Update order status to cancelled
+            await _orderRepository.UpdateOrderStatusAsync(id, OrderStatus.Cancelled);
+
+            try 
+            {
+                // Send cancellation email
+                await SendOrderCancellationEmail(order, finalReason);
+                TempData["SuccessMessage"] = "Đơn hàng đã được hủy và email thông báo đã được gửi đến khách hàng";
+            }
+            catch (Exception ex)
+            {
+                // Log the error but don't stop the process
+                Console.WriteLine($"Error sending cancellation email: {ex.Message}");
+                TempData["SuccessMessage"] = "Đơn hàng đã được hủy nhưng không thể gửi email đến khách hàng";
+            }
+
+            // Check if it's an AJAX request
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return Json(new { success = true, message = TempData["SuccessMessage"] });
+            }
+
             return RedirectToAction(nameof(Index));
+        }
+
+        // Helper method to send order confirmation email
+        private async Task SendOrderConfirmationEmail(Order order)
+        {
+            if (string.IsNullOrEmpty(order.Email))
+                return;
+
+            string subject = $"Đơn hàng #{order.Id} đã được xác nhận!";
+            
+            // Create HTML for order items
+            string orderItemsHtml = "";
+            if (order.Items != null && order.Items.Any())
+            {
+                orderItemsHtml = "<table class='product-list'>" +
+                    "<tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr>";
+
+                foreach (var item in order.Items)
+                {
+                    orderItemsHtml += $"<tr>" +
+                        $"<td>{item.Product?.Name ?? "Sản phẩm"}</td>" +
+                        $"<td>{item.Quantity}</td>" +
+                        $"<td>{item.UnitPrice:N0} đ</td>" +
+                        $"<td>{(item.UnitPrice * item.Quantity):N0} đ</td>" +
+                        $"</tr>";
+                }
+
+                orderItemsHtml += "</table>";
+            }
+            
+            string message = $@"
+            <html>
+            <head>
+                <style>
+                    body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                    .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                    .header {{ background-color: #0d6efd; color: white; padding: 10px 20px; text-align: center; }}
+                    .content {{ padding: 20px; border: 1px solid #ddd; border-top: none; }}
+                    .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #777; }}
+                    .order-details {{ margin: 20px 0; }}
+                    .product-list {{ border-collapse: collapse; width: 100%; margin: 15px 0; }}
+                    .product-list th, .product-list td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                    .product-list th {{ background-color: #f2f2f2; }}
+                    .total {{ font-weight: bold; text-align: right; margin-top: 10px; }}
+                    .btn {{ display: inline-block; padding: 10px 20px; background-color: #0d6efd; color: white; 
+                           text-decoration: none; border-radius: 4px; }}
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <div class='header'>
+                        <h2>Đơn hàng của bạn đã được xác nhận!</h2>
+                    </div>
+                    <div class='content'>
+                        <p>Chào <strong>{order.FullName}</strong>,</p>
+                        <p>Cảm ơn bạn đã mua sắm tại GocNhoDecor. Đơn hàng #{order.Id} của bạn đã được xác nhận và sẽ được xử lý ngay!</p>
+                        
+                        <div class='order-details'>
+                            <h3>Thông tin đơn hàng:</h3>
+                            <p><strong>Mã đơn hàng:</strong> #{order.Id}</p>
+                            <p><strong>Ngày đặt:</strong> {order.OrderDate:dd/MM/yyyy HH:mm}</p>
+                            <p><strong>Tổng tiền:</strong> {order.TotalAmount:N0} đ</p>
+                            <p><strong>Phương thức thanh toán:</strong> {(order.PaymentMethod == "COD" ? "Thanh toán khi nhận hàng (COD)" : order.PaymentMethod)}</p>
+                        </div>
+                        
+                        <h3>Chi tiết đơn hàng:</h3>
+                        {orderItemsHtml}
+                        <p class='total'>Tổng thanh toán: <strong>{order.TotalAmount:N0} đ</strong></p>
+                        
+                        <p>Đơn hàng của bạn sẽ được giao đến:</p>
+                        <p>
+                            <strong>Địa chỉ:</strong> {order.ShippingAddress}<br/>
+                            <strong>Số điện thoại:</strong> {order.PhoneNumber}
+                        </p>
+                        
+                        <p>Bạn có thể theo dõi trạng thái đơn hàng trong phần <strong>Đơn hàng của tôi</strong> trên website.</p>
+                        
+                        <p>Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại được cung cấp trên trang web.</p>
+                        
+                        <p>Cảm ơn bạn đã chọn mua sắm tại GocNhoDecor!</p>
+                    </div>
+                    <div class='footer'>
+                        <p>© 2025 GocNhoDecor - Nơi mang đến không gian sống đẹp cho ngôi nhà của bạn</p>
+                    </div>
+                </div>
+            </body>
+            </html>";
+
+            await _emailSender.SendEmailAsync(order.Email, subject, message);
+        }
+
+        // Helper method to send order completed email
+        private async Task SendOrderCompletedEmail(Order order)
+        {
+            if (string.IsNullOrEmpty(order.Email))
+                return;
+
+            string subject = $"Đơn hàng #{order.Id} đã giao thành công!";
+            
+            // Create HTML for order items
+            string orderItemsHtml = "";
+            if (order.Items != null && order.Items.Any())
+            {
+                orderItemsHtml = "<table class='product-list'>" +
+                    "<tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr>";
+
+                foreach (var item in order.Items)
+                {
+                    orderItemsHtml += $"<tr>" +
+                        $"<td>{item.Product?.Name ?? "Sản phẩm"}</td>" +
+                        $"<td>{item.Quantity}</td>" +
+                        $"<td>{item.UnitPrice:N0} đ</td>" +
+                        $"<td>{(item.UnitPrice * item.Quantity):N0} đ</td>" +
+                        $"</tr>";
+                }
+
+                orderItemsHtml += "</table>";
+            }
+            
+            string message = $@"
+            <html>
+            <head>
+                <style>
+                    body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                    .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                    .header {{ background-color: #28a745; color: white; padding: 10px 20px; text-align: center; }}
+                    .content {{ padding: 20px; border: 1px solid #ddd; border-top: none; }}
+                    .footer {{ text-align: center; margin-top: 20px; font-size: 12px; color: #777; }}
+                    .order-details {{ margin: 20px 0; }}
+                    .product-list {{ border-collapse: collapse; width: 100%; margin: 15px 0; }}
+                    .product-list th, .product-list td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                    .product-list th {{ background-color: #f2f2f2; }}
+                    .total {{ font-weight: bold; text-align: right; margin-top: 10px; }}
+                    .btn {{ display: inline-block; padding: 10px 20px; background-color: #28a745; color: white; 
+                           text-decoration: none; border-radius: 4px; }}
+                    .highlight {{ background-color: #e8f5e9; padding: 10px; border-radius: 5px; margin: 10px 0; }}
+                </style>
+            </head>
+            <body>
+                <div class='container'>
+                    <div class='header'>
+                        <h2>Đơn hàng đã giao thành công!</h2>
+                    </div>
+                    <div class='content'>
+                        <p>Chào <strong>{order.FullName}</strong>,</p>
+                        <p>Cảm ơn bạn đã mua sắm tại GocNhoDecor. Chúng tôi rất vui thông báo rằng đơn hàng của bạn đã được giao thành công!</p>
+                        
+                        <div class='highlight'>
+                            <p>Đơn hàng <strong>#{order.Id}</strong> đã được giao thành công. Chúng tôi hy vọng bạn hài lòng với sản phẩm!</p>
+                        </div>
+                        
+                        <div class='order-details'>
+                            <h3>Thông tin đơn hàng:</h3>
+                            <p><strong>Mã đơn hàng:</strong> #{order.Id}</p>
+                            <p><strong>Ngày đặt:</strong> {order.OrderDate:dd/MM/yyyy HH:mm}</p>
+                            <p><strong>Ngày giao:</strong> {DateTime.Now:dd/MM/yyyy HH:mm}</p>
+                            <p><strong>Tổng tiền:</strong> {order.TotalAmount:N0} đ</p>
+                            <p><strong>Phương thức thanh toán:</strong> {(order.PaymentMethod == "COD" ? "Thanh toán khi nhận hàng (COD)" : order.PaymentMethod)}</p>
+                        </div>
+                        
+                        <h3>Chi tiết đơn hàng:</h3>
+                        {orderItemsHtml}
+                        <p class='total'>Tổng thanh toán: <strong>{order.TotalAmount:N0} đ</strong></p>
+                        
+                        <p>Nếu bạn có bất kỳ câu hỏi gì hoặc cần hỗ trợ về sản phẩm, vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại được cung cấp trên trang web.</p>
+                        
+                        <p>Cảm ơn bạn đã chọn mua sắm tại GocNhoDecor!</p>
+                    </div>
+                    <div class='footer'>
+                        <p>© 2025 GocNhoDecor - Nơi mang đến không gian sống đẹp cho ngôi nhà của bạn</p>
+                    </div>
+                </div>
+            </body>
+            </html>";
+
+            await _emailSender.SendEmailAsync(order.Email, subject, message);
         }
     }
 }

@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 =======
+>>>>>>> b242d96a2dad1845e2a97bae07c2c3728776f953
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\appsettings.Development.json
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\appsettings.json
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\WebSiteBanHang.staticwebassets.runtime.json
@@ -242,7 +243,6 @@ E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\runtimes\win\li
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
->>>>>>> b242d96a2dad1845e2a97bae07c2c3728776f953
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.csproj.AssemblyReference.cache
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.GeneratedMSBuildEditorConfig.editorconfig
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.AssemblyInfoInputs.cache
@@ -253,8 +253,6 @@ E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.RazorAssemblyInfo.cache
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.RazorAssemblyInfo.cs
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.sourcelink.json
-<<<<<<< HEAD
-=======
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\scopedcss\bundle\WebSiteBanHang.styles.css
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\scopedcss\projectbundle\WebSiteBanHang.bundle.scp.css
@@ -274,4 +272,3 @@ E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.pdb
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.genruntimeconfig.cache
 E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\ref\WebSiteBanHang.dll
->>>>>>> b242d96a2dad1845e2a97bae07c2c3728776f953

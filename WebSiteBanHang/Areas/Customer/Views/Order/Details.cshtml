@@ -2,13 +2,13 @@
 @{
     ViewData["Title"] = "Chi tiết đơn hàng";
     
-    var (statusClass, statusText) = Model.Status switch
+    var statusInfo = Model.Status switch
     {
         OrderStatus.Pending => ("bg-warning text-dark", "Chờ xác nhận"),
-        OrderStatus.Processing => ("bg-info text-dark", "Đã xác nhận"),
-        OrderStatus.Completed => ("bg-success", "Đã giao hàng"),
+        OrderStatus.Confirmed => ("bg-info text-dark", "Đã xác nhận"),
+        OrderStatus.Completed => ("bg-success", "Đã hoàn thành"),
         OrderStatus.Cancelled => ("bg-danger", "Đã hủy"),
-        _ => ("bg-secondary", "Không xác định")
+        _ => ("bg-secondary", Model.Status.ToString())
     };
 }
 
@@ -34,12 +34,12 @@
                             <div class="me-3">
                                 <div class="badge 
                                     @(Model.Status == OrderStatus.Pending ? "bg-warning text-dark" : 
-                                      Model.Status == OrderStatus.Processing ? "bg-info text-dark" :
+                                      Model.Status == OrderStatus.Confirmed ? "bg-info text-dark" :
                                       Model.Status == OrderStatus.Completed ? "bg-success" :
                                       Model.Status == OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")
                                     p-2 fs-6">
                                     @(Model.Status == OrderStatus.Pending ? "Chờ xác nhận" :
-                                      Model.Status == OrderStatus.Processing ? "Đã xác nhận" :
+                                      Model.Status == OrderStatus.Confirmed ? "Đã xác nhận" :
                                       Model.Status == OrderStatus.Completed ? "Đã hoàn thành" :
                                       Model.Status == OrderStatus.Cancelled ? "Đã hủy" : Model.Status.ToString())
                                 </div>
@@ -81,6 +81,17 @@
                             </tbody>
                             <tfoot class="table-light">
                                 <tr>
+                                    <th colspan="3" class="text-end">Tạm tính:</th>
+                                    <th class="text-end">@((Model.TotalAmount + Model.DiscountAmount).ToString("C0"))</th>
+                                </tr>
+                                @if (Model.DiscountAmount > 0)
+                                {
+                                    <tr>
+                                        <th colspan="3" class="text-end">Giảm giá:</th>
+                                        <th class="text-end text-danger">-@Model.DiscountAmount.ToString("C0")</th>
+                                    </tr>
+                                }
+                                <tr>
                                     <th colspan="3" class="text-end">Tổng cộng:</th>
                                     <th class="text-end text-primary">@Model.TotalAmount.ToString("C0")</th>
                                 </tr>
@@ -112,18 +123,25 @@
                         <span class="text-muted">Phương thức thanh toán:</span>
                         <span>@Model.PaymentMethod</span>
                     </p>
+                    @if (Model.PromotionId.HasValue && Model.DiscountAmount > 0)
+                    {
+                        <p class="mb-1 d-flex justify-content-between">
+                            <span class="text-muted">Mã giảm giá:</span>
+                            <span class="text-danger fw-bold">-@Model.DiscountAmount.ToString("C0")</span>
+                        </p>
+                    }
                     <p class="mb-1 d-flex justify-content-between">
                         <span class="text-muted">Trạng thái:</span>
                         <div class="d-flex align-items-center mb-3">
                             <div class="me-3">
                                 <div class="badge 
                                     @(Model.Status == OrderStatus.Pending ? "bg-warning text-dark" : 
-                                      Model.Status == OrderStatus.Processing ? "bg-info text-dark" :
+                                      Model.Status == OrderStatus.Confirmed ? "bg-info text-dark" :
                                       Model.Status == OrderStatus.Completed ? "bg-success" :
                                       Model.Status == OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")
                                     p-2 fs-6">
                                     @(Model.Status == OrderStatus.Pending ? "Chờ xác nhận" :
-                                      Model.Status == OrderStatus.Processing ? "Đã xác nhận" :
+                                      Model.Status == OrderStatus.Confirmed ? "Đã xác nhận" :
                                       Model.Status == OrderStatus.Completed ? "Đã hoàn thành" :
                                       Model.Status == OrderStatus.Cancelled ? "Đã hủy" : Model.Status.ToString())
                                 </div>

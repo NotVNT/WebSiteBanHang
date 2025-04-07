@@ -34,7 +34,7 @@
             <div class="toast-body">
                 <div class="d-flex align-items-center">
                     <i class="bi bi-exclamation-circle-fill text-danger fs-4 me-2"></i>
-                    <span>@TempData["ErrorMessage"]</span>
+                    <span>@Html.Raw(TempData["ErrorMessage"])</span>
                 </div>
             </div>
         </div>
@@ -96,6 +96,12 @@
         
         .toast-body {
             padding: 1rem;
+        }
+        
+        .product-name {
+            font-size: 1.1em;
+            color: #ff4d4d;
+            font-weight: bold;
         }
     `;
     document.head.appendChild(style);

@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-white border-0 py-2">
-                            <a href="@Url.Action("Index", new { Status = WebSiteBanHang.Models.OrderStatus.Processing })" class="text-decoration-none small d-flex align-items-center justify-content-end">
+                            <a href="@Url.Action("Index", new { Status = WebSiteBanHang.Models.OrderStatus.Confirmed })" class="text-decoration-none small d-flex align-items-center justify-content-end">
                                 <span>Xem chi tiết</span>
                                 <i class="bi bi-chevron-right ms-1"></i>
                             </a>
@@ -271,7 +271,7 @@
                             <span class="badge bg-info text-dark">
                                 Trạng thái: 
                                 @(filter.Status == OrderStatus.Pending ? "Chờ xác nhận" :
-                                  filter.Status == OrderStatus.Processing ? "Đã xác nhận" :
+                                  filter.Status == OrderStatus.Confirmed ? "Đã xác nhận" :
                                   filter.Status == OrderStatus.Completed ? "Đã hoàn thành" :
                                   filter.Status == OrderStatus.Cancelled ? "Đã hủy" : filter.Status.ToString())
                                 <button type="button" class="btn-close btn-close-white btn-sm ms-1" 
@@ -423,11 +423,11 @@
                                         <div class="status-badge-container">
                                             <span id="status-badge-@order.Id" class="status-badge badge 
                                                 @(order.Status == OrderStatus.Pending ? "bg-warning text-dark" : 
-                                                order.Status == OrderStatus.Processing ? "bg-info text-dark" : 
+                                                order.Status == OrderStatus.Confirmed ? "bg-info text-dark" : 
                                                 order.Status == OrderStatus.Completed ? "bg-success" : 
                                                 order.Status == OrderStatus.Cancelled ? "bg-danger" : "bg-secondary")">
                                                 @(order.Status == OrderStatus.Pending ? "Chờ xác nhận" : 
-                                                order.Status == OrderStatus.Processing ? "Đã xác nhận" : 
+                                                order.Status == OrderStatus.Confirmed ? "Đã xác nhận" : 
                                                 order.Status == OrderStatus.Completed ? "Đã hoàn thành" : 
                                                 order.Status == OrderStatus.Cancelled ? "Đã hủy" : order.Status.ToString())
                                             </span>
@@ -448,8 +448,8 @@
                                                     </button>
                                                     <ul class="dropdown-menu status-dropdown">
                                                         <li>
-                                                            <button class="dropdown-item status-update-btn @(order.Status == OrderStatus.Processing ? "active" : "")" 
-                                                                    data-order-id="@order.Id" data-status="@OrderStatus.Processing">
+                                                            <button class="dropdown-item status-update-btn @(order.Status == OrderStatus.Confirmed ? "active" : "")" 
+                                                                    data-order-id="@order.Id" data-status="@OrderStatus.Confirmed">
                                                                 <i class="bi bi-check2-circle me-2 text-info"></i>Đã xác nhận
                                                             </button>
                                                         </li>
@@ -729,7 +729,7 @@
                     })
                     .finally(() => {
                         // Reset button text and enable it
-                        this.innerHTML = this.getAttribute('data-status') == '@OrderStatus.Processing' ?
+                        this.innerHTML = this.getAttribute('data-status') == '@OrderStatus.Confirmed' ?
                             '<i class="bi bi-check2-circle me-2 text-info"></i>Đã xác nhận' :
                             this.getAttribute('data-status') == '@OrderStatus.Completed' ?
                             '<i class="bi bi-box-seam me-2 text-success"></i>Đã hoàn thành' :

@@ -52,14 +52,27 @@
                                         <strong>#@order.Id</strong>
                                     </td>
                                     <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
-                                    <td class="text-end">@order.TotalAmount.ToString("C0")</td>
+                                    <td class="text-end">
+                                        @if (order.DiscountAmount > 0)
+                                        {
+                                            <div class="d-flex flex-column align-items-end">
+                                                <span class="text-decoration-line-through text-muted small">@((order.TotalAmount + order.DiscountAmount).ToString("C0"))</span>
+                                                <span>@order.TotalAmount.ToString("C0")</span>
+                                                <span class="badge bg-danger mt-1">-@order.DiscountAmount.ToString("C0")</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            @order.TotalAmount.ToString("C0")
+                                        }
+                                    </td>
                                     <td>
                                         @switch (order.Status)
                                         {
                                             case OrderStatus.Pending:
                                                 <span class="badge bg-warning text-dark">Chờ xác nhận</span>
                                                 break;
-                                            case OrderStatus.Processing:
+                                            case OrderStatus.Confirmed:
                                                 <span class="badge bg-info text-dark">Đã xác nhận</span>
                                                 break;
                                             case OrderStatus.Completed:

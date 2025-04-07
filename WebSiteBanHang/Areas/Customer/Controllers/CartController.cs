@@ -136,7 +136,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 _context.CartItems.Remove(cartItem);
                 await _context.SaveChangesAsync();
                 
-                TempData["ErrorMessage"] = $"{productName} đã được xóa khỏi giỏ hàng";
+                TempData["ErrorMessage"] = $"<strong class=\"product-name\">{productName}</strong> đã được xóa khỏi giỏ hàng";
             }
             else
             {
@@ -175,7 +175,8 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             _context.CartItems.Remove(cartItem);
             await _context.SaveChangesAsync();
             
-            TempData["ErrorMessage"] = $"{productName} đã được xóa khỏi giỏ hàng";
+            // Format the message with HTML to emphasize the product name
+            TempData["ErrorMessage"] = $"<strong class=\"product-name\">{productName}</strong> đã được xóa khỏi giỏ hàng";
             
             return RedirectToAction(nameof(Index));
         }
@@ -489,7 +490,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             {
                 _context.CartItems.RemoveRange(cartItems);
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Tất cả sản phẩm đã được xóa khỏi giỏ hàng";
+                TempData["ErrorMessage"] = "Tất cả sản phẩm đã được xóa khỏi giỏ hàng";
             }
             
             return RedirectToAction(nameof(Index));
