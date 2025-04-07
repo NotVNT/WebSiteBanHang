@@ -1,0 +1,10 @@
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.csproj.AssemblyReference.cache
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.GeneratedMSBuildEditorConfig.editorconfig
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.AssemblyInfoInputs.cache
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.AssemblyInfo.cs
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.csproj.CoreCompileInputs.cache
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.MvcApplicationPartsAssemblyInfo.cs
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.MvcApplicationPartsAssemblyInfo.cache
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.RazorAssemblyInfo.cache
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.RazorAssemblyInfo.cs
+E:\WebSiteBanHang\WebSiteBanHang\WebSiteBanHang\obj\Debug\net8.0\WebSiteBanHang.sourcelink.json
