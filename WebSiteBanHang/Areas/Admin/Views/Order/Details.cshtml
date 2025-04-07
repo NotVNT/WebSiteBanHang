@@ -30,17 +30,17 @@
                                         case OrderStatus.Pending:
                                             <span class="badge bg-warning text-dark fs-6 px-3 py-2">Chờ xác nhận</span>
                                             break;
-                                        case OrderStatus.Processing:
-                                            <span class="badge bg-info text-dark fs-6 px-3 py-2">Đã xác nhận</span>
+                                        case OrderStatus.Confirmed:
+                                            <span class="badge bg-info text-white fs-6 px-3 py-2">Đã xác nhận</span>
                                             break;
                                         case OrderStatus.Completed:
-                                            <span class="badge bg-success fs-6 px-3 py-2">Đã giao hàng</span>
+                                            <span class="badge bg-success text-white fs-6 px-3 py-2">Đã giao hàng</span>
                                             break;
                                         case OrderStatus.Cancelled:
-                                            <span class="badge bg-danger fs-6 px-3 py-2">Đã hủy</span>
+                                            <span class="badge bg-danger text-white fs-6 px-3 py-2">Đã hủy</span>
                                             break;
                                         default:
-                                            <span class="badge bg-secondary fs-6 px-3 py-2">@Model.Status</span>
+                                            <span class="badge bg-secondary text-white fs-6 px-3 py-2">@Model.Status</span>
                                             break;
                                     }
                                 </div>
@@ -70,9 +70,9 @@
                                             <div class="mb-3">
                                                 <label class="form-label fw-bold">Cập nhật trạng thái đơn hàng:</label>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <button type="submit" name="status" value="@OrderStatus.Processing" 
-                                                            class="btn btn-sm @(Model.Status == OrderStatus.Processing ? "btn-info" : "btn-outline-info")">
-                                                        <i class="bi bi-check2-circle me-1"></i> Đã xác nhận
+                                                    <button type="submit" name="status" value="@OrderStatus.Confirmed" 
+                                                            class="btn btn-sm @(Model.Status == OrderStatus.Confirmed ? "btn-info" : "btn-outline-info")">
+                                                        <i class="bi bi-check-circle me-1"></i> Đã xác nhận
                                                     </button>
                                                     <button type="submit" name="status" value="@OrderStatus.Completed" 
                                                             class="btn btn-sm @(Model.Status == OrderStatus.Completed ? "btn-success" : "btn-outline-success")">
@@ -112,6 +112,23 @@
                                     <span class="badge bg-warning text-dark ms-2">Chưa thanh toán</span>
                                 }
                             </p>
+                            @if (Model.DiscountAmount > 0)
+                            {
+                                <p>
+                                    <span class="fw-bold">Khuyến mãi áp dụng:</span>
+                                    @if (Model.Promotion != null)
+                                    {
+                                        <span class="badge bg-danger ms-2">@Model.Promotion.Code</span>
+                                        <span class="text-danger ms-2">
+                                            @(Model.Promotion.IsPercentage ? $"(-{Model.Promotion.DiscountAmount}%)" : $"(-{Model.DiscountAmount.ToString("N0")} đ)")
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger ms-2">-@Model.DiscountAmount.ToString("N0") đ</span>
+                                    }
+                                </p>
+                            }
                             <p class="mb-0">
                                 <span class="fw-bold">Tổng tiền:</span>
                                 <span class="text-danger fw-bold fs-4 ms-2">@Model.TotalAmount.ToString("N0") đ</span>
@@ -207,6 +224,17 @@
                                 }
                             </tbody>
                             <tfoot class="table-light">
+                                @if (Model.DiscountAmount > 0)
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-end fw-bold">Tạm tính:</td>
+                                        <td class="text-end">@((Model.TotalAmount + Model.DiscountAmount).ToString("N0")) đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-end fw-bold">Giảm giá:</td>
+                                        <td class="text-end text-danger">-@Model.DiscountAmount.ToString("N0") đ</td>
+                                    </tr>
+                                }
                                 <tr>
                                     <td colspan="3" class="text-end fw-bold">Tổng cộng:</td>
                                     <td class="text-end fw-bold text-danger fs-5">@Model.TotalAmount.ToString("N0") đ</td>

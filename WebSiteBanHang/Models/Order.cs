@@ -99,11 +99,8 @@ namespace WebSiteBanHang.Models
     public enum OrderStatus
     {
         Pending,    // Chờ xác nhận
-        Processing, // Đã xác nhận / đang xử lý
-        Confirmed,  // Đã xác nhận đơn hàng
-        Shipping,   // Đang giao hàng
-        Delivered,  // Đã giao hàng
+        Confirmed,  // Đã xác nhận
         Completed,  // Đã hoàn thành
-        Cancelled   // Đã hủy đơn hàng
+        Cancelled   // Đã hủy
     }
 } 

@@ -58,7 +58,7 @@ namespace WebSiteBanHang.Models.ViewModels
                     string statusText = status switch
                     {
                         OrderStatus.Pending => "Chờ xác nhận",
-                        OrderStatus.Processing => "Đã xác nhận",
+                        OrderStatus.Confirmed => "Đã xác nhận",
                         OrderStatus.Completed => "Đã hoàn thành",
                         OrderStatus.Cancelled => "Đã hủy",
                         _ => status.ToString()
