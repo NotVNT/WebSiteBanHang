@@ -45,5 +45,9 @@ namespace WebSiteBanHang.Repositories
         {
             return await _context.Products.CountAsync();
         }
+        public async Task<int> GetProductCountAsync()
+        {
+            return await _context.Products.CountAsync();
+        }
     }
 }

@@ -87,6 +87,7 @@ $(document).ready(function () {
         toastElement.show();
     }
 
+
     // Thêm function xử lý xóa sản phẩm bằng AJAX
     function removeItemFromCart(id) {
         if (!confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?")) {

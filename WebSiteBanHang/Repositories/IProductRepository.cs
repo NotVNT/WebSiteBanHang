@@ -1,4 +1,4 @@
-﻿using WebSiteBanHang.Models;
+using WebSiteBanHang.Models;
 
 namespace WebSiteBanHang.Repositories
 {
