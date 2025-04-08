@@ -75,7 +75,6 @@ namespace WebSiteBanHang.Models
         public string Email { get; set; }
 
         [Display(Name = "Ghi chú")]
-        [Required(AllowEmptyStrings = true)]
         public string Notes { get; set; } = "";
 
         public virtual ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
