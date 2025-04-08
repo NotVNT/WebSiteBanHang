@@ -195,6 +195,18 @@
         <member name="M:WebSiteBanHang.Migrations.FixOrderModel.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:WebSiteBanHang.Migrations.MakeNotesOptional">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.MakeNotesOptional.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.MakeNotesOptional.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebSiteBanHang.Migrations.MakeNotesOptional.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:WebSiteBanHang.Utilities.StringHelper.NormalizeVietnamese(System.String)">
             <summary>
             Normalizes a string by removing diacritics (accent marks) and converting to lowercase

@@ -1,37 +1,55 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace WebSiteBanHang.Models.ViewModels
 {
-    public class CheckoutViewModel
-    {
-        public List<CartItem> CartItems { get; set; }
-        public decimal TotalAmount { get; set; }
-        
-        [Required(ErrorMessage = "Vui lòng nhập họ tên")]
-        [Display(Name = "Họ và tên")]
-        public string FullName { get; set; }
-        
-        [Required(ErrorMessage = "Vui lòng nhập email")]
-        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-        
-        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
-        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
-        [RegularExpression(@"^(0\d{9,10})$", ErrorMessage = "Số điện thoại phải có 10 hoặc 11 chữ số và bắt đầu bằng số 0")]
-        [Display(Name = "Số điện thoại")]
-        public string PhoneNumber { get; set; }
-        
-        [Required(ErrorMessage = "Vui lòng nhập địa chỉ")]
-        [Display(Name = "Địa chỉ")]
-        public string Address { get; set; }
-        
-        [Display(Name = "Ghi chú")]
-        public string Notes { get; set; }
-        
-        [Display(Name = "Phương thức thanh toán")]
-        [Required(ErrorMessage = "Vui lòng chọn phương thức thanh toán")]
-        public string PaymentMethod { get; set; }
-    }
+    public class MockCheckoutViewModel
+{
+    [Required(ErrorMessage = "Vui lòng nhập họ tên")]
+    [Display(Name = "Họ và tên")]
+    public string FullName { get; set; }
+
+    [Required(ErrorMessage = "Vui lòng nhập địa chỉ email")]
+    [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
+    [RegularExpression(@"^[a-zA-Z0-9._%+-]+@gmail\.com$", ErrorMessage = "Vui lòng nhập đúng định dạng Gmail")]
+    [Display(Name = "Email")]
+    public string Email { get; set; }
+
+    [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+    [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại phải có 10 hoặc 11 chữ số")]
+    [Display(Name = "Số điện thoại")]
+    public string PhoneNumber { get; set; }
+
+    [Required(ErrorMessage = "Vui lòng nhập địa chỉ giao hàng")]
+    [Display(Name = "Địa chỉ giao hàng")]
+    public string ShippingAddress { get; set; }
+
+    [Display(Name = "Ghi chú")]
+    [StringLength(500, ErrorMessage = "Ghi chú không được vượt quá 500 ký tự")]
+    public string Notes { get; set; } // Optional
+
+    [Display(Name = "Mã giảm giá")]
+    public string PromotionCode { get; set; } // Optional
+
+    [Required(ErrorMessage = "Vui lòng chọn phương thức thanh toán")]
+    [Display(Name = "Phương thức thanh toán")]
+    public string PaymentMethod { get; set; }
+
+    public decimal TotalAmount { get; set; }
+    public decimal DiscountAmount { get; set; }
+    public decimal FinalAmount => TotalAmount - DiscountAmount;
+    public List<CartItemViewModel> CartItems { get; set; } = new List<CartItemViewModel>();
 }
+
+    public class CartItemViewModel
+    {
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductImage { get; set; }
+        public int Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Subtotal => Quantity * UnitPrice;
+    }
+} 
