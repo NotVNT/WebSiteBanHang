@@ -431,6 +431,25 @@
                                                 order.Status == OrderStatus.Completed ? "Đã hoàn thành" : 
                                                 order.Status == OrderStatus.Cancelled ? "Đã hủy" : order.Status.ToString())
                                             </span>
+                                            @if (order.Status == OrderStatus.Cancelled)
+                                            {
+                                                <div class="small text-muted mt-1">
+                                                    <i class="bi bi-person-x me-1"></i>
+                                                    @(order.CancellationType == CancellationType.Admin ? "Admin hủy" : "Khách hàng hủy")
+                                                    @if (!string.IsNullOrEmpty(order.CancellationReason))
+                                                    {
+                                                        <br/>
+                                                        <i class="bi bi-info-circle me-1"></i>
+                                                        <span class="text-danger">@order.CancellationReason</span>
+                                                    }
+                                                    @if (order.CancellationDate.HasValue)
+                                                    {
+                                                        <br/>
+                                                        <i class="bi bi-calendar-x me-1"></i>
+                                                        @order.CancellationDate.Value.ToString("dd/MM/yyyy HH:mm")
+                                                    }
+                                                </div>
+                                            }
                                             
                                             <div class="dropdown d-inline-block ms-1">
                                                 @if (order.Status == OrderStatus.Completed || order.Status == OrderStatus.Cancelled)
