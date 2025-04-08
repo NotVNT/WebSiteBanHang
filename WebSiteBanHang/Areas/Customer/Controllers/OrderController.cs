@@ -39,8 +39,8 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
             return View(order);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Cancel(int id)
+        // GET: Customer/Order/CancelOrder/5
+        public async Task<IActionResult> CancelOrder(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var order = await _orderRepository.GetByIdAsync(id);
@@ -50,10 +50,55 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 return NotFound();
             }
             
+            if (order.Status != OrderStatus.Pending)
+            {
+                TempData["ErrorMessage"] = "Chỉ có thể hủy đơn hàng ở trạng thái chờ xác nhận.";
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            
+            var viewModel = new OrderCancellationViewModel
+            {
+                OrderId = id
+            };
+            
+            return View(viewModel);
+        }
+
+        // POST: Customer/Order/Cancel
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cancel(OrderCancellationViewModel model)
+        {
+            // Remove CustomReason from ModelState validation if not "other"
+            if (model.CancellationReasonId != "other")
+            {
+                ModelState.Remove("CustomReason");
+            }
+
+            // Add custom validation for CustomReason when "other" is selected
+            if (model.CancellationReasonId == "other" && string.IsNullOrWhiteSpace(model.CustomReason))
+            {
+                ModelState.AddModelError("CustomReason", "Vui lòng nhập lý do cụ thể khi chọn 'Lý do khác'.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("CancelOrder", model);
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var order = await _orderRepository.GetByIdAsync(model.OrderId);
+            
+            if (order == null || order.UserId != userId)
+            {
+                return NotFound();
+            }
+            
             // Only allow cancellation if the order is in Pending status
             if (order.Status == OrderStatus.Pending)
             {
-                await _orderRepository.UpdateOrderStatusAsync(id, OrderStatus.Cancelled);
+                string cancellationReason = model.GetFullCancellationReason();
+                await _orderRepository.CancelOrderAsync(model.OrderId, cancellationReason, CancellationType.Customer);
                 TempData["SuccessMessage"] = "Đơn hàng đã được hủy thành công.";
             }
             else
@@ -61,7 +106,7 @@ namespace WebSiteBanHang.Areas.Customer.Controllers
                 TempData["ErrorMessage"] = "Không thể hủy đơn hàng này do trạng thái hiện tại.";
             }
             
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { id = model.OrderId });
         }
     }
 }

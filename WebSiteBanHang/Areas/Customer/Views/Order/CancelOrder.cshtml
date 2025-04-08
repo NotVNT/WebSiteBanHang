@@ -1,0 +1,98 @@
+@model WebSiteBanHang.Models.ViewModels.OrderCancellationViewModel
+
+@{
+    ViewData["Title"] = "Hủy đơn hàng";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Hủy đơn hàng #@Model.OrderId</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Bạn có chắc chắn muốn hủy đơn hàng này? Hành động này không thể hoàn tác.
+                    </div>
+
+                    <form asp-action="Cancel" method="post" id="cancelOrderForm">
+                        <input type="hidden" asp-for="OrderId" />
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="CancellationReasonId" class="form-label"></label>
+                            <select asp-for="CancellationReasonId" asp-items="Model.CancellationReasons" class="form-select">
+                                <option value="">-- Chọn lý do hủy --</option>
+                            </select>
+                            <span asp-validation-for="CancellationReasonId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3 d-none" id="customReasonGroup">
+                            <label asp-for="CustomReason" class="form-label"></label>
+                            <textarea asp-for="CustomReason" class="form-control" rows="4" placeholder="Vui lòng nhập lý do cụ thể..."></textarea>
+                            <span asp-validation-for="CustomReason" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Details" asp-route-id="@Model.OrderId" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-times"></i> Xác nhận hủy đơn
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            var $customReasonGroup = $("#customReasonGroup");
+            var $customReason = $("#CustomReason");
+            var $form = $("#cancelOrderForm");
+
+            function toggleCustomReason() {
+                var selectedReason = $("#CancellationReasonId").val();
+                if (selectedReason === "other") {
+                    $customReasonGroup.removeClass("d-none");
+                    $customReason.prop("required", true);
+                } else {
+                    $customReasonGroup.addClass("d-none");
+                    $customReason.prop("required", false);
+                    $customReason.val(""); // Clear the textarea
+                    $customReason.removeClass("is-invalid"); // Clear validation errors
+                    $customReason.next(".text-danger").text(""); // Clear server-side error messages
+                }
+            }
+
+            $("#CancellationReasonId").change(toggleCustomReason);
+            toggleCustomReason(); // Run on page load
+
+            // Client-side validation
+            $form.on("submit", function(e) {
+                var selectedReason = $("#CancellationReasonId").val();
+                if (selectedReason === "other" && !$customReason.val().trim()) {
+                    e.preventDefault();
+                    $customReason.addClass("is-invalid");
+                    $customReason.next(".text-danger").text("Vui lòng nhập lý do cụ thể khi chọn 'Lý do khác'.");
+                    return false;
+                }
+                return true;
+            });
+
+            // Clear validation on input
+            $customReason.on("input", function() {
+                if ($(this).val().trim()) {
+                    $(this).removeClass("is-invalid");
+                    $(this).next(".text-danger").text("");
+                }
+            });
+        });
+    </script>
+}

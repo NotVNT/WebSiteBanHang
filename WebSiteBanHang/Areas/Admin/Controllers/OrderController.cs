@@ -56,6 +56,12 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
                 filteredOrders = filteredOrders.Where(o => o.Status == filter.Status.Value).ToList();
             }
             
+            // Apply cancellation type filter
+            if (filter.CancellationType.HasValue && filter.Status == OrderStatus.Cancelled)
+            {
+                filteredOrders = filteredOrders.Where(o => o.CancellationType == filter.CancellationType.Value).ToList();
+            }
+            
             if (filter.StartDate.HasValue)
             {
                 filteredOrders = filteredOrders.Where(o => o.OrderDate >= filter.StartDate.Value).ToList();
@@ -72,15 +78,14 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
                 filteredOrders = filteredOrders.Where(o => o.Id == filter.OrderId.Value).ToList();
             }
             
-            // Apply Customer search with Vietnamese text normalization
-            if (!string.IsNullOrWhiteSpace(filter.CustomerSearch))
+            // Apply customer search filter
+            if (!string.IsNullOrEmpty(filter.CustomerSearch))
             {
-                string normalizedSearch = StringHelper.NormalizeVietnamese(filter.CustomerSearch);
-                
+                string search = filter.CustomerSearch.ToLower();
                 filteredOrders = filteredOrders.Where(o => 
-                    (o.FullName != null && StringHelper.NormalizeVietnamese(o.FullName).Contains(normalizedSearch)) ||
-                    (o.Email != null && StringHelper.NormalizeVietnamese(o.Email).Contains(normalizedSearch)) ||
-                    (o.PhoneNumber != null && o.PhoneNumber.Contains(filter.CustomerSearch))
+                    (o.FullName != null && o.FullName.ToLower().Contains(search)) ||
+                    (o.Email != null && o.Email.ToLower().Contains(search)) ||
+                    (o.PhoneNumber != null && o.PhoneNumber.Contains(search))
                 ).ToList();
             }
             
@@ -95,7 +100,7 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
                 filteredOrders = filteredOrders.Where(o => o.TotalAmount <= filter.MaxAmount.Value).ToList();
             }
             
-            // Apply sorting based on SortBy and SortDirection
+            // Apply sorting
             if (!string.IsNullOrEmpty(filter.SortBy))
             {
                 switch (filter.SortBy)
@@ -405,13 +410,13 @@ namespace WebSiteBanHang.Areas.Admin.Controllers
 
             // Combine reasons if "Other" is selected
             string finalReason = cancellationReason;
-            if (cancellationReason == "Khác" && !string.IsNullOrEmpty(otherReason))
+            if (cancellationReason == "other" && !string.IsNullOrEmpty(otherReason))
             {
                 finalReason = otherReason;
             }
 
-            // Update order status to cancelled
-            await _orderRepository.UpdateOrderStatusAsync(id, OrderStatus.Cancelled);
+            // Update order status to cancelled with admin cancellation type
+            await _orderRepository.CancelOrderAsync(id, finalReason, CancellationType.Admin);
 
             try 
             {

@@ -83,7 +83,14 @@ namespace WebSiteBanHang.Models
         public virtual ApplicationUser User { get; set; }
 
         [Required(AllowEmptyStrings = true)]
+        [Display(Name = "Lý do hủy")]
         public string CancellationReason { get; set; } = "";
+
+        [Display(Name = "Người hủy")]
+        public CancellationType? CancellationType { get; set; }
+
+        [Display(Name = "Ngày hủy")]
+        public DateTime? CancellationDate { get; set; }
 
         // New property for Promotion reference
         public int? PromotionId { get; set; }
@@ -101,5 +108,14 @@ namespace WebSiteBanHang.Models
         Confirmed,  // Đã xác nhận
         Completed,  // Đã hoàn thành
         Cancelled   // Đã hủy
+    }
+
+    public enum CancellationType
+    {
+        [Display(Name = "Khách hàng hủy")]
+        Customer,
+
+        [Display(Name = "Admin hủy")]
+        Admin
     }
 } 

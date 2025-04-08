@@ -244,6 +244,51 @@
                     </div>
                 </div>
             </div>
+
+            @if (Model.Status == OrderStatus.Cancelled)
+            {
+                <div class="alert alert-danger mt-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-x-circle-fill me-2 fs-4"></i>
+                        <h5 class="mb-0">Đơn hàng đã bị hủy</h5>
+                    </div>
+                    <hr class="my-2">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong>Lý do hủy:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @Model.CancellationReason
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <strong>Người hủy:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @if (Model.CancellationType.HasValue)
+                            {
+                                @(Model.CancellationType == CancellationType.Customer ? "Khách hàng hủy" : "Admin hủy")
+                            }
+                            else
+                            {
+                                <span class="text-muted">Không xác định</span>
+                            }
+                        </div>
+                    </div>
+                    @if (Model.CancellationDate.HasValue)
+                    {
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <strong>Ngày hủy:</strong>
+                            </div>
+                            <div class="col-md-8">
+                                @Model.CancellationDate.Value.ToString("dd/MM/yyyy HH:mm")
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
         </div>
         
         <div class="card-footer bg-white p-4 border-top">
