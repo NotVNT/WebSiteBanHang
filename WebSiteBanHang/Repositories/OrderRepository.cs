@@ -113,13 +113,15 @@ namespace WebSiteBanHang.Repositories
                 .SumAsync(o => o.TotalAmount);
         }
 
-        public async Task CancelOrderAsync(int id, string cancellationReason)
+        public async Task CancelOrderAsync(int id, string cancellationReason, CancellationType cancellationType)
         {
             var order = await _context.Orders.FindAsync(id);
             if (order != null)
             {
                 order.Status = OrderStatus.Cancelled;
                 order.CancellationReason = cancellationReason;
+                order.CancellationType = cancellationType;
+                order.CancellationDate = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
         }

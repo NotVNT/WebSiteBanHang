@@ -13,7 +13,7 @@ namespace WebSiteBanHang.Repositories
         Task<List<Order>> GetOrdersByStatusAsync(OrderStatus status);
         Task<int> GetOrderCountAsync();
         Task<decimal> GetTotalRevenueAsync();
-        Task CancelOrderAsync(int id, string cancellationReason);
+        Task CancelOrderAsync(int id, string cancellationReason, CancellationType cancellationType);
         Task<int> GetUniqueCustomerCountAsync();
     }
 }

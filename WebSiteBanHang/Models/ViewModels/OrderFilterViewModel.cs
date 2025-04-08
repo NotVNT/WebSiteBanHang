@@ -10,6 +10,10 @@ namespace WebSiteBanHang.Models.ViewModels
         // Status filter
         public OrderStatus? Status { get; set; }
         
+        // Cancellation Type filter
+        [Display(Name = "Người hủy")]
+        public CancellationType? CancellationType { get; set; }
+        
         // Date range filters
         [DataType(DataType.Date)]
         [Display(Name = "Từ ngày")]
@@ -72,6 +76,19 @@ namespace WebSiteBanHang.Models.ViewModels
                 }
                 
                 return options;
+            }
+        }
+        
+        public List<SelectListItem> CancellationTypeOptions
+        {
+            get
+            {
+                return new List<SelectListItem>
+                {
+                    new SelectListItem { Value = "", Text = "Tất cả" },
+                    new SelectListItem { Value = ((int)Models.CancellationType.Customer).ToString(), Text = "Khách hàng hủy" },
+                    new SelectListItem { Value = ((int)Models.CancellationType.Admin).ToString(), Text = "Admin hủy" }
+                };
             }
         }
         
